@@ -1,31 +1,21 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-import json
+from config.db import db
+from routes.user_bp import user_bp
 
 app=Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://admin:passw0rd@localhost/no_country?host=localhost"
+app.config.from_object('config.default')
+db.init_app(app)
 
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+migrate = Migrate()
+migrate.init_app(app, db)
 
-
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(128))
+app.register_blueprint(user_bp, url_prefix='/users')
 
 @app.route("/")
 def func():
-     return "Hola mundo"
+     return "Hola munddo"
 
-@app.route("/crearUsuario")
-def test():
-     user1 = User(id=3, name='maria')
-     db.session.add(user1)
-     db.session.commit()
 
-     return json.dumps(user1.__dict__) # Revisar, no funciona
-
-    
 if __name__ == '__main__':
      app.run(debug=True)

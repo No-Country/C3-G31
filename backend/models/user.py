@@ -6,10 +6,3 @@ class User(db.Model, BaseModelMixin):
 
     def __init__(self, name):
         self.name = name
-
-    @property
-    def serialize(self):
-        return {
-            'id': self.id,
-            'name': self.name
-        }

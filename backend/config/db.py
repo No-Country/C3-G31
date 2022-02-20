@@ -4,8 +4,10 @@ db = SQLAlchemy()
 
 class BaseModelMixin():
 
-    def save(self):
-        db.session.add(self)
+    def save(self, is_new: bool):
+        if is_new:
+            db.session.add(self)
+
         db.session.commit()
         return self
 

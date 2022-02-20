@@ -13,6 +13,7 @@ import { ModalRegistroEmpresaComponent } from './modal-registro-empresa/modal-re
 import { AvisoEmpleoComponent } from './aviso-empleo/aviso-empleo.component';
 import { EmpleoComponent } from './empleo/empleo.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule, 
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

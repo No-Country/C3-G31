@@ -15,6 +15,7 @@ import { AvisoEmpleoComponent } from './aviso-empleo/aviso-empleo.component';
 import { EmpleoComponent } from './empleo/empleo.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
 @NgModule({
   declarations: [
     AppComponent,

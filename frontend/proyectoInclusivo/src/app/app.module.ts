@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 
 //Componentes
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +15,12 @@ import { ModalCvComponent } from './modal-cv/modal-cv.component';
 import { ModalRegistroEmpresaComponent } from './modal-registro-empresa/modal-registro-empresa.component';
 import { AvisoEmpleoComponent } from './aviso-empleo/aviso-empleo.component';
 import { EmpleoComponent } from './empleo/empleo.component';
+
+//Amgular material
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+
 
 
 @NgModule({
@@ -33,7 +39,11 @@ import { EmpleoComponent } from './empleo/empleo.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

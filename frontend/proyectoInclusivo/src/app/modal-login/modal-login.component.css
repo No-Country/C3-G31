@@ -1,6 +1,25 @@
+.login{
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    background-color: C8BFBC;
+}
+
 .body{
     display: flex;
     justify-content: center;
     height: 100%;
     align-items: center;
+}
+
+img{
+    width: 55%;
+}
+
+.ancho{
+    width: 80%;
+}
+
+.button{
+    height: 50px;
 }

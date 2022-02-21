@@ -1,7 +1,7 @@
 <div class="body">
     <form [formGroup]="form" (ngSubmit)="ingresar()">
         <div class="login">
-            <img src="../../assets/img/isologotipo.png" class="imagen">
+            <img src="../../assets/img/logo.png" width="100px">
             <br>
             <br>
             <h2 style="color:black; font-weight: bold;">INICIAR SESIÓN</h2>
@@ -14,6 +14,10 @@
                 <input type='password' matInput autocomplete="off" formControlName="password">
               </mat-form-field>
               <button type='submit' mat-raised-button class = 'ancho button' color="primary" [disabled]="form.invalid">Ingresar</button>
+              <div class="my-3">
+                <input class="form-check-input me-2" type="checkbox" value="" id="flexCheckDefault"> Recordar usuario
+                </div>  
+              <label for="">¿No tienes usuario?</label><a  [routerLink]="['/registro']" > Registrate aqui!</a>
         </div>
     </form>
 </div>

@@ -1,1 +1,48 @@
-<p>navbar works!</p>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      
+        <img src="../../assets/img/isologotipo.png" width="100px" alt="" class="mx-3">
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Sobre nosotros
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Quienes Somos</a></li>
+              <li><a class="dropdown-item" href="#">Nuestro objetivo</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">FAQs</a></li>
+            </ul>
+          </li>
+
+        </ul>
+
+        <form class="d-flex">
+            <!-- BOTON LOGIN -->
+            <div class="dropdown me-5">
+              <label class="text-warning" for="botonLogin">Aqui iria nombre</label>
+              <button class="btn btn-primary  dropdown-toggle" type="button" id="botonLogin" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <i class="fa-solid fa-user"></i>
+              </button>
+              <ul class="dropdown-menu text-center" aria-labelledby="botonLogin">
+                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalLogin">LogIn</a></li>
+                <li><a class="dropdown-item" href="/deslogueo">LogOut</a></li>
+                <li><a class="dropdown-item" href="/miPerfil">Mi perfil</a></li>
+                <li><a class="dropdown-item" href="/misPedidos">Mis pedidos</a></li>
+              </ul>
+            </div>
+            <!-- FIN BOTON LOGIN -->
+          </form>
+    
+      </div>
+    </div>
+  </nav>

@@ -1,1 +1,174 @@
-<p>registro works!</p>
+<app-navbar></app-navbar>
+
+<div class="container mt-4">
+    <h1>Registrate aqui</h1>
+    <div class="row border border-4 rounded p-3">
+
+        <div class="col border border-3 rounded p-3 m-2">
+
+            <h2>Tus datos:</h2>
+
+            <input type="file" class="mb-3" id="floatingInput">
+            <label for="floatingInput">Selecciona tu foto</label>
+
+            <div class="form-floating mb-3 ">
+                <input type="email" class="form-control" id="floatingInput" placeholder=" ">
+                <label for="floatingInput">E-mail <small>(sera tu usuario)</small> </label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder=" ">
+                <label for="floatingInput">Nombre</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder=" ">
+                <label for="floatingInput">Apellido</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder=" ">
+                <label for="floatingInput">Telefono</label>
+            </div>
+
+            <div class="form-check form-switch">
+                <div class="row ms-5">
+                    <div class="col ">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Movilidad Propia</label>
+                    </div>
+                    <div class="col">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Disponibilidad para viajar</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ms-5 ">
+
+                <div class="col">
+
+                    <div class="form-check form-switch mb-1">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Discapacidad</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col mb-3">
+                    <!-- Aqui si se activa el switch se abriria el text area -->
+                    <textarea class="form-control" placeholder="¿Que discapacidad tienes?"
+                        id="floatingTextarea"></textarea>
+                </div>
+            </div>
+
+
+            <div class="form-floating mb-3">
+                <input type="date" class="form-control" id="floatingInput" placeholder=" ">
+                <label for="floatingInput">Fecha de nacimiento</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="floatingPassword" placeholder=" ">
+                <label for="floatingPassword">Password</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="floatingPassword" placeholder=" ">
+                <label for="floatingPassword">Confirma tu password</label>
+            </div>
+
+        </div>
+
+        <div class="col border border-3 rounded p-4 m-2">
+
+            <div class="row border border-2 rounded mb-3 ">
+                <div class="col">
+                    <h2>Direccion:</h2>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" placeholder=" ">
+                        <label for="floatingInput">Calle </label>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput" placeholder=" ">
+                                <label for="floatingInput">Nro </label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput"
+                                    placeholder=" ">
+                                <label for="floatingInput">Piso </label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput"
+                                    placeholder=" ">
+                                <label for="floatingInput">Depto </label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput" placeholder=" "> 
+                                <label for="floatingInput">Codigo postal</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput" placeholder=" ">
+                                <label for="floatingInput">Localidad</label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingInput" placeholder=" ">
+                            <label for="floatingInput">Provincia</label>
+                        </div>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" placeholder=" ">
+                        <label for="floatingInput">Observaciones del domicilio</label>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row border border-3 rounded p-4 mb-3 ">
+                <div class="col">
+                    <h2>Sube tu Curriculum Vitae</h2>
+                    <input type="file" class="mb-3 me-2" id="floatingInput" placeholder=" ">
+                    <label for="floatingInput">Selecciona tu CV</label>
+
+                </div>
+            </div>
+
+            <div class="row rounded p-4 ">
+                <div class="col  text-center">
+                    <div class="btn btn-lg btn-primary">Aceptar</div>
+                </div>
+                <div class="col  text-center">
+                    <div class="btn btn-lg btn-secondary" [routerLink]="['']">Volver</div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

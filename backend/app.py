@@ -6,6 +6,7 @@ from werkzeug.exceptions import HTTPException
 from config.db import db
 from config.marsh import ma
 from resources.user_resources import UserListResource, UserResource
+from resources.profile_resources import ProfileListResource
 
 app = Flask(__name__)
 app.config.from_object('config.default')
@@ -44,6 +45,8 @@ api = Api(app)
 api.add_resource(UserListResource, '/api/users')
 api.add_resource(UserResource, '/api/users/<int:user_id>')
 
+api.add_resource(ProfileListResource, '/api/profiles')
+# api.add_resource(ProfileResource)
 
 if __name__ == '__main__':
      app.run(debug=True)

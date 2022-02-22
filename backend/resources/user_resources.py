@@ -11,7 +11,8 @@ class UserListResource(Resource):
 
     def post(self):
         user = User(
-            name = request.json['name']
+            email = request.json['email'],
+            password = request.json['password']
         )
         user.save(is_new=True)
         return user_schema.dump(user)
@@ -23,10 +24,12 @@ class UserResource(Resource):
         return user_schema.dump(user)
 
     def patch(self, user_id):
-        user = User.get_by_id(user_id)
+        user: User = User.get_by_id(user_id)
 
-        if 'name' in request.json:
-            user.name = request.json['name']
+        if 'email' in request.json:
+            user.email = request.json['email']
+        if 'password' in request.json:
+            user.password = request.json['password']
 
         user.save(is_new=False)
         return user_schema.dump(user)

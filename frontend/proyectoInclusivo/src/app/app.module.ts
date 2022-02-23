@@ -10,6 +10,7 @@ import { RegistroComponent } from './components/registro/registro.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { EmpleosComponent } from './components/empleos/empleos.component';
 import { HomeComponent } from './components/home/home.component';
+import { HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { HomeComponent } from './components/home/home.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

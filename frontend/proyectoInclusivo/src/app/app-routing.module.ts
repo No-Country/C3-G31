@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AvisoEmpleoComponent } from './aviso-empleo/aviso-empleo.component';
-import { ModalLoginComponent } from './modal-login/modal-login.component';
-import { RegistroUsuarioComponent } from './registro-usuario/registro-usuario.component';
+import { LoginComponent } from './components/login/login.component';
+import { PrincipalComponent } from './components/principal/principal.component';
+import { RegistroComponent } from './components/registro/registro.component';
 
 const routes: Routes = [
-  { path: '', component: AvisoEmpleoComponent },
-  { path: 'registro', component: RegistroUsuarioComponent },
-  { path: 'login', component: ModalLoginComponent }
+  { path: '', component: PrincipalComponent },
+  { path: 'registro', component: RegistroComponent },
+  { path: 'login', component: LoginComponent }
+
 ];
 
 @NgModule({

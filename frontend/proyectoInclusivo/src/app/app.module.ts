@@ -6,45 +6,29 @@ import { ReactiveFormsModule } from '@angular/forms';
 //Componentes
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { FooterComponent } from './footer/footer.component';
-import { HeaderComponent } from './header/header.component';
-import { ModalLoginComponent } from './modal-login/modal-login.component';
-import { RegistroUsuarioComponent } from './registro-usuario/registro-usuario.component';
-import { ModalCvComponent } from './modal-cv/modal-cv.component';
-import { ModalRegistroEmpresaComponent } from './modal-registro-empresa/modal-registro-empresa.component';
-import { AvisoEmpleoComponent } from './aviso-empleo/aviso-empleo.component';
-import { EmpleoComponent } from './empleo/empleo.component';
-
-//Amgular material
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
-
-import { SharedModule } from './shared/shared.module';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { PrincipalComponent } from './components/principal/principal.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegistroComponent } from './components/registro/registro.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { EmpleosComponent } from './components/empleos/empleos.component';
+import { HomeComponent } from './components/home/home.component';
+import { FooterHomeComponent } from './components/footer-home/footer-home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
+    PrincipalComponent,
+    LoginComponent,
+    RegistroComponent,
     FooterComponent,
-    HeaderComponent,
-    ModalLoginComponent,
-    RegistroUsuarioComponent,
-    ModalCvComponent,
-    ModalRegistroEmpresaComponent,
-    AvisoEmpleoComponent,
-    EmpleoComponent
+    EmpleosComponent,
+    HomeComponent,
+    FooterHomeComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    ReactiveFormsModule,
-    SharedModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

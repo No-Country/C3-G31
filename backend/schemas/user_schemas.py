@@ -1,14 +1,15 @@
 from config.marsh import ma
 from models.user import User
+from schemas.profile_schemas import ProfileSchema
 
 class UserSchema(ma.SQLAlchemySchema):
-    class Meta:
-        # fields = ('id', 'email', 'profile')
-        model = User
+    profile = ma.Nested(ProfileSchema)
 
-    id = ma.auto_field()
-    email = ma.auto_field()
-    profile = ma.auto_field()
+    class Meta:
+        ordered = True
+        fields = ('id', 'email', 'profile')
+        # exclude = ('password',)
+        model = User
 
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)

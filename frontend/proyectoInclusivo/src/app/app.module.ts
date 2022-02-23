@@ -11,6 +11,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { EmpleosComponent } from './components/empleos/empleos.component';
 import { HomeComponent } from './components/home/home.component';
 import { HttpClientModule} from '@angular/common/http';
+import { FooterHomeComponent } from './components/footer-home/footer-home.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { HttpClientModule} from '@angular/common/http';
     RegistroComponent,
     FooterComponent,
     EmpleosComponent,
-    HomeComponent
+    HomeComponent,
+    FooterHomeComponent
   ],
   imports: [
     BrowserModule,

@@ -2,6 +2,8 @@ from config.db import db, BaseModelMixin
 
 class Profile(db.Model, BaseModelMixin):
     id = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(50), nullable=False)
+    apellido = db.Column(db.String(50), nullable=False)
     presentacion = db.Column(db.String(500))
     telefono = db.Column(db.String(20))
     fecha_nacimiento = db.Column(db.DateTime, nullable=False)
@@ -14,4 +16,4 @@ class Profile(db.Model, BaseModelMixin):
     user = db.relationship("User", back_populates="profile")
 
     def __repr__(self) -> str:
-        return f'<Profile {self.user_id}>'
+        return f'<Profile {self.nombre} {self.apellido}>'

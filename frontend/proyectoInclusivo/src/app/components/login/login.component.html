@@ -7,12 +7,12 @@
     <div class="row d-flex justify-content-center align-items-center h-100">
       
       <div class="col ms-5">
-        <img src="../../../assets/img/logo.jpg" width="400px" class="img-fluid"
-          alt="Sample image">
+        <a href=""><img src="../../../assets/img/logo.jpg" width="400px" class="img-fluid"
+          alt="Sample image" [routerLink]='["/principal"]'></a>
       </div>
       
       <div class="col offset-xl-1 me-5">
-          <form>
+          <form #f="ngForm" (ngSubmit)="f.form.valid && iniciar()">
           <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
             <p class="lead fw-normal mb-0 me-3">Inicia sesión con: </p>
             <button type="button" class="btn btn-primary btn-floating mx-1">
@@ -27,16 +27,24 @@
               <i class="fab fa-linkedin-in"></i>
             </button>
           </div>
-
-          <div class="divider my-4">
-            <p class="text-center fw-bold mb-1">O</p>
+          
+          <div class="row mt-3 mb-3">
+            <div class="col"><hr></div>
+            <div class="col-auto mt-1 fw-bold">O</div>
+            <div class="col"><hr></div>
           </div>
+          <!--<h2 class="linea"><span>O</span></h2>!-->
+
+          <!--<div class="divider my-4 hrdivider ">
+            
+            <span class="text-center fw-bold mb-1">O</span>
+          </div>-->
 
           <!-- Email input -->
           <div class="form-outline mb-4">
               <label class="form-label" for="form3Example3">Dirección de correo electrónico</label>
               <input type="email" id="form3Example3" class="form-control form-control-lg"
-              placeholder="Ingresa tu correo electrónico" />
+              placeholder="Ingresa tu correo electrónico" [(ngModel)]='mail' name='mail' required/>
             
           </div>
 
@@ -44,7 +52,7 @@
           <div class="form-outline mb-3">
               <label class="form-label" for="form3Example4">Contraseña</label>
             <input type="password" id="form3Example4" class="form-control form-control-lg"
-              placeholder="Ingresa tu contraseña" />
+              placeholder="Ingresa tu contraseña"  [(ngModel)]='password' name='password' required/>
             
           </div>
 
@@ -60,8 +68,8 @@
           </div>
 
           <div class="text-center text-lg-start mt-4 pt-2">
-            <button type="button" class="btn btn-primary btn-lg"
-              style="padding-left: 2.5rem; padding-right: 2.5rem;">Iniciar Sesión</button>
+            <button type="submit" class="btn btn-primary btn-lg"
+              style="padding-left: 2.5rem; padding-right: 2.5rem;" [disabled]="!f.form.valid" >Iniciar Sesión</button>
             <p class="small fw-bold mt-2 pt-1 mb-0">¿No tienes una cuenta? <a href="" [routerLink]="['/registro']"
                 class="link-primary">Regístrate</a></p>
           </div>

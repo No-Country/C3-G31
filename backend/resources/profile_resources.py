@@ -12,6 +12,8 @@ class ProfileListResource(Resource):
     def post(self):
         profile = Profile(
             user_id = request.json['user_id'],
+            nombre = request.json['nombre'],
+            apellido = request.json['apellido'],
             telefono = request.json['telefono'],
             fecha_nacimiento = request.json['fecha_nacimiento']
         )

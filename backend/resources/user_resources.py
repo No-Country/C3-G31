@@ -1,7 +1,9 @@
+from datetime import datetime
 from flask import request
 from flask_restful import Resource
 from flask_jwt_extended import create_access_token
 
+from models.profile import Profile
 from models.user import User
 from schemas.user_schemas import user_schema, users_schema, user_register_schema
 
@@ -13,14 +15,14 @@ class UserListResource(Resource):
 
     def post(self):
         form_data = request.get_json()
-        errors = user_register_schema.validate(form_data)
-        if(errors):
-            return {"errors": errors}, 400
+        # errors = user_register_schema.validate(form_data)
+        # if(errors):
+        #     return {"errors": errors}, 400
 
         email = form_data['email']
         password = form_data['password']
 
-        if(User.email_exists(email)):
+        if User.email_exists(email):
             return {"errors":
                 {"email": ['this email already exists ']}
             }, 400
@@ -29,6 +31,15 @@ class UserListResource(Resource):
         user.email = email
         user.set_password(password)
         user.save(is_new=True)
+
+        profile = Profile(
+            user_id = user.id,
+            nombre = form_data['nombre'],
+            apellido = form_data['apellido'],
+            fecha_nacimiento = datetime(2000, 1, 1)
+        )
+        profile.save(is_new=True)
+        user.profile = profile
 
         return user_schema.dump(user), 201
 

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -7,32 +9,38 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-mail: string
-password: string
+  mail: string
+  password: string
 
-constructor(private servicioUsuario: UsuariosService) { }
+  constructor(
+    private servicioUsuario: UsuariosService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
   
-  registrar() {
+  iniciar() {
     
     try {
       let dataLogin = {
-        mail:this.mail,
+        email:this.mail,
         password: this.password,
       }
-      this.servicioUsuario.verificarLogin(dataLogin);
+      this.servicioUsuario.verificarLogin(dataLogin).subscribe(
+        (response: any) => {
+          let nombreUsuario = response.user.profile.nombre;
+          sessionStorage.setItem('nombreUsuario', nombreUsuario);
+          this.router.navigate(['']);
+        },
+        error => Swal.fire({
+          title: 'Error', 
+          text: 'Usuario o contraseña incorrecta', 
+          icon: 'error'
+        })
+      );
     }
     catch (error) {
     }
   } 
-
-
-
-
-
-  iniciar(){
-    console.log(this.mail, this.password)
-  }
 }

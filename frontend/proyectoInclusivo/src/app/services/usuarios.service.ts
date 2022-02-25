@@ -8,8 +8,17 @@ import { Observable } from 'rxjs';
 export class UsuariosService {
 
   private api_usuarios="http://127.0.0.1:5000/api/users";
+  private usuario: string;
 
   constructor(private http: HttpClient) { }
+
+  public getUsuarioActual(): string {
+    return this.usuario;
+  }
+
+  public setUsuarioActual(usuario: string) {
+    this.usuario = usuario;
+  }
 
 
   public getAllUsuarios(): Observable<any>{
@@ -20,11 +29,13 @@ export class UsuariosService {
     return this.http.get(this.api_usuarios+"/"+id);
   }
 
-  public verificarLogin(data:any): Observable<any>{
-    
+  public postUsuario(data:any): Observable<any>{
     return this.http.post(this.api_usuarios, data);
   }
 
+  verificarLogin(data:any){
+    return this.http.post(this.api_usuarios + "/token", data);
+  }
 
   
   // public postEntidad(obj, entidad: string) {

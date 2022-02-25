@@ -20,17 +20,17 @@
             </div>
 
             <div class="form-floating mb-3 ">
-                <input type="email" class="form-control" id="floatingInput" placeholder=" ">
-                <label for="floatingInput"> E-mail <small>(sera tu usuario) *</small> </label>
+                <input type="email" class="form-control" id="floatingInput" placeholder=" " [(ngModel)]="email" name="email">
+                <label for="floatingInput" > E-mail <small>(sera tu usuario) *</small> </label>
             </div>
 
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="floatingInput" placeholder=" ">
-                <label for="floatingInput">Nombre *</label>
+                <input type="text" class="form-control" id="floatingInput" placeholder=" " [(ngModel)]='nombre' name="nombre">
+                <label for="floatingInput" >Nombre *</label>
             </div>
 
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="floatingInput" placeholder=" ">
+                <input type="text" class="form-control" id="floatingInput" placeholder="" [(ngModel)]="apellido" name="apellido">
                 <label for="floatingInput">Apellido *</label>
             </div>
             <div class="form-floating mb-3">
@@ -77,8 +77,8 @@
             </div>
 
             <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="floatingPassword" placeholder=" ">
-                <label for="floatingPassword">Contraseña *</label>
+                <input type="password" class="form-control" id="floatingPassword" placeholder=" " [(ngModel)]="password" name="password">
+                <label for="floatingPassword" >Contraseña *</label>
             </div>
 
             <div class="form-floating mb-3">
@@ -173,7 +173,7 @@
                 <small>(*)obligatorio</small>
                 <div class="col  text-center">
                    
-                    <div class=" container-fluid btn btn-lg btn-primary">Aceptar</div>
+                    <div class=" container-fluid btn btn-lg btn-primary" (click)="registrar()">Aceptar</div>
                 </div>
                 <div class="col text-center">
                     <div class=" container-fluid btn btn-lg btn-secondary" [routerLink]="['']">Volver</div>

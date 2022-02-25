@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UsuariosService } from 'src/app/services/usuarios.service';
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registro',
@@ -14,18 +15,23 @@ export class RegistroComponent implements OnInit {
   mostrar=false;
   
 
-  fotoUsuario:any
-  nombre: any;
-  apellido: any;
-  nick: any;
-  email: any;
-  telefono: any;
-  nombreEmpresa: any;
-  descripcionEmpresa: any;
-  password: any;
-  confPassword: any;
+  fotoUsuario: string;
+  nombre: string;
+  apellido: string;
+  email: string;
+  telefono: string;
+  password: string;
+  confPassword: string;
+  disponibilidadViajar: boolean;
+  fechaNacimiento: Date;
+  discapacidad: string;
+  movilidad: boolean
 
-  constructor(private servicio: UsuariosService) { 
+
+  constructor(
+    private servicio: UsuariosService,
+    private router: Router
+    ) { 
     
   }
 
@@ -78,18 +84,23 @@ export class RegistroComponent implements OnInit {
         foto:this.fotoUsuario,
         nombre: this.nombre,
         apellido: this.apellido,
-        nick: this.nick,
         email: this.email,
         telefono: this.telefono,
         password:this.password,
-        nombreEmpresa: this.nombreEmpresa,
-        descripcionEmpresa: this.descripcionEmpresa
+        disponibilidadViajar: this.disponibilidadViajar,
+        fechaNacimiento: this.fechaNacimiento,
+        discapacidad: this.discapacidad,
+        movilidad: this.movilidad
       }
 
-        // this.servicio.postEntidad(dataUsuario, "registrarUsuario").subscribe(dt =>{
-        //   this.router.navigate([''])
-        // });
-      
+      this.servicio.postUsuario(dataUsuario).subscribe(
+        response => this.router.navigate(['login']),
+        error => Swal.fire({
+          title: 'Error', 
+          text: 'Ha ocurrido un error al registrarse',
+          icon: 'error'
+        })
+      );
   
     }
     catch (error) {

@@ -15,7 +15,7 @@ constructor(private servicioUsuario: UsuariosService) { }
   ngOnInit(): void {
   }
   
-  registrar() {
+  iniciar() {
     
     try {
       let dataLogin = {
@@ -27,12 +27,4 @@ constructor(private servicioUsuario: UsuariosService) { }
     catch (error) {
     }
   } 
-
-
-
-
-
-  iniciar(){
-    console.log(this.mail, this.password)
-  }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 
 @Component({
@@ -12,7 +13,19 @@ export class RegistroComponent implements OnInit {
   nombreCv:any[]=[];
   mostrar=false;
   
-  constructor() { 
+
+  fotoUsuario:any
+  nombre: any;
+  apellido: any;
+  nick: any;
+  email: any;
+  telefono: any;
+  nombreEmpresa: any;
+  descripcionEmpresa: any;
+  password: any;
+  confPassword: any;
+
+  constructor(private servicio: UsuariosService) { 
     
   }
 
@@ -57,6 +70,31 @@ export class RegistroComponent implements OnInit {
 
   }
     
+  
+  registrar() {
+    
+    try {
+      let dataUsuario = {
+        foto:this.fotoUsuario,
+        nombre: this.nombre,
+        apellido: this.apellido,
+        nick: this.nick,
+        email: this.email,
+        telefono: this.telefono,
+        password:this.password,
+        nombreEmpresa: this.nombreEmpresa,
+        descripcionEmpresa: this.descripcionEmpresa
+      }
+
+        // this.servicio.postEntidad(dataUsuario, "registrarUsuario").subscribe(dt =>{
+        //   this.router.navigate([''])
+        // });
+      
+  
+    }
+    catch (error) {
+    }
+  } 
 
   ngOnInit(): void {
   }

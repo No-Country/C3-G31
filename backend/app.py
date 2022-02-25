@@ -1,12 +1,14 @@
 from flask import Flask, json
 from flask_migrate import Migrate
 from flask_restful import Api
+from flask_jwt_extended import JWTManager
 from werkzeug.exceptions import HTTPException
 
 from config.db import db
 from config.marsh import ma
-from resources.user_resources import UserListResource, UserResource
+from resources.user_resources import UserListResource, UserResource, TokenResource
 from resources.profile_resources import ProfileListResource
+
 
 app = Flask(__name__)
 app.config.from_object('config.default')
@@ -15,6 +17,8 @@ ma.init_app(app)
 
 migrate = Migrate()
 migrate.init_app(app, db)
+
+jwt = JWTManager(app)
 
 
 @app.errorhandler(HTTPException)
@@ -44,6 +48,7 @@ api = Api(app)
 
 api.add_resource(UserListResource, '/api/users')
 api.add_resource(UserResource, '/api/users/<int:user_id>')
+api.add_resource(TokenResource, '/api/users/token')
 
 api.add_resource(ProfileListResource, '/api/profiles')
 # api.add_resource(ProfileResource)

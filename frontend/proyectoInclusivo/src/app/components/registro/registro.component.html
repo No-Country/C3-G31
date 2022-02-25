@@ -12,7 +12,7 @@
                 <div>
                     <img [src]="imageURL[0]" width="100px" class="mb-3">
                   </div>
-                <input type="file" accept="image/*" class="mb-3 d-none" id="inputFoto" name="fotoPerfil"  (change)="cargarImagen($event)">
+                <input type="file" accept="image/*" class="mb-3 d-none" id="inputFoto" name="fotoPerfil"  (change)="cargarImagen($event)"  [(ngModel)]="fotoUsuario">
                 
                 <input type="button" value="Selecciona una foto" onclick="document.getElementById('inputFoto').click()" class="btn btn-primary mb-3">
             
@@ -170,15 +170,15 @@
             </div>
 
             <div class="row rounded p-4 ">
+                <small>(*)obligatorio</small>
                 <div class="col  text-center">
+                   
                     <div class=" container-fluid btn btn-lg btn-primary">Aceptar</div>
                 </div>
                 <div class="col text-center">
                     <div class=" container-fluid btn btn-lg btn-secondary" [routerLink]="['']">Volver</div>
                 </div>
             </div>
-
-
 
         </div>
     </div>

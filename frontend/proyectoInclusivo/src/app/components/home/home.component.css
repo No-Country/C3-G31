@@ -1,7 +1,6 @@
-#titulo{
+.titulo{
     display:flex;
-    justify-content: center;
-    margin-bottom: 25px;    
+    justify-content: center;  
 }
 
 #p1{
@@ -16,4 +15,17 @@
     border-radius:.5em;
     width: 460px;
     height: 70px;
+}
+
+.ancho{
+    width: 625px;
+}
+
+#mensaje{
+    background-color: white;
+    font-weight: bold;
+    display:flex;
+    justify-content: center;
+    border-radius:.5em;
+    width: 500px;
 }

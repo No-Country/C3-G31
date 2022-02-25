@@ -11,7 +11,6 @@ import { FooterComponent } from './components/footer/footer.component';
 import { EmpleosComponent } from './components/empleos/empleos.component';
 import { HomeComponent } from './components/home/home.component';
 import { HttpClientModule} from '@angular/common/http';
-import { FooterHomeComponent } from './components/footer-home/footer-home.component';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -24,7 +23,6 @@ import { FormsModule } from '@angular/forms';
     FooterComponent,
     EmpleosComponent,
     HomeComponent,
-    FooterHomeComponent
   ],
   imports: [
     BrowserModule,

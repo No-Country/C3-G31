@@ -86,9 +86,9 @@ export class RegistroComponent implements OnInit {
         descripcionEmpresa: this.descripcionEmpresa
       }
 
-        this.servicio.postEntidad(dataUsuario, "registrarUsuario").subscribe(dt =>{
-          this.router.navigate([''])
-        });
+        // this.servicio.postEntidad(dataUsuario, "registrarUsuario").subscribe(dt =>{
+        //   this.router.navigate([''])
+        // });
       
   
     }

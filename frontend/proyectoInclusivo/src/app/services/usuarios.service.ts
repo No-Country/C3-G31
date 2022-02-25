@@ -13,9 +13,7 @@ export class UsuariosService {
 
 
   public getAllUsuarios(): Observable<any>{
-    
     return this.http.get(this.api_usuarios);
-
   }
   
   public getUsuariosId(id:number): Observable<any>{
@@ -23,18 +21,19 @@ export class UsuariosService {
   }
 
   public verificarLogin(data:any): Observable<any>{
+    
     return this.http.post(this.api_usuarios, data);
   }
 
 
   
-  public postEntidad(obj, entidad: string) {
-    const token = localStorage.getItem('token');
-    let header = new HttpHeaders({
-      "Content-Type": "application/json",
-      'Authorization': 'Bearer ' + token
-    });
-    return this.http.post(this.api_usuarios + entidad, obj, { headers: header });
-  }
+  // public postEntidad(obj, entidad: string) {
+  //   const token = localStorage.getItem('token');
+  //   let header = new HttpHeaders({
+  //     "Content-Type": "application/json",
+  //     'Authorization': 'Bearer ' + token
+  //   });
+  //   return this.http.post(this.api_usuarios + entidad, obj, { headers: header });
+  // }
 
 }

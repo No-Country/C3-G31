@@ -1,5 +1,7 @@
 <app-navbar></app-navbar>
-<div class="container mt-0 p-5 ">
+<br>
+
+<div class="container mb-0 pb-0 ">
   <div class="container">
       
   <div class="container border border-10   rounded p-5">
@@ -69,7 +71,7 @@
 
           <div class="text-center text-lg-start mt-4 pt-2">
             <button type="submit" class="btn btn-primary btn-lg"
-              style="padding-left: 2.5rem; padding-right: 2.5rem;" [disabled]="!f.form.valid" >Iniciar Sesión</button>
+              style="padding-left: 2.5rem; padding-right: 2.5rem;" (click)=registrar() [disabled]="!f.form.valid" >Iniciar Sesión</button>
             <p class="small fw-bold mt-2 pt-1 mb-0">¿No tienes una cuenta? <a href="" [routerLink]="['/registro']"
                 class="link-primary">Regístrate</a></p>
           </div>
@@ -84,4 +86,9 @@
 </div>
 </div>
 
+
+
+
+<div class="container-fluid m-0 p-0 fixed-bottom">
 <app-footer></app-footer>
+</div>

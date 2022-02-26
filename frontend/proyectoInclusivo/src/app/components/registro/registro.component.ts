@@ -13,20 +13,34 @@ export class RegistroComponent implements OnInit {
   imageURL:any[]=[];
   nombreCv:any[]=[];
   mostrar=false;
-  
 
   fotoUsuario: string;
   nombre: string;
   apellido: string;
+  presentacion:string;
   email: string;
   telefono: string;
+
   password: string;
   confPassword: string;
+  //bandera que muestra o no mensaje de error de password distinto
+  banderaPass:boolean;
+
   disponibilidadViajar: boolean;
   fechaNacimiento: Date;
   discapacidad: string;
-  movilidad: boolean
-
+  movilidad: boolean 
+  sobreTi:string;
+  calle:string
+  numero:string
+  piso:string
+  depto:string
+  cp:string
+  localidad:string
+  provincia:string
+  observacionesDomicilio:string
+  //creo esta bandera para saber si en el ngOnInit tengo que buscar datos del usuario o mostrar el registro vacio. 
+  public banderaEdit:boolean= false
 
   constructor(
     private servicio: UsuariosService,
@@ -53,35 +67,25 @@ export class RegistroComponent implements OnInit {
   
   cargarCv(event:any)
   {
-   
     let archivoSeleccionado=event.target.files;
-    
     let reader= new FileReader();
-    
     this.nombreCv=event.target.files[0].name
-
-    
   }
 
   mostrarTextArea(){
-    
     if(this.mostrar==false){
       this.mostrar=true;
-  
     }
     else{
       this.mostrar=false;
-      
     }
-
   }
     
   
   registrar() {
-    
     try {
       let dataUsuario = {
-        foto:this.fotoUsuario,
+        foto:this.imageURL,
         nombre: this.nombre,
         apellido: this.apellido,
         email: this.email,
@@ -107,8 +111,53 @@ export class RegistroComponent implements OnInit {
     }
   } 
 
-  ngOnInit(): void {
+  verificarPass(evento:any){
+    if(this.password==this.confPassword){
+      this.banderaPass=true;
+    }
+    else{
+      this.banderaPass=false;
+    }
+    
+
+    
   }
+
+  ngOnInit(): void {
+    
+    // var datos=this.servicio.getUsuarioActual();
+    // console.log(datos)
+
+    // if(this.banderaEdit==true){
+
+      
+    //   //   response => this.router.navigate(['login']),
+    //   //   error => Swal.fire({
+    //   //     title: 'Error', 
+    //   //     text: 'Ha ocurrido un error al registrarse',
+    //   //     icon: 'error'
+    //   //   })
+    //   // );
+
+    //   //   this.fotoUsuario,
+    //   //   this.nombre,
+    //   //   this.apellido,
+    //   //   this.email,
+    //   //   this.telefono,
+    //   //   this.password,
+    //   //   this.disponibilidadViajar,
+    //   //   this.fechaNacimiento,
+    //   //   this.discapacidad,
+    //   //   this.movilidad
+    // }
+
+  }
+
+
+
+
+
+  
   }
 
 

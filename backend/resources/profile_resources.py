@@ -15,7 +15,12 @@ class ProfileListResource(Resource):
             nombre = request.json['nombre'],
             apellido = request.json['apellido'],
             telefono = request.json['telefono'],
-            fecha_nacimiento = request.json['fecha_nacimiento']
+            fecha_nacimiento = request.json['fecha_nacimiento'],
+            presentacion =request.json['sobreTi'],
+            foto = request.json['foto'],
+            disponibilidad_viajar =request.json['disponibilidad_viajar'],
+            movilidad_propia =request.json['movilidad_propia'],
+            discapacidad =request.json['discapacidad']
         )
         profile.save(is_new=True)
         return profile_schema.dump(profile)

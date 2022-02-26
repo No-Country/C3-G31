@@ -17,6 +17,7 @@ class Direccion(db.Model, BaseModelMixin):
 class Localidad(db.Model, BaseModelMixin):
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(50), nullable=False)
+    codigoPostal=db.Column(db.String(50))
     direccion_id = db.Column(db.Integer, db.ForeignKey("direccion.id"), unique=True, nullable=False)
     
     direccion = db.relationship("Direccion", back_populates="direccion")

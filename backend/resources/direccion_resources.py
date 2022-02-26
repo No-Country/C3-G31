@@ -1,91 +1,49 @@
 from datetime import datetime
 from flask import request
-from backend.models.direccion import Direccion
+from backend.models.direccion import Direccion, Localidad
 from flask_restful import Resource
 from flask_jwt_extended import create_access_token
 
-from models.profile import Profile
 from models.user import User
 from schemas.user_schemas import user_schema, users_schema, user_register_schema
+from schemas.direccion_schemas import direccion_schema,localidad_schema, provincia_schema
 
 
-class UserListResource(Resource):
+class DireccionListResource(Resource):
     def get(self):
-        users = User.get_all()
-        return users_schema.dump(users)
+        direcciones = Direccion.get_all()
+        return direccion_schema.dump(direcciones)
 
     def post(self):
         form_data = request.get_json()
-        # errors = user_register_schema.validate(form_data)
-        # if(errors):
-        #     return {"errors": errors}, 400
+        calle= form_data['calle']
+        numero= form_data['numero']
+        piso= form_data['piso']
+        depto= form_data['depto']
+        observaciones= form_data['observaciones']
+        
+        user_id= form_data['user_id']
 
-        email = form_data['email']
-        password = form_data['password']
+        direccion = Direccion()
+        direccion.calle=calle
+        direccion.numero=numero
+        direccion.piso=piso
+        direccion.depto=depto
+        direccion.observaciones=observaciones
+        direccion.user_id=user_id
+        
+        direccion.save(is_new=True)
 
-        if User.email_exists(email):
-            return {"errors":
-                {"email": ['this email already exists ']}
-            }, 400
-
-        user = User()
-        user.email = email
-        user.set_password(password)
-        user.save(is_new=True)
-
-        profile = Profile(
-            user_id = user.id,
+        localidad = Localidad(
+            direccion_id = direccion.id,
             nombre = form_data['nombre'],
             apellido = form_data['apellido'],
             fecha_nacimiento = datetime(2000, 1, 1)
         )
-
-   
         profile.save(is_new=True)
         user.profile = profile
-        #aqui le agrego la direccion
-
-        direccion=Direccion(
-        calle= form_data['calle'],
-        numero= form_data['numero'],
-        piso= form_data['piso'],
-        depto= form_data['depto'],
-        observaciones= form_data['observaciones'],
-        user_id= user.id
-        )
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         return user_schema.dump(user), 201
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 class TokenResource(Resource):

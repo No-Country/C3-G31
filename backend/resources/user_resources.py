@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask import request
-from backend.models.direccion import Direccion
+from backend.models.direccion import Direccion, Localidad, Provincia
 from flask_restful import Resource
 from flask_jwt_extended import create_access_token
 
@@ -37,14 +37,20 @@ class UserListResource(Resource):
             user_id = user.id,
             nombre = form_data['nombre'],
             apellido = form_data['apellido'],
-            fecha_nacimiento = datetime(2000, 1, 1)
+            fecha_nacimiento = form_data['fecha_nacimiento'], 
+            presentacion = form_data['presentacion'],
+            telefono = form_data['telefono'],
+            foto =  form_data['foto'],
+            disponibilidad_viajar =  form_data['disponibilidad_viajar'],
+            movilidad_propia =  form_data['movilidad_propia'],
+            discapacidad =  form_data['discapacidad']
         )
 
    
         profile.save(is_new=True)
         user.profile = profile
-        #aqui le agrego la direccion
 
+        #aqui le agrego la direccion
         direccion=Direccion(
         calle= form_data['calle'],
         numero= form_data['numero'],
@@ -52,6 +58,15 @@ class UserListResource(Resource):
         depto= form_data['depto'],
         observaciones= form_data['observaciones'],
         user_id= user.id
+        )
+        localidad=Localidad(
+        nombre= form_data['localidad'],
+        codigoPostal= form_data['codigoPostal'],
+        direccion_id=direccion.id
+        )
+        provincia=Provincia(
+        nombre=form_data['provincia'],
+        localidad_id=localidad.id
         )
 
 

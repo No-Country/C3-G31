@@ -3,13 +3,15 @@ from marshmallow import fields
 from config.marsh import ma
 from models.user import User
 from schemas.profile_schemas import ProfileSchema
+from schemas.empresa_schemas import EmpresaSchema
 
 class UserSchema(ma.SQLAlchemySchema):
     profile = ma.Nested(ProfileSchema)
+    empresa = ma.Nested(EmpresaSchema)
 
     class Meta:
         ordered = True
-        fields = ('id', 'email', 'profile')
+        fields = ('id', 'email', 'profile', 'empresa')
         # exclude = ('password',)
         model = User
 

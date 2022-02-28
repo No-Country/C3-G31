@@ -9,7 +9,7 @@ class UserSchema(ma.SQLAlchemySchema):
 
     class Meta:
         ordered = True
-        fields = ('id', 'email', 'profile')
+        fields = ('id', 'email', 'profile', 'direccion')
         # exclude = ('password',)
         model = User
 

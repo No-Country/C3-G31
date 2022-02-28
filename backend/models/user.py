@@ -7,6 +7,7 @@ class User(db.Model, BaseModelMixin):
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
     profile = db.relationship(Profile, back_populates="user", uselist=False)
+    #empresa = db.relationship("Empresa", back_populates="user", uselist=False)
 
     def set_password(self, password):
         self.password = generate_password_hash(password, method='sha256')

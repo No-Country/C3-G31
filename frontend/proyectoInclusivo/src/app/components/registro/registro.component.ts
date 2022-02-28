@@ -11,6 +11,8 @@ import Swal from 'sweetalert2';
 export class RegistroComponent implements OnInit {
   
   imageURL:any[]=[];
+  archivoFoto:any
+  archivoCV:any
   nombreCv:any[]=[];
   mostrar=false;
 
@@ -52,23 +54,22 @@ export class RegistroComponent implements OnInit {
   cargarImagen(event:any)
   {
    
-    let archivoSeleccionado=event.target.files;
+    this.archivoFoto=event.target.files;
+
     
     let reader= new FileReader();
 
-    reader.readAsDataURL(archivoSeleccionado[0]);
+    reader.readAsDataURL(this.archivoFoto[0]);
 
     reader.onload=()=>{
       this.imageURL.pop();
       this.imageURL.push(reader.result);
     }
   }
-
   
   cargarCv(event:any)
   {
-    let archivoSeleccionado=event.target.files;
-    let reader= new FileReader();
+    this.archivoCV=event.target.files;
     this.nombreCv=event.target.files[0].name
   }
 
@@ -85,17 +86,21 @@ export class RegistroComponent implements OnInit {
   registrar() {
     try {
       let dataUsuario = {
-        foto:this.imageURL,
+        
         nombre: this.nombre,
         apellido: this.apellido,
         email: this.email,
+        presentacion:this.presentacion,
         telefono: this.telefono,
         password:this.password,
         disponibilidadViajar: this.disponibilidadViajar,
         fechaNacimiento: this.fechaNacimiento,
-        discapacidad: this.discapacidad,
-        movilidad: this.movilidad
+        discapacidad: this.sobreTi,
+        movilidad: this.movilidad,
+        // curriculum: this.archivoCV
+        // foto:this.imageURL,
       }
+      console.log(dataUsuario)
 
       this.servicio.postUsuario(dataUsuario).subscribe(
         response => this.router.navigate(['login']),

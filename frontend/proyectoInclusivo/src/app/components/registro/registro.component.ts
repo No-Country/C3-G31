@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import Swal from 'sweetalert2';
 
@@ -10,37 +11,35 @@ import Swal from 'sweetalert2';
 })
 export class RegistroComponent implements OnInit {
   
-  imageURL:any[]=[];
-  archivoFoto:any
-  archivoCV:any
-  nombreCv:any[]=[];
+  imageURL:any[]=[''];
+  cvUrl:any[]=[''];
+  labelCv:any;
   mostrar=false;
-
   fotoUsuario: string;
   nombre: string;
   apellido: string;
-  presentacion:string;
   email: string;
-  telefono: string;
+  telefono: string="";
 
   password: string;
   confPassword: string;
+
   //bandera que muestra o no mensaje de error de password distinto
   banderaPass:boolean;
-
-  disponibilidadViajar: boolean;
-  fechaNacimiento: Date;
-  discapacidad: string;
-  movilidad: boolean 
-  sobreTi:string;
-  calle:string
-  numero:string
-  piso:string
-  depto:string
-  cp:string
-  localidad:string
-  provincia:string
-  observacionesDomicilio:string
+  disponibilidadViajar: boolean=false;
+  fechaNacimiento: Date = new Date()
+  discapacidad: string="";
+  movilidad: boolean=false; 
+  sobreTi:string="";
+  presentacion:string="";
+  calle:string="";
+  numero:string="";
+  piso:string="";
+  depto:string="";
+  cp:string="";
+  localidad:string="";
+  provincia:string="";
+  observacionesDomicilio:string="";
   //creo esta bandera para saber si en el ngOnInit tengo que buscar datos del usuario o mostrar el registro vacio. 
   public banderaEdit:boolean= false
 
@@ -53,13 +52,10 @@ export class RegistroComponent implements OnInit {
 
   cargarImagen(event:any)
   {
-   
-    this.archivoFoto=event.target.files;
-
-    
+    let archivoFoto=event.target.files;
     let reader= new FileReader();
 
-    reader.readAsDataURL(this.archivoFoto[0]);
+    reader.readAsDataURL(archivoFoto[0]);
 
     reader.onload=()=>{
       this.imageURL.pop();
@@ -69,8 +65,16 @@ export class RegistroComponent implements OnInit {
   
   cargarCv(event:any)
   {
-    this.archivoCV=event.target.files;
-    this.nombreCv=event.target.files[0].name
+    let archivoCV=event.target.files;
+    let reader=new FileReader();
+    reader.readAsDataURL(archivoCV[0]);
+    
+    reader.onload=()=>{
+      this.cvUrl.pop();
+      this.cvUrl.push(reader.result);
+    }
+
+    this.labelCv=event.target.files[0].name
   }
 
   mostrarTextArea(){
@@ -85,22 +89,35 @@ export class RegistroComponent implements OnInit {
   
   registrar() {
     try {
+      console.log(this.fechaNacimiento)
       let dataUsuario = {
+        //user
+        email: this.email,
+        password:this.confPassword,
         
+        //profile
         nombre: this.nombre,
         apellido: this.apellido,
-        email: this.email,
         presentacion:this.presentacion,
+        sobreTi:this.sobreTi,
         telefono: this.telefono,
-        password:this.password,
         disponibilidadViajar: this.disponibilidadViajar,
         fechaNacimiento: this.fechaNacimiento,
         discapacidad: this.sobreTi,
         movilidad: this.movilidad,
-        // curriculum: this.archivoCV
-        // foto:this.imageURL,
+        curriculum: this.cvUrl,
+        foto:this.imageURL,
+        
+        //Domicilio
+        calle:this.calle,
+        numero:this.numero,
+        piso:this.piso,
+        depto:this.depto,
+        cp:this.cp,
+        localidad:this.localidad,
+        provincia:this.provincia,
+        observacionesDomicilio:this.observacionesDomicilio
       }
-      console.log(dataUsuario)
 
       this.servicio.postUsuario(dataUsuario).subscribe(
         response => this.router.navigate(['login']),

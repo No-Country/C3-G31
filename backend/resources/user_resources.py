@@ -6,6 +6,7 @@ from flask_jwt_extended import create_access_token
 from models.profile import Profile
 from models.user import User
 from schemas.user_schemas import user_schema, users_schema, user_register_schema
+from models.direccion import Direccion, Localidad, Provincia
 
 
 class UserListResource(Resource):
@@ -22,10 +23,10 @@ class UserListResource(Resource):
         email = form_data['email']
         password = form_data['password']
 
-        if User.email_exists(email):
-            return {"errors":
-                {"email": ['this email already exists ']}
-            }, 400
+        # if User.email_exists(email):
+        #     return {"errors":
+        #         {"email": ['this email already exists ']}
+        #     }, 400
 
         user = User()
         user.email = email
@@ -36,10 +37,41 @@ class UserListResource(Resource):
             user_id = user.id,
             nombre = form_data['nombre'],
             apellido = form_data['apellido'],
-            fecha_nacimiento = datetime(2000, 1, 1)
+            fecha_nacimiento = form_data['fechaNacimiento'], 
+            presentacion = form_data['presentacion'],
+            telefono = form_data['telefono'],
+            foto =  form_data['foto'],
+            movilidad_propia =  form_data['movilidad'],
+            disponibilidad_viajar =  form_data['disponibilidadViajar'],
+            discapacidad =  form_data['discapacidad']
         )
         profile.save(is_new=True)
         user.profile = profile
+
+        
+        #aqui le agrego la direccion
+        direccion=Direccion(
+        calle= form_data['calle'],
+        numero= form_data['numero'],
+        piso= form_data['piso'],
+        depto= form_data['depto'],
+        observaciones= form_data['observacionesDomicilio'],
+        user_id= user.id
+        )
+        direccion.save(is_new=True)
+        
+        localidad=Localidad(
+        nombre= form_data['localidad'],
+        codigoPostal= form_data['cp'],
+        direccion_id=direccion.id
+        )
+        localidad.save(is_new=True)
+        
+        provincia=Provincia(
+        nombre=form_data['provincia'],
+        localidad_id=localidad.id
+        )
+        provincia.save(is_new=True)
 
         return user_schema.dump(user), 201
 

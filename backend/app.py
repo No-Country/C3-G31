@@ -6,12 +6,12 @@ from flask_migrate import Migrate
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
 from werkzeug.exceptions import HTTPException
-
 from flask_marshmallow import sqla
 from config.db import db
 from config.marsh import ma
 from resources.user_resources import UserListResource, UserResource, TokenResource
 from resources.profile_resources import ProfileListResource
+
 
 
 app = Flask(__name__)
@@ -24,7 +24,6 @@ migrate = Migrate()
 migrate.init_app(app, db)
 
 jwt = JWTManager(app)
-
 
 @app.errorhandler(HTTPException)
 def handle_httpexception(e: HTTPException):

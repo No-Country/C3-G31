@@ -1,8 +1,7 @@
-from datetime import datetime
 from flask import request
 from flask_restful import Resource
 from flask_jwt_extended import create_access_token
-
+from sqlalchemy import false, true
 from models.profile import Profile
 from models.user import User
 from schemas.user_schemas import user_schema, users_schema, user_register_schema
@@ -15,8 +14,10 @@ class UserListResource(Resource):
         return users_schema.dump(users)
 
     def post(self):
-        form_data = request.get_json()
-        
+        #form_data = request.get_json()
+        form_data=request.form
+        tieneFoto=form_data["tieneFoto"]
+        tieneCv=form_data["tieneCv"]
         # errors = user_register_schema.validate(form_data)
         # if(errors):
         #     return {"errors": errors}, 400
@@ -34,6 +35,15 @@ class UserListResource(Resource):
         user.set_password(password)
         user.save(is_new=True)
 
+        movilidad = 0
+        disponibilidad=0
+
+        if form_data['movilidad']!='false':
+            movilidad = 1
+
+        if form_data['disponibilidadViajar']!='false':
+            disponibilidad = 1
+                    
         profile = Profile(
             user_id = user.id,
             nombre = form_data['nombre'],
@@ -41,18 +51,26 @@ class UserListResource(Resource):
             fecha_nacimiento = form_data['fechaNacimiento'], 
             presentacion = form_data['presentacion'],
             telefono = form_data['telefono'],
-            movilidad_propia =  form_data['movilidad'],
-            disponibilidad_viajar =  form_data['disponibilidadViajar'],
+            disponibilidad_viajar =disponibilidad,
+            movilidad_propia =movilidad,
             discapacidad =  form_data['discapacidad']
         )
-        profile.guardarFoto(form_data['foto'])
+        if tieneFoto=="si":
+            foto = request.files["foto"]
+            profile.foto=profile.guardarFoto(foto)
+  
         profile.save(is_new=True)
         user.profile = profile
 
         curriculum = Curriculum(
-            direccionDeArchivo = form_data['curriculum'],
+            direccionDeArchivo="",
             user_id = user.id
         )
+
+        if tieneCv=="si":
+            cv = request.files["curriculum"]
+            curriculum.direccionDeArchivo=curriculum.guardarCurriculum(cv)
+
         curriculum.save(is_new=True)
         user.curriculum=curriculum
         

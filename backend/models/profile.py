@@ -1,3 +1,5 @@
+from datetime import datetime
+from importlib_metadata import re
 from config.db import db, BaseModelMixin
 import os
 
@@ -21,9 +23,13 @@ class Profile(db.Model, BaseModelMixin):
 
 
     def guardarFoto(self, archivoFoto):
-        #guardo la direccion en "foto" concatenando la id del profile asi no hay 2 imagenes con mismo nombre
-        self.foto = archivoFoto.filename+str(self.id)
-        archivoFoto.save("./static/uploads/imagenes" + self.foto)
+        #guardo la direccion en "foto" concatenando la  fecha y hora del momento asi no hay 2 imagenes con mismo nombre
+        now=datetime.now()
+        tiempo=now.strftime("%Y%H%M%S")
+        self.foto =tiempo+archivoFoto.filename
+        archivoFoto.save("backend/static/upload/imagenes/" + self.foto)
+        return self.foto
+         
 
  
 

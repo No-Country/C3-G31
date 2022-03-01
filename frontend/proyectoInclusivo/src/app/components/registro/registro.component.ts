@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { UsuariosService } from 'src/app/services/usuarios.service';
@@ -11,9 +12,15 @@ import Swal from 'sweetalert2';
 })
 export class RegistroComponent implements OnInit {
   
+  archivoFotos: any[]=[];
+  archivoCurriculum: any[]=[];
+
+
+  nombreFoto:any="";
   imageURL:any[]=[''];
+ 
   cvUrl:any[]=[''];
-  labelCv:any;
+  labelCv:any="";
   mostrar=false;
   fotoUsuario: string;
   nombre: string;
@@ -52,22 +59,24 @@ export class RegistroComponent implements OnInit {
 
   cargarImagen(event:any)
   {
-    let archivoFoto=event.target.files;
+    this.archivoFotos=event.target.files;
     let reader= new FileReader();
 
-    reader.readAsDataURL(archivoFoto[0]);
+    reader.readAsDataURL(this.archivoFotos[0]);
 
     reader.onload=()=>{
       this.imageURL.pop();
       this.imageURL.push(reader.result);
     }
+    this.nombreFoto=event.target.files[0].name
+    
   }
   
   cargarCv(event:any)
   {
-    let archivoCV=event.target.files;
+    this.archivoCurriculum=event.target.files;
     let reader=new FileReader();
-    reader.readAsDataURL(archivoCV[0]);
+    reader.readAsDataURL(this.archivoCurriculum[0]);
     
     reader.onload=()=>{
       this.cvUrl.pop();
@@ -89,37 +98,57 @@ export class RegistroComponent implements OnInit {
   
   registrar() {
     try {
-      console.log(this.fechaNacimiento)
-      let dataUsuario = {
-        //user
-        email: this.email,
-        password:this.confPassword,
-        
-        //profile
-        nombre: this.nombre,
-        apellido: this.apellido,
-        presentacion:this.presentacion,
-        sobreTi:this.sobreTi,
-        telefono: this.telefono,
-        disponibilidadViajar: this.disponibilidadViajar,
-        fechaNacimiento: this.fechaNacimiento,
-        discapacidad: this.sobreTi,
-        movilidad: this.movilidad,
-        curriculum: this.cvUrl,
-        foto:this.imageURL,
-        
-        //Domicilio
-        calle:this.calle,
-        numero:this.numero,
-        piso:this.piso,
-        depto:this.depto,
-        cp:this.cp,
-        localidad:this.localidad,
-        provincia:this.provincia,
-        observacionesDomicilio:this.observacionesDomicilio
+      
+
+      const formData= new FormData();
+      
+
+      formData.append("email", this.email)
+      formData.append("password", this.confPassword)
+//perfil
+ 
+      formData.append("nombre", this.nombre)
+      formData.append("apellido", this.apellido)
+      formData.append("presentacion", this.presentacion)
+      formData.append("sobreTi", this.sobreTi)
+      formData.append("telefono", this.telefono)
+      formData.append("disponibilidadViajar", this.disponibilidadViajar.toString())
+      formData.append("fechaNacimiento", this.fechaNacimiento.toString())
+      formData.append("discapacidad", this.discapacidad)
+      formData.append("movilidad", this.movilidad.toString())
+      
+//domicilio
+      formData.append("calle", this.calle)
+      formData.append("numero", this.numero)
+      formData.append("piso", this.piso)
+      formData.append("depto", this.depto)
+      formData.append("cp", this.cp)
+      formData.append("localidad", this.localidad)
+      formData.append("provincia", this.provincia)
+      formData.append("observacionesDomicilio", this.observacionesDomicilio)
+      
+      
+
+      if(this.archivoCurriculum.length>=1){
+          formData.append("curriculum", this.archivoCurriculum[0], this.labelCv);
+          formData.append("tieneCv", "si")
+      }else{
+        formData.append("curriculum","");
+        formData.append("tieneCv", "no")
       }
 
-      this.servicio.postUsuario(dataUsuario).subscribe(
+      if(this.archivoFotos.length>=1){
+          formData.append("foto", this.archivoFotos[0], this.nombreFoto);   
+          formData.append("tieneFoto", "si")
+      }else{
+        formData.append("foto","");
+        formData.append("tieneFoto", "no")
+      }
+
+
+      
+
+      this.servicio.postUsuario(formData).subscribe(
         response => this.router.navigate(['login']),
         error => Swal.fire({
           title: 'Error', 

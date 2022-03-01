@@ -25,10 +25,7 @@ class Profile(db.Model, BaseModelMixin):
         self.foto = archivoFoto.filename+str(self.id)
         archivoFoto.save("./static/uploads/imagenes" + self.foto)
 
-    def guardarCurriculum(self, archivoCv):
-        #guardo la direccion en "curriculum" concatenando la id del profile asi no hay 2 curriculums con mismo nombre
-        self.curriculum = archivoCv.filename+str(self.id)
-        archivoCv.save("./static/uploads/curriculums" + self.curriculum)
+ 
 
     def __repr__(self) -> str:
         return f'<Profile {self.nombre} {self.apellido}>'

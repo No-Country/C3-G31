@@ -7,7 +7,7 @@ from models.profile import Profile
 from models.user import User
 from schemas.user_schemas import user_schema, users_schema, user_register_schema
 from models.direccion import Direccion, Localidad, Provincia
-
+from models.curriculum import Curriculum
 
 class UserListResource(Resource):
     def get(self):
@@ -16,6 +16,7 @@ class UserListResource(Resource):
 
     def post(self):
         form_data = request.get_json()
+        
         # errors = user_register_schema.validate(form_data)
         # if(errors):
         #     return {"errors": errors}, 400
@@ -23,10 +24,10 @@ class UserListResource(Resource):
         email = form_data['email']
         password = form_data['password']
 
-        # if User.email_exists(email):
-        #     return {"errors":
-        #         {"email": ['this email already exists ']}
-        #     }, 400
+        if User.email_exists(email):
+             return {"errors":
+                 {"email": ['this email already exists ']}
+             }, 400
 
         user = User()
         user.email = email
@@ -40,14 +41,20 @@ class UserListResource(Resource):
             fecha_nacimiento = form_data['fechaNacimiento'], 
             presentacion = form_data['presentacion'],
             telefono = form_data['telefono'],
-            foto =  form_data['foto'],
             movilidad_propia =  form_data['movilidad'],
             disponibilidad_viajar =  form_data['disponibilidadViajar'],
             discapacidad =  form_data['discapacidad']
         )
+        profile.guardarFoto(form_data['foto'])
         profile.save(is_new=True)
         user.profile = profile
 
+        curriculum = Curriculum(
+            direccionDeArchivo = form_data['curriculum'],
+            user_id = user.id
+        )
+        curriculum.save(is_new=True)
+        user.curriculum=curriculum
         
         #aqui le agrego la direccion
         direccion=Direccion(

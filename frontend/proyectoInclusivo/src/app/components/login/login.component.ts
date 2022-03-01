@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
         (response: any) => {
           let nombreUsuario = response.user.profile.nombre;
           sessionStorage.setItem('nombreUsuario', nombreUsuario);
+          sessionStorage.setItem('idUsuario', response.user.id);
 
           this.router.navigate([this.returnUrl]);
         },

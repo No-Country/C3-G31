@@ -2,7 +2,7 @@
 
 <div class="container mt-4">
     <h1>Regístrate aquí</h1>
-    <form class="row border border-4 rounded p-3" #f="ngForm" (ngSubmit)="f.form.valid && registrar(f)">
+    <form class="row border border-4 rounded p-3" #f="ngForm" (ngSubmit)="f.form.valid && registrar()">
 
         <div class="col  p-3 m-2">
 
@@ -18,7 +18,7 @@
             </div>
 
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" placeholder=" " [(ngModel)]='nombre' name="nombre" required>
+                <input type="text" class="form-control" placeholder=" " [(ngModel)]='razonSocial' name="razonSocial" required>
                 <label>Razón social *</label>
             </div>
 

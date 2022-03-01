@@ -15,4 +15,8 @@ export class EmpresaService {
     public getUsuarioEmpresa(idUsuario: number) {
         return this.http.get(this.api_empresas + '?user_id=' + idUsuario);
     }
+
+    public postEmpresa(data: object) {
+        return this.http.post(this.api_empresas, data);
+    }
 }

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { EmpresaService } from 'src/app/services/empresa.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-empresa',
@@ -11,8 +14,7 @@ export class EmpresaComponent implements OnInit {
   imageURL:any[]=[];
 
   logo: string;
-  nombre: string;
-  apellido: string;
+  razonSocial: string;
   email: string;
   telefono: string;
 
@@ -26,13 +28,11 @@ export class EmpresaComponent implements OnInit {
   observaciones: string;
 
   constructor(
+    private router: Router,
     private servicioEmpresa: EmpresaService
   ) { }
 
   ngOnInit(): void {
-    let res = this.servicioEmpresa.getUsuarioEmpresa(1).subscribe(
-      response => console.log(response)
-    );
   }
 
   cargarImagen(event:any) {
@@ -49,8 +49,27 @@ export class EmpresaComponent implements OnInit {
     }
   }
 
-  registrar(form: NgForm) {
-    console.log(form);
+  registrar() {
+    let dataEmpresa = {
+      idUsuario: Number.parseInt(sessionStorage.getItem('idUsuario') || '0'),
+      logo: this.logo,
+      razonSocial: this.razonSocial,
+      email: this.email,
+      telefono: this.telefono
+    }
+
+    this.servicioEmpresa.postEmpresa(dataEmpresa).subscribe(
+      response => Swal.fire({
+        icon: 'success',
+        title: 'Éxito',
+        text: 'Su empresa ha sido registrada con éxito'
+      }).then(() => this.router.navigate([''])),
+      error => Swal.fire({
+        title: 'Error', 
+        text: 'Ha ocurrido un error al registrar su empresa',
+        icon: 'error'
+      })
+    )
   }
 
 }

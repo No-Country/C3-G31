@@ -10,17 +10,17 @@ class EmpresaListResource(Resource):
         return empresas_schema.dump(empresas)
 
     def post(self):
-        form_data = request.get_json()
-        errors = empresa_schema.validate(form_data)
-        if errors:
-            abort(400, errors)
+        form_data: dict = request.get_json()
+        # errors = empresa_schema.validate(form_data)
+        # if errors:
+        #     abort(400, errors)
         
         empresa = Empresa(
-            razon_social = form_data['razon_social'],
+            razon_social = form_data['razonSocial'],
             telefono = form_data['telefono'],
             email = form_data['email'],
-            logo = form_data['logo'],
-            user_id = form_data['user_id']
+            logo = form_data.get('logo'),
+            user_id = form_data['idUsuario']
         )
         empresa.save(is_new=True)
         return empresa_schema.dump(empresa), 201

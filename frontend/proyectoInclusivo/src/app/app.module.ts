@@ -12,6 +12,7 @@ import { EmpleosComponent } from './components/empleos/empleos.component';
 import { HomeComponent } from './components/home/home.component';
 import { HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { EmpresaComponent } from './components/empresa/empresa.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { FormsModule } from '@angular/forms';
     FooterComponent,
     EmpleosComponent,
     HomeComponent,
+    EmpresaComponent,
   ],
   imports: [
     BrowserModule,

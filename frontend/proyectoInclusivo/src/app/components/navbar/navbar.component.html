@@ -16,7 +16,9 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Soy empresa</a>
+            <a class="nav-link active" aria-current="page" 
+              [routerLink]="!estaAutenticado() ? ['/login'] : ['/empresa']" 
+              [queryParams]="!estaAutenticado() ? {r: '/empresa'} : null" >Soy empresa</a>
           </li>
 
           <li class="nav-item dropdown">

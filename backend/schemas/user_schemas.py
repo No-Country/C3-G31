@@ -4,14 +4,15 @@ from config.marsh import ma
 from models.user import User
 from schemas.profile_schemas import ProfileSchema
 from schemas.direccion_schemas import DireccionSchema
+from schemas.empresa_schemas import EmpresaSchema
 
 class UserSchema(ma.SQLAlchemySchema):
     profile = ma.Nested(ProfileSchema)
     direccion= ma.Nested(DireccionSchema)
-
+    empresa = ma.Nested(EmpresaSchema)
     class Meta:
         ordered = True
-        fields = ('id', 'email', 'profile', 'direccion')
+        fields = ('id', 'email', 'profile', 'direccion','empresa')
         # exclude = ('password',)
         model = User
 

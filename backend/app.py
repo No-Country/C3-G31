@@ -11,6 +11,7 @@ from config.db import db
 from config.marsh import ma
 from resources.user_resources import UserListResource, UserResource, TokenResource
 from resources.profile_resources import ProfileListResource
+from resources.empresa_resources import EmpresaListResource, EmpresaResource
 
 
 
@@ -56,6 +57,9 @@ api.add_resource(TokenResource, '/api/users/token')
 
 api.add_resource(ProfileListResource, '/api/profiles')
 # api.add_resource(ProfileResource)
+
+api.add_resource(EmpresaListResource, '/api/empresas')
+api.add_resource(EmpresaResource, '/api/empresas/<int:empresa_id>')
 
 if __name__ == '__main__':
      app.run(debug=False)

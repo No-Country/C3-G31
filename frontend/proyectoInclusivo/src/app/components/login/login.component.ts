@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import Swal from 'sweetalert2';
 
@@ -12,10 +12,17 @@ export class LoginComponent implements OnInit {
   mail: string
   password: string
 
+  returnUrl: string;
+
   constructor(
     private servicioUsuario: UsuariosService,
-    private router: Router
-  ) { }
+    private router: Router,
+    route: ActivatedRoute
+  ) {
+    route.queryParams.subscribe(params => {
+      this.returnUrl = params.r || '';
+    });
+  }
 
   ngOnInit(): void {
   }
@@ -31,7 +38,9 @@ export class LoginComponent implements OnInit {
         (response: any) => {
           let nombreUsuario = response.user.profile.nombre;
           sessionStorage.setItem('nombreUsuario', nombreUsuario);
-          this.router.navigate(['']);
+          sessionStorage.setItem('idUsuario', response.user.id);
+
+          this.router.navigate([this.returnUrl]);
         },
         error => Swal.fire({
           title: 'Error', 

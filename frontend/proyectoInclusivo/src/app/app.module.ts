@@ -24,7 +24,7 @@ import { EmpresaComponent } from './components/empresa/empresa.component';
     FooterComponent,
     EmpleosComponent,
     HomeComponent,
-    EmpresaComponent,
+    EmpresaComponent
   ],
   imports: [
     BrowserModule,

@@ -19,4 +19,8 @@ export class EmpresaService {
     public postEmpresa(data: object) {
         return this.http.post(this.api_empresas, data);
     }
+
+    public tieneEmpresa(): boolean{
+        return sessionStorage.getItem('empresa') != null
+    }
 }

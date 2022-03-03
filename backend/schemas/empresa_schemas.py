@@ -1,5 +1,6 @@
 from config.marsh import ma
 from models.empresa import Empresa
+from schemas.direccion_schemas import DireccionSchema
 
 class EmpresaSchema(ma.SQLAlchemySchema):
     class Meta:
@@ -11,6 +12,7 @@ class EmpresaSchema(ma.SQLAlchemySchema):
     email = ma.auto_field()
     logo = ma.auto_field()
     user_id = ma.auto_field()
+    direccion = ma.Nested(DireccionSchema)
 
 empresa_schema = EmpresaSchema()
 empresas_schema = EmpresaSchema(many=True)

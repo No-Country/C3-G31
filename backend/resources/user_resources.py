@@ -74,27 +74,27 @@ class UserListResource(Resource):
         curriculum.save(is_new=True)
         user.curriculum=curriculum
         
-        #aqui le agrego la direccion
+        #TODO: Cambiar guardado de localidad y provincia, no se debería insertar en esas tablas
         direccion=Direccion(
-        calle= form_data['calle'],
-        numero= form_data['numero'],
-        piso= form_data['piso'],
-        depto= form_data['depto'],
-        observaciones= form_data['observacionesDomicilio'],
-        user_id= user.id
+            calle= form_data['calle'],
+            numero= form_data['numero'],
+            piso= form_data['piso'],
+            depto= form_data['depto'],
+            observaciones= form_data['observacionesDomicilio'],
+            user_id= user.id
         )
         direccion.save(is_new=True)
         
         localidad=Localidad(
-        nombre= form_data['localidad'],
-        codigoPostal= form_data['cp'],
-        direccion_id=direccion.id
+            nombre= form_data['localidad'],
+            codigoPostal= form_data['cp'],
+            direccion_id=direccion.id
         )
         localidad.save(is_new=True)
         
         provincia=Provincia(
-        nombre=form_data['provincia'],
-        localidad_id=localidad.id
+            nombre=form_data['provincia'],
+            localidad_id=localidad.id
         )
         provincia.save(is_new=True)
 

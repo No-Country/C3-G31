@@ -43,7 +43,7 @@ def handle_exception(e: Exception):
         'code': 500,
         'name': type(e).__name__,
         'description': str(e)
-    }
+    }, 500
 
 
 api = Api(app)

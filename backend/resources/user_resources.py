@@ -1,3 +1,4 @@
+import email
 from flask import request
 from flask_restful import Resource
 from flask_jwt_extended import create_access_token
@@ -11,6 +12,7 @@ from models.curriculum import Curriculum
 class UserListResource(Resource):
     def get(self):
         users = User.get_all()
+        
         return users_schema.dump(users)
 
     def post(self):
@@ -35,14 +37,14 @@ class UserListResource(Resource):
         user.set_password(password)
         user.save(is_new=True)
 
-        movilidad = 0
-        disponibilidad=0
+        movilidad = false
+        disponibilidad=false
 
         if form_data['movilidad']!='false':
-            movilidad = 1
+            movilidad = true
 
         if form_data['disponibilidadViajar']!='false':
-            disponibilidad = 1
+            disponibilidad = true
                     
         profile = Profile(
             user_id = user.id,
@@ -128,16 +130,64 @@ class TokenResource(Resource):
 class UserResource(Resource):
     def get(self, user_id):
         user = User.get_by_id(user_id)
+        
+     
         return user_schema.dump(user)
 
     def patch(self, user_id):
-        user: User = User.get_by_id(user_id)
+        user = User.get_by_id(user_id)
+        form_data=request.form
 
-        if 'email' in request.json:
-            user.email = request.json['email']
-        if 'password' in request.json:
-            user.password = request.json['password']
+        if 'email' in form_data:
+            user.email = form_data['email']
+        if 'password' in form_data:
+            user.password = form_data['password']
 
+        #profile
+        movilidad = 0
+        disponibilidad=0
+
+        if form_data['movilidad']!='false':
+            movilidad = true
+        if form_data['disponibilidadViajar']!='false':
+            disponibilidad = true
+        if 'nombre' in form_data:
+            user.profile.nombre = form_data['nombre']
+        if 'apellido' in form_data:
+            user.profile.apellido = form_data['apellido']
+        if 'presentacion' in form_data:
+            user.profile.presentacion = form_data['presentacion']
+        if 'telefono' in form_data:
+            user.profile.telefono = form_data['telefono']
+        if 'fecha_nacimiento' in form_data:
+            user.profile.fecha_nacimiento = form_data['fechaNacimiento']
+        if 'disponibilidad_viajar' in form_data:
+            user.profile.disponibilidad_viajar = disponibilidad
+        if 'movilidad_propia' in form_data:
+            user.profile.movilidad_propia = movilidad
+        if 'discapacidad' in form_data:
+            user.profile.discapacidad = form_data['discapacidad']
+      #foto (esto tengo que cambiar, tanto aca como en  post)
+        if form_data["tieneFoto"]=="si":
+            foto = request.files["foto"]
+            user.profile.foto= user.profile.guardarFoto(foto)
+        #direccion
+        if 'calle' in form_data:
+            user.direccion.calle = form_data['calle']
+        if 'numero' in form_data:
+            user.direccion.numero = form_data['numero']
+        if 'piso' in form_data:
+            user.direccion.piso = form_data['piso']
+        if 'depto' in form_data:
+            user.direccion.depto = form_data['depto']
+        if 'observacionesDomicilio' in form_data:
+            user.direccion.observaciones = form_data['observacionesDomicilio']
+        if 'localidad' in form_data:
+            user.direccion.localidad.nombre = form_data['localidad']
+        if 'cp' in form_data:
+            user.direccion.localidad.codigoPostal = form_data['cp']
+        if 'provincia' in form_data:
+            user.direccion.localidad.provincia.nombre = form_data['provincia']
         user.save(is_new=False)
         return user_schema.dump(user)
 

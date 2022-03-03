@@ -11,7 +11,7 @@
                 <!-- Oculto el input file asi utilizo un boton personalizado para subir la foto(tambien lo voy a usar para el cv) -->
                 <div>
                     <div>
-                        <img [src]="imageURL[0]" width="100px" class="mb-3">
+                        <img [src]="imageURL[0]" width="100px" class="mb-3" src="../../../../../../backend/static/upload/imagenes/">
                     </div>
                     <input type="file" accept="image/*" class="mb-3 d-none" id="inputFoto" name="fotoPerfil"
                         (change)="cargarImagen($event)">

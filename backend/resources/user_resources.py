@@ -30,8 +30,46 @@ class UserListResource(Resource):
                  {"email": ['this email already exists ']}
              }, 400
 
-        user = User()
-        user.email = email
+        # curriculum = Curriculum(
+        #     direccionDeArchivo="",
+        #     user_id = user.id
+        # )
+
+        # if tieneCv=="si":
+        #     cv = request.files["curriculum"]
+        #     curriculum.direccionDeArchivo=curriculum.guardarCurriculum(cv)
+
+        # curriculum.save(is_new=True)
+        # user.curriculum=curriculum
+        
+        #TODO: Cambiar guardado de localidad y provincia, no se debería insertar en esas tablas
+        direccion=Direccion(
+            calle= form_data['calle'],
+            numero= form_data['numero'],
+            piso= form_data['piso'],
+            depto= form_data['depto'],
+            observaciones= form_data['observacionesDomicilio']
+        )
+        direccion.save(is_new=True)
+        
+        localidad=Localidad(
+            nombre= form_data['localidad'],
+            codigoPostal= form_data['cp'],
+            direccion_id=direccion.id
+        )
+        localidad.save(is_new=True)
+        
+        provincia=Provincia(
+            nombre=form_data['provincia'],
+            localidad_id=localidad.id
+        )
+        provincia.save(is_new=True)
+        
+
+        user = User(
+            email = email,
+            direccion_id = direccion.id
+        )
         user.set_password(password)
         user.save(is_new=True)
 
@@ -61,42 +99,6 @@ class UserListResource(Resource):
   
         profile.save(is_new=True)
         user.profile = profile
-
-        curriculum = Curriculum(
-            direccionDeArchivo="",
-            user_id = user.id
-        )
-
-        if tieneCv=="si":
-            cv = request.files["curriculum"]
-            curriculum.direccionDeArchivo=curriculum.guardarCurriculum(cv)
-
-        curriculum.save(is_new=True)
-        user.curriculum=curriculum
-        
-        #TODO: Cambiar guardado de localidad y provincia, no se debería insertar en esas tablas
-        direccion=Direccion(
-            calle= form_data['calle'],
-            numero= form_data['numero'],
-            piso= form_data['piso'],
-            depto= form_data['depto'],
-            observaciones= form_data['observacionesDomicilio'],
-            user_id= user.id
-        )
-        direccion.save(is_new=True)
-        
-        localidad=Localidad(
-            nombre= form_data['localidad'],
-            codigoPostal= form_data['cp'],
-            direccion_id=direccion.id
-        )
-        localidad.save(is_new=True)
-        
-        provincia=Provincia(
-            nombre=form_data['provincia'],
-            localidad_id=localidad.id
-        )
-        provincia.save(is_new=True)
 
         return user_schema.dump(user), 201
 

@@ -1,18 +1,15 @@
-import flask_sqlalchemy
-
 from flask import Flask, json
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
 from werkzeug.exceptions import HTTPException
-from flask_marshmallow import sqla
+
 from config.db import db
 from config.marsh import ma
 from resources.user_resources import UserListResource, UserResource, TokenResource
 from resources.profile_resources import ProfileListResource
 from resources.empresa_resources import EmpresaListResource, EmpresaResource
-
 
 
 app = Flask(__name__)

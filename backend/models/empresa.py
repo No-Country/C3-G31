@@ -10,5 +10,5 @@ class Empresa(db.Model, BaseModelMixin):
 
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), unique=True, nullable=False)
 
-    # address_id = db.Column(db.Integer, db.ForeignKey("address.id"), unique=True, nullable=False)
-    # address = db.relationship("Address", back_populates="empresa", uselist=False)
+    direccion_id = db.Column(db.Integer, db.ForeignKey("direccion.id"), unique=True, nullable=False)
+    direccion = db.relationship("Direccion", uselist=False)

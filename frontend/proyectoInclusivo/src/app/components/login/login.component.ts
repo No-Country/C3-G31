@@ -45,12 +45,13 @@ export class LoginComponent implements OnInit {
 
           this.router.navigate([this.returnUrl]);
         },
-        error => Swal.fire({
+        (error) => {console.log(error)
+          Swal.fire({
           title: 'Error', 
           text: 'Usuario o contraseña incorrecta', 
-          icon: 'error'
-        })
-      );
+          icon: 'error',
+        })}
+      ); 
     }
     catch (error) {
     }

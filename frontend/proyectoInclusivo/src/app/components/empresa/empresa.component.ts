@@ -35,7 +35,7 @@ export class EmpresaComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (sessionStorage.getItem('empresa')!= null)
+    if (this.servicioEmpresa.tieneEmpresa())
     {
       let datos;
 

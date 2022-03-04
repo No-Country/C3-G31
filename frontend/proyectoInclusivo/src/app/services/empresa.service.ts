@@ -13,6 +13,10 @@ export class EmpresaService {
     constructor(
         private http: HttpClient
     ) {}
+
+    public tieneEmpresa() {
+        return sessionStorage.getItem('empresa') != null;
+    }
     
     public getEmpresaActual():string{
         return this.empresa

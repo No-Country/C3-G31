@@ -119,10 +119,10 @@ export class RegistroComponent implements OnInit {
       formData.append("presentacion", this.presentacion)
       formData.append("sobreTi", this.sobreTi)
       formData.append("telefono", this.telefono)
-      formData.append("disponibilidadViajar", this.disponibilidadViajar.toString())
+      formData.append("disponibilidadViajar", this.disponibilidadViajar?.toString())
       formData.append("fechaNacimiento", this.fechaNacimiento.toString())
       formData.append("discapacidad", this.discapacidad)
-      formData.append("movilidad", this.movilidad.toString())
+      formData.append("movilidad", this.movilidad?.toString())
 //domicilio
       formData.append("calle", this.calle)
       formData.append("numero", this.numero)
@@ -161,12 +161,14 @@ export class RegistroComponent implements OnInit {
         sessionStorage.setItem('idUsuario', idUsuario);
         this.router.navigate(['']);
         },
-        error => {console.log(error),
+        error => {
+          console.log(error);
           Swal.fire({
-          title: 'Error', 
-          text: 'Ha ocurrido un error al registrarse',
-          icon: 'error'
-        })}
+            title: 'Error', 
+            text: 'Ha ocurrido un error al registrarse',
+            icon: 'error'
+          });
+        }
       );
       }
       else{
@@ -175,16 +177,20 @@ export class RegistroComponent implements OnInit {
           (response: any) => {
           this.router.navigate(['']);
           },
-          error => Swal.fire({
-            title: 'Error', 
-            text: 'Ha ocurrido un error al registrarse',
-            icon: 'error'
-          })
+          error => {
+            console.log(error);
+            Swal.fire({
+              title: 'Error', 
+              text: 'Ha ocurrido un error al registrarse',
+              icon: 'error'
+            });
+          }
         );
       }
   
     }
     catch (error) {
+      console.log(error);
     }
   } 
 

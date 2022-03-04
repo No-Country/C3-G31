@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import request, jsonify
 from flask_restful import Resource, abort
 from flask_jwt_extended import jwt_required, get_jwt_identity
@@ -25,17 +26,18 @@ class EmpleoListResource(Resource):
             return self.model.query.filter(*filter_list)
         return self.model.query.paginate(page, per_page)
 
-    @jwt_required()
+    # @jwt_required()
     def get(self):
         queryset = self.get_queryset()
         data = empleos_schema.dump(queryset.items)
         return get_paginated_dict(data, queryset), 201
 
-    @jwt_required()
-    @validate_schema(empleo_schema)
+    # @jwt_required()
+    # @validate_schema(empleo_schema)
     def post(self):
-        current_user_id = get_jwt_identity()
-        empresa = Empresa.get_by_user(current_user_id)
+        user_id = 1
+        # current_user_id = get_jwt_identity()
+        empresa = Empresa.get_by_user(user_id)
         if empresa is None:
             abort(403, message="You do not have a registered company")
 
@@ -49,13 +51,13 @@ class EmpleoResource(Resource):
 
     model = Empleo
 
-    @jwt_required()
+    # @jwt_required()
     def get(self, empleo_id):
         empleo = get_or_404(self.empleo, empleo_id)
         return empleo_schema.dump(empleo)
 
-    @jwt_required()
-    @validate_schema(empleo_schema)
+    # @jwt_required()
+    # @validate_schema(empleo_schema)
     def put(self, empleo_id):
         empleo = get_or_404(self.model, empleo_id)
         abort_is_not_owner(empleo.empresa.user.id)
@@ -63,7 +65,7 @@ class EmpleoResource(Resource):
         empleo.update(**valid_data)
         return empleo_schema.dump(empleo)
 
-    @jwt_required()
+    # @jwt_required()
     def delete(self, empleo_id):
         empleo = get_or_404(self.model, empleo_id)
         abort_is_not_owner(empleo.empresa.user.id)

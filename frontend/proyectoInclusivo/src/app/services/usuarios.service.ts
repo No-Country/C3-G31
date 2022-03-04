@@ -12,6 +12,10 @@ export class UsuariosService {
 
   constructor(private http: HttpClient) { }
 
+  public estaAutenticado(): boolean {
+    return sessionStorage.getItem('nombreUsuario') != null;
+  }
+
   public getUsuarioActual(): string {
     return this.usuario;
   }

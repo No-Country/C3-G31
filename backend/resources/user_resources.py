@@ -7,6 +7,7 @@ from models.user import User
 from schemas.user_schemas import user_schema, users_schema, user_register_schema
 from models.direccion import Direccion, Localidad, Provincia
 from models.curriculum import Curriculum
+import datetime
 
 class UserListResource(Resource):
     def get(self):
@@ -86,7 +87,7 @@ class UserListResource(Resource):
             user_id = user.id,
             nombre = form_data['nombre'],
             apellido = form_data['apellido'],
-            fecha_nacimiento = form_data['fechaNacimiento'], 
+            fecha_nacimiento = datetime.datetime.now(),
             presentacion = form_data['presentacion'],
             telefono = form_data['telefono'],
             disponibilidad_viajar =disponibilidad,

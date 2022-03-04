@@ -150,11 +150,12 @@ export class RegistroComponent implements OnInit {
 
       this.servicio.postUsuario(formData).subscribe(
         response => this.router.navigate(['login']),
-        error => Swal.fire({
+        error => {console.log(error),
+          Swal.fire({
           title: 'Error', 
           text: 'Ha ocurrido un error al registrarse',
           icon: 'error'
-        })
+        })}
       );
   
     }

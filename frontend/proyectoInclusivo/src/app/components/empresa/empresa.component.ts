@@ -18,8 +18,10 @@ export class EmpresaComponent implements OnInit {
   email: string;
   telefono: string;
 
-  idProvincia: number;
-  idLocalidad: number;
+  // idProvincia: number;
+  // idLocalidad: number;
+  provincia: string;
+  localidad: string;
   codigoPostal: string;
   calle: string;
   altura: number;
@@ -55,7 +57,16 @@ export class EmpresaComponent implements OnInit {
       logo: this.logo,
       razonSocial: this.razonSocial,
       email: this.email,
-      telefono: this.telefono
+      telefono: this.telefono,
+      
+      calle: this.calle,
+      numero: this.altura,
+      piso: this.piso,
+      depto: this.depto,
+      cp: this.codigoPostal,
+      localidad: this.localidad,
+      provincia: this.provincia,
+      observacionesDomicilio: this.observaciones
     }
 
     this.servicioEmpresa.postEmpresa(dataEmpresa).subscribe(

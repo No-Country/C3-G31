@@ -16,6 +16,7 @@ class User(db.Model, BaseModelMixin):
         self.password = generate_password_hash(password, method='sha256')
 
     def check_password(self, password) -> bool:
+        
         return check_password_hash(self.password, password)
 
     @classmethod

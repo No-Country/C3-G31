@@ -37,14 +37,14 @@ class UserListResource(Resource):
         user.set_password(password)
         user.save(is_new=True)
 
-        movilidad = false
-        disponibilidad=false
+        movilidad = 0
+        disponibilidad=0
 
         if form_data['movilidad']!='false':
-            movilidad = true
+            movilidad = 1
 
         if form_data['disponibilidadViajar']!='false':
-            disponibilidad = true
+            disponibilidad = 1
                     
         profile = Profile(
             user_id = user.id,
@@ -130,8 +130,6 @@ class TokenResource(Resource):
 class UserResource(Resource):
     def get(self, user_id):
         user = User.get_by_id(user_id)
-        
-     
         return user_schema.dump(user)
 
     def patch(self, user_id):
@@ -141,16 +139,20 @@ class UserResource(Resource):
         if 'email' in form_data:
             user.email = form_data['email']
         if 'password' in form_data:
-            user.password = form_data['password']
+            user.set_password(form_data['password'])
 
         #profile
-        movilidad = 0
-        disponibilidad=0
-
         if form_data['movilidad']!='false':
-            movilidad = true
+            movilidad = 1
+        else:
+            movilidad = 0
+        
         if form_data['disponibilidadViajar']!='false':
-            disponibilidad = true
+            disponibilidad = 1
+        else:
+            disponibilidad = 0
+        
+
         if 'nombre' in form_data:
             user.profile.nombre = form_data['nombre']
         if 'apellido' in form_data:
@@ -159,14 +161,14 @@ class UserResource(Resource):
             user.profile.presentacion = form_data['presentacion']
         if 'telefono' in form_data:
             user.profile.telefono = form_data['telefono']
-        if 'fecha_nacimiento' in form_data:
+        if 'fechaNacimiento' in form_data:
             user.profile.fecha_nacimiento = form_data['fechaNacimiento']
-        if 'disponibilidad_viajar' in form_data:
+        if 'disponibilidadViajar' in form_data:
             user.profile.disponibilidad_viajar = disponibilidad
-        if 'movilidad_propia' in form_data:
+        if 'movilidad' in form_data:
             user.profile.movilidad_propia = movilidad
-        if 'discapacidad' in form_data:
-            user.profile.discapacidad = form_data['discapacidad']
+        if 'sobreTi' in form_data:
+            user.profile.discapacidad = form_data['sobreTi']
       #foto (esto tengo que cambiar, tanto aca como en  post)
         if form_data["tieneFoto"]=="si":
             foto = request.files["foto"]

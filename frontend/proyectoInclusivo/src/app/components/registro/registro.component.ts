@@ -37,6 +37,7 @@ export class RegistroComponent implements OnInit {
   movilidad: boolean; 
   sobreTi:string="";
   presentacion:string="";
+  switchDiscapacidad:boolean=false;
   //#endregion
   
   //#region variables Domicilio
@@ -97,11 +98,11 @@ export class RegistroComponent implements OnInit {
   }
 
   mostrarTextArea(){
-    if(this.mostrar==false){
-      this.mostrar=true;
+    if(this.switchDiscapacidad==true){
+      this.mostrar=false;
     }
     else{
-      this.mostrar=false;
+      this.mostrar=true;
     }
   }
     
@@ -169,8 +170,6 @@ export class RegistroComponent implements OnInit {
       }
       else{
         var idUsuario:any =sessionStorage.getItem('idUsuario');
-        console.log(this.movilidad)
-   
         this.servicio.patchUsuariosId(idUsuario,formData).subscribe(
           (response: any) => {
           this.router.navigate(['']);
@@ -210,10 +209,12 @@ export class RegistroComponent implements OnInit {
       var idUsuario:any =sessionStorage.getItem('idUsuario');
       this.servicio.getUsuariosId(idUsuario).subscribe(
         (response: any) => {
-           datos=response
+          datos=response
+          let fechaEntrante=new Date(response.profile.fecha_nacimiento)
           
            //#region Datos Usuario
-           this.email=response.email
+          this.email=response.email
+           
            //#endregion
 
            //#region Profile
@@ -222,12 +223,19 @@ export class RegistroComponent implements OnInit {
            this.apellido=response.profile.apellido;
            this.presentacion=response.profile.presentacion;
            this.telefono= response.profile.telefono;
-           this.fechaNacimiento=response.profile.fecha_nacimiento;
+           this.fechaNacimiento= fechaEntrante;
            this.disponibilidadViajar=response.profile.disponibilidad_viajar;
            this.movilidad=response.profile.movilidad_propia;
-           this.discapacidad=response.profile.discapacidad;
+           this.sobreTi=response.profile.discapacidad;
+           console.log(this.sobreTi)
+           if(this.sobreTi!=""){
+             this.mostrar=true
+             this.switchDiscapacidad=true
+           }
           //#endregion
-
+          console.log(fechaEntrante)
+          console.log(this.fechaNacimiento)
+          
           //#region Curriculum
           //aca iria un metodo para traer todos los cvs cargados, pero tiene que funcionar el servidor
           //#endregion

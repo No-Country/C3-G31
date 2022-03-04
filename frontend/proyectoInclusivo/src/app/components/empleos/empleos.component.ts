@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { EmpleosService } from 'src/app/services/empleos.service';
 
 @Component({
   selector: 'app-empleos',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmpleosComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private servicio: EmpleosService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+
+    this.servicio.getAllEmpleos().subscribe(
+      (response: any) => {
+        let datos=response
+        
+    })
+        
   }
+
+
+
+
+
 
 }

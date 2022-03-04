@@ -1,0 +1,58 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top opacity-75 mb-5">
+    <div class="container-fluid">
+      <img src="../../assets/img/isologotipo.png" width="100px" alt="" class="mx-4">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" [routerLink]="['/empleos']">Empleos</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Soy empresa</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Sobre nosotros
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#p1">¿Quiénes Somos?</a></li>
+              <li><a class="dropdown-item" href="#p2">Nuestro objetivo</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#p3">FAQs</a></li>
+            </ul>
+          </li>
+
+        </ul>
+
+        <form class="d-flex">
+            <!-- BOTON LOGIN -->
+            <div class="dropdown me-5">
+              <label class="text-primary me-2">
+                {{usuario}}
+              </label>
+              <button class="btn btn-primary  dropdown-toggle" type="button" id="botonLogin" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <i class="fa-solid fa-circle-user fa-xl"></i>
+              </button>
+              <ul class="dropdown-menu text-center" aria-labelledby="botonLogin">
+                <li><a class="dropdown-item" [routerLink]="['/login']" >LogIn</a></li>
+                <li><a class="dropdown-item" href="/deslogueo">LogOut</a></li>
+                <li><a class="dropdown-item"  [routerLink]="['/registro']">Mi perfil</a></li>
+              </ul>
+            </div>
+            <!-- FIN BOTON LOGIN -->
+          </form>
+    
+      </div>
+    </div>
+</nav>
+<br><br><br>

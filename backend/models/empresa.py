@@ -10,11 +10,10 @@ class Empresa(db.Model, BaseModelMixin):
     logo = db.Column(db.String(100))
 
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), unique=True, nullable=False)
-    user = db.relationship("User", back_populates="empresa")
 
-    # address_id = db.Column(db.Integer, db.ForeignKey("address.id"), unique=True, nullable=False)
-    # address = db.relationship("Address", back_populates="empresa", uselist=False)
-
+    direccion_id = db.Column(db.Integer, db.ForeignKey("direccion.id"), unique=True, nullable=False)
+    direccion = db.relationship("Direccion", uselist=False)
+    
     empleos = db.relationship('Empleo', lazy='select', backref=db.backref('empresa', lazy='joined'))
 
     @classmethod

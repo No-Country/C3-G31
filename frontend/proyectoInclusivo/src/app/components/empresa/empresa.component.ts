@@ -18,8 +18,10 @@ export class EmpresaComponent implements OnInit {
   email: string;
   telefono: string;
 
-  idProvincia: number;
-  idLocalidad: number;
+  // idProvincia: number;
+  // idLocalidad: number;
+  provincia: string;
+  localidad: string;
   codigoPostal: string;
   calle: string;
   altura: number;
@@ -33,6 +35,32 @@ export class EmpresaComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if (sessionStorage.getItem('empresa')!= null)
+    {
+      let datos;
+
+      var idEmpresa: any = sessionStorage.getItem('empresa')
+      this.servicioEmpresa.getEmpresaId(idEmpresa).subscribe(
+        (response:any) => {
+          datos=response
+          console.log(datos)
+          //Región empresa
+          this.razonSocial = response.razon_social
+          this.email = response.email;
+          this.telefono = response.telefono
+
+          //Región dirección
+          this.provincia = response.direccion.localidad.provincia.nombre;
+          this.localidad = response.direccion.localidad.nombre
+          this.codigoPostal = response.direccion.localidad.codigoPostal
+          this.calle = response.direccion.calle
+          this.altura = response.direccion.numero
+          this.piso = response.direccion.piso
+          this.depto = response.direccion.depto
+          this.observaciones = response.direccion.observaciones
+        }
+      )
+    }
   }
 
   cargarImagen(event:any) {
@@ -55,7 +83,16 @@ export class EmpresaComponent implements OnInit {
       logo: this.logo,
       razonSocial: this.razonSocial,
       email: this.email,
-      telefono: this.telefono
+      telefono: this.telefono,
+      
+      calle: this.calle,
+      numero: this.altura,
+      piso: this.piso,
+      depto: this.depto,
+      cp: this.codigoPostal,
+      localidad: this.localidad,
+      provincia: this.provincia,
+      observacionesDomicilio: this.observaciones
     }
 
     this.servicioEmpresa.postEmpresa(dataEmpresa).subscribe(
@@ -64,11 +101,12 @@ export class EmpresaComponent implements OnInit {
         title: 'Éxito',
         text: 'Su empresa ha sido registrada con éxito'
       }).then(() => this.router.navigate([''])),
-      error => Swal.fire({
+      error => {console.log(error)
+        Swal.fire({
         title: 'Error', 
         text: 'Ha ocurrido un error al registrar su empresa',
         icon: 'error'
-      })
+      })}
     )
   }
 

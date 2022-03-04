@@ -24,13 +24,16 @@ export class UsuariosService {
     this.usuario = usuario;
   }
 
-
   public getAllUsuarios(): Observable<any>{
     return this.http.get(this.api_usuarios);
   }
   
   public getUsuariosId(id:number): Observable<any>{
     return this.http.get(this.api_usuarios+"/"+id);
+  }
+
+  public patchUsuariosId(id:number, data:any): Observable<any>{
+    return this.http.patch(this.api_usuarios+"/"+id, data);
   }
 
   public postUsuario(data:any): Observable<any>{

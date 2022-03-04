@@ -8,7 +8,7 @@ from schemas.empresa_schemas import EmpresaSchema
 
 class UserSchema(ma.SQLAlchemySchema):
     profile = ma.Nested(ProfileSchema)
-    curriculum=ma.Nested(CurriculumSchema)
+    # curriculum=ma.Nested(CurriculumSchema)
     direccion= ma.Nested(DireccionSchema)
     empresa = ma.Nested(EmpresaSchema)
     class Meta:

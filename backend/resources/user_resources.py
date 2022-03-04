@@ -165,7 +165,7 @@ class UserResource(Resource):
         if 'telefono' in form_data:
             user.profile.telefono = form_data['telefono']
         if 'fechaNacimiento' in form_data:
-            user.profile.fecha_nacimiento = form_data['fechaNacimiento']
+            user.profile.fecha_nacimiento = datetime.datetime.now() #form_data['fechaNacimiento']
         if 'disponibilidadViajar' in form_data:
             user.profile.disponibilidad_viajar = disponibilidad
         if 'movilidad' in form_data:

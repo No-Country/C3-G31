@@ -1,3 +1,5 @@
+
+import { dashCaseToCamelCase } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -12,33 +14,33 @@ import Swal from 'sweetalert2';
 })
 export class RegistroComponent implements OnInit {
   
+  //#region variables User
+  email: string;
+  password: string;
+  confPassword: string;
+  //bandera que muestra o no mensaje de error de password distinto
+  banderaPass:boolean;
+
+  //#endregion
+  
+  //#region variables Profile
   archivoFotos: any[]=[];
-  archivoCurriculum: any[]=[];
-
-
   nombreFoto:any="";
   imageURL:any[]=[''];
- 
-  cvUrl:any[]=[''];
-  labelCv:any="";
-  mostrar=false;
   fotoUsuario: string;
   nombre: string;
   apellido: string;
-  email: string;
   telefono: string="";
-
-  password: string;
-  confPassword: string;
-
-  //bandera que muestra o no mensaje de error de password distinto
-  banderaPass:boolean;
-  disponibilidadViajar: boolean=false;
+  disponibilidadViajar: boolean;
   fechaNacimiento: Date = new Date()
   discapacidad: string="";
-  movilidad: boolean=false; 
+  movilidad: boolean; 
   sobreTi:string="";
   presentacion:string="";
+  switchDiscapacidad:boolean=false;
+  //#endregion
+  
+  //#region variables Domicilio
   calle:string="";
   numero:string="";
   piso:string="";
@@ -47,8 +49,17 @@ export class RegistroComponent implements OnInit {
   localidad:string="";
   provincia:string="";
   observacionesDomicilio:string="";
-  //creo esta bandera para saber si en el ngOnInit tengo que buscar datos del usuario o mostrar el registro vacio. 
-  public banderaEdit:boolean= false
+  //#endregion
+
+  //#region variables Curriculum
+  archivoCurriculum: any[]=[];
+  cvUrl:any[]=[''];
+  labelCv:any="";
+  //#endregion
+  
+  //bandera para mostrar el textArea de discapacidad o no, dependiendo del switch "discapacidad"
+  mostrar=false;
+
 
   constructor(
     private servicio: UsuariosService,
@@ -87,26 +98,22 @@ export class RegistroComponent implements OnInit {
   }
 
   mostrarTextArea(){
-    if(this.mostrar==false){
-      this.mostrar=true;
+    if(this.switchDiscapacidad==true){
+      this.mostrar=false;
     }
     else{
-      this.mostrar=false;
+      this.mostrar=true;
     }
   }
     
   
   registrar() {
     try {
-      
-
+      //#region formData 
       const formData= new FormData();
-      
-
       formData.append("email", this.email)
       formData.append("password", this.confPassword)
 //perfil
- 
       formData.append("nombre", this.nombre)
       formData.append("apellido", this.apellido)
       formData.append("presentacion", this.presentacion)
@@ -116,7 +123,6 @@ export class RegistroComponent implements OnInit {
       formData.append("fechaNacimiento", this.fechaNacimiento.toString())
       formData.append("discapacidad", this.discapacidad)
       formData.append("movilidad", this.movilidad.toString())
-      
 //domicilio
       formData.append("calle", this.calle)
       formData.append("numero", this.numero)
@@ -126,9 +132,9 @@ export class RegistroComponent implements OnInit {
       formData.append("localidad", this.localidad)
       formData.append("provincia", this.provincia)
       formData.append("observacionesDomicilio", this.observacionesDomicilio)
+    //#endregion
       
-      
-
+      //#region if verificacion de files
       if(this.archivoCurriculum.length>=1){
           formData.append("curriculum", this.archivoCurriculum[0], this.labelCv);
           formData.append("tieneCv", "si")
@@ -144,12 +150,17 @@ export class RegistroComponent implements OnInit {
         formData.append("foto","");
         formData.append("tieneFoto", "no")
       }
-
-
-      
-
+      //#endregion
+      if (sessionStorage.getItem('idUsuario')==null){
       this.servicio.postUsuario(formData).subscribe(
-        response => this.router.navigate(['login']),
+        (response: any) => {
+    
+        let nombreUsuario = response['profile']['nombre'];
+        let idUsuario= response['id'];
+        sessionStorage.setItem('nombreUsuario', nombreUsuario);
+        sessionStorage.setItem('idUsuario', idUsuario);
+        this.router.navigate(['']);
+        },
         error => {console.log(error),
           Swal.fire({
           title: 'Error', 
@@ -157,6 +168,20 @@ export class RegistroComponent implements OnInit {
           icon: 'error'
         })}
       );
+      }
+      else{
+        var idUsuario:any =sessionStorage.getItem('idUsuario');
+        this.servicio.patchUsuariosId(idUsuario,formData).subscribe(
+          (response: any) => {
+          this.router.navigate(['']);
+          },
+          error => Swal.fire({
+            title: 'Error', 
+            text: 'Ha ocurrido un error al registrarse',
+            icon: 'error'
+          })
+        );
+      }
   
     }
     catch (error) {
@@ -176,20 +201,68 @@ export class RegistroComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //verifico que exista usuario en la sesion
+   if (sessionStorage.getItem('idUsuario')!=null)
+   { 
+      let datos;
+   
+
+      var idUsuario:any =sessionStorage.getItem('idUsuario');
+      this.servicio.getUsuariosId(idUsuario).subscribe(
+        (response: any) => {
+          datos=response
+          let fechaEntrante=new Date(response.profile.fecha_nacimiento)
+          
+           //#region Datos Usuario
+          this.email=response.email
+           
+           //#endregion
+
+           //#region Profile
+          //la foto cuando este en servidor va a funcionar
+           this.nombre=response.profile.nombre;
+           this.apellido=response.profile.apellido;
+           this.presentacion=response.profile.presentacion;
+           this.telefono= response.profile.telefono;
+           this.fechaNacimiento= fechaEntrante;
+           this.disponibilidadViajar=response.profile.disponibilidad_viajar;
+           this.movilidad=response.profile.movilidad_propia;
+           this.sobreTi=response.profile.discapacidad;
+           console.log(this.sobreTi)
+           if(this.sobreTi!=""){
+             this.mostrar=true
+             this.switchDiscapacidad=true
+           }
+          //#endregion
+          console.log(fechaEntrante)
+          console.log(this.fechaNacimiento)
+          
+          //#region Curriculum
+          //aca iria un metodo para traer todos los cvs cargados, pero tiene que funcionar el servidor
+          //#endregion
+
+          //#region Direccion
+          this.calle=response.direccion.calle;
+          this.numero=response.direccion.numero;
+          this.piso=response.direccion.piso;
+          this.depto=response.direccion.depto;
+          this.observacionesDomicilio=response.direccion.observaciones;
+
+          this.localidad=response.direccion.localidad.nombre;
+          this.cp=response.direccion.localidad.codigoPostal;
+          
+          this.provincia=response.direccion.localidad.provincia.nombre;
+          //#endregion
+           
+
+
+
+
+        })
+    }
+
     
-    // var datos=this.servicio.getUsuarioActual();
-    // console.log(datos)
-
-    // if(this.banderaEdit==true){
-
-      
-    //   //   response => this.router.navigate(['login']),
-    //   //   error => Swal.fire({
-    //   //     title: 'Error', 
-    //   //     text: 'Ha ocurrido un error al registrarse',
-    //   //     icon: 'error'
-    //   //   })
-    //   // );
+    
 
     //   //   this.fotoUsuario,
     //   //   this.nombre,
@@ -211,6 +284,3 @@ export class RegistroComponent implements OnInit {
 
   
   }
-
-
-

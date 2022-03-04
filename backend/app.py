@@ -52,6 +52,7 @@ api.add_resource(UserListResource, '/api/users')
 api.add_resource(UserResource, '/api/users/<int:user_id>')
 api.add_resource(TokenResource, '/api/users/token')
 
+
 api.add_resource(ProfileListResource, '/api/profiles')
 # api.add_resource(ProfileResource)
 

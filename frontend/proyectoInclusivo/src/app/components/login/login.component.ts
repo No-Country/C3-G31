@@ -37,10 +37,11 @@ export class LoginComponent implements OnInit {
       this.servicioUsuario.verificarLogin(dataLogin).subscribe(
         (response: any) => {
           let nombreUsuario = response.user.profile.nombre;
+          let idUsuario = response.user.id;
           let empresa = response.user.empresa?.id;
           sessionStorage.setItem('empresa', empresa);
           sessionStorage.setItem('nombreUsuario', nombreUsuario);
-          sessionStorage.setItem('idUsuario', response.user.id);
+          sessionStorage.setItem('idUsuario', idUsuario);
           
 
           this.router.navigate([this.returnUrl]);

@@ -40,20 +40,18 @@ export class EmpresaComponent implements OnInit {
       let datos;
 
       var idEmpresa: any = sessionStorage.getItem('empresa')
-      console.log(idEmpresa)
       this.servicioEmpresa.getEmpresaId(idEmpresa).subscribe(
         (response:any) => {
           datos=response
-
+          console.log(datos)
           //Región empresa
-          this.logo = response.empresa.logo
-          this.razonSocial = response.empresa.razon_social
-          this.email = response.empresa.email;
-          this.telefono = response.empresa.telefono
+          this.razonSocial = response.razon_social
+          this.email = response.email;
+          this.telefono = response.telefono
 
           //Región dirección
-          this.provincia = response.direccion.localidad.provincia;
-          this.localidad = response.direccion.provincia.localidad
+          this.provincia = response.direccion.localidad.provincia.nombre;
+          this.localidad = response.direccion.localidad.nombre
           this.codigoPostal = response.direccion.localidad.codigoPostal
           this.calle = response.direccion.calle
           this.altura = response.direccion.numero

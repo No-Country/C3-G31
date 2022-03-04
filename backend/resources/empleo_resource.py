@@ -41,7 +41,9 @@ class EmpleoListResource(Resource):
         if empresa is None:
             abort(403, message="You do not have a registered company")
 
-        valid_data = empleo_schema.load(request.get_json())
+        form_data: dict = request.get_json()
+        form_data['fecha_vencimiento'] = "2000-01-01T18:30:00"
+        valid_data = empleo_schema.load(form_data)
         empleo = self.model(empresa_id=empresa.id, **valid_data)
         empleo.save(is_new=True)
         return empleo_schema.dump(empleo), 201

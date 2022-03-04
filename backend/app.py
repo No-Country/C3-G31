@@ -12,6 +12,7 @@ from config.marsh import ma
 from resources.user_resources import UserListResource, UserResource, TokenResource
 from resources.profile_resources import ProfileListResource
 from resources.empresa_resources import EmpresaListResource, EmpresaResource
+from resources.empleo_resource import EmpleoListResource, EmpleoResource
 
 
 
@@ -60,6 +61,9 @@ api.add_resource(ProfileListResource, '/api/profiles')
 
 api.add_resource(EmpresaListResource, '/api/empresas')
 api.add_resource(EmpresaResource, '/api/empresas/<int:empresa_id>')
+
+api.add_resource(EmpleoListResource, '/api/empleos')
+api.add_resource(EmpleoResource, '/api/empleos/<int:empleo_id>')
 
 if __name__ == '__main__':
      app.run(debug=False)

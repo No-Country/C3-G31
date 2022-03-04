@@ -1,5 +1,6 @@
 from enum import unique
 from config.db import db, BaseModelMixin
+from .empleo import Empleo
 
 class Empresa(db.Model, BaseModelMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -13,3 +14,9 @@ class Empresa(db.Model, BaseModelMixin):
 
     # address_id = db.Column(db.Integer, db.ForeignKey("address.id"), unique=True, nullable=False)
     # address = db.relationship("Address", back_populates="empresa", uselist=False)
+
+    empleos = db.relationship('Empleo', lazy='select', backref=db.backref('empresa', lazy='joined'))
+
+    @classmethod
+    def get_by_user(cls, user_id):
+        return cls.query.filter_by(user_id=user_id).first()

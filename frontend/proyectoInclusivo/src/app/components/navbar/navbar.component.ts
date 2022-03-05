@@ -25,4 +25,8 @@ export class NavbarComponent implements OnInit {
     return this.servicioUsuario.estaAutenticado();
   }
 
+  logOut(){
+    
+  }
+
 }

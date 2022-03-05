@@ -210,14 +210,28 @@
                 <!-- BOTONES -->
                 <div class="row rounded p-4 ">
                     <small>(*)obligatorio</small>
+                    <!-- BOTON ACEPTAR -->
                     <div class="col  text-center">
                         <button class=" container-fluid btn btn-lg btn-primary" (click)="registrar()"
                             [disabled]="!f.form.valid" [disabled]="banderaPass==false">Aceptar</button>
                     </div>
+
+                    <!-- BOTON VOLVER -->
                     <div class="col text-center">
                         <div class=" container-fluid btn btn-lg btn-secondary" [routerLink]="['']">Volver</div>
+                    <!--DAR DE BAJA AL USUARIO -->
+                    <div>
+                        <a class="text-danger" href="" onclick="event.preventDefault()" (click)="eliminarUsuario()">Eliminar cuenta</a>
                     </div>
+
+
+
+                    </div>
+
+
+
                 </div>
+
 
             </div>
         </div>

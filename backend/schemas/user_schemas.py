@@ -13,7 +13,7 @@ class UserSchema(ma.SQLAlchemySchema):
     empresa = ma.Nested(EmpresaSchema)
     class Meta:
         ordered = True
-        fields = ('id', 'email', 'profile', 'direccion','empresa')
+        fields = ('id', 'email', 'profile', 'direccion','empresa', 'activo')
         # exclude = ('password',)
         model = User
 

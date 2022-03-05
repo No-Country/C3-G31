@@ -46,10 +46,11 @@ export class LoginComponent implements OnInit {
           this.servicioUsuario.setToken(response.token);
           this.router.navigate([this.returnUrl]);
         },
-        (error) => {console.log(error)
+
+        (error) => {
           Swal.fire({
           title: 'Error', 
-          text: 'Usuario o contraseña incorrecta', 
+          text: error.error.msg, 
           icon: 'error',
         })}
       ); 

@@ -40,6 +40,10 @@ export class UsuariosService {
     return this.http.post(this.api_usuarios, data);
   }
 
+  public deleteUsuario(id:number): Observable<any>{
+    return this.http.delete(this.api_usuarios+"/"+id);
+  }
+
   verificarLogin(data:any){
     return this.http.post(this.api_usuarios + "/token", data);
   }

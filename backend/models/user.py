@@ -12,6 +12,7 @@ class User(db.Model, BaseModelMixin):
     direccion = db.relationship("Direccion", uselist=False)
     curriculum = db.relationship(Curriculum, back_populates="user", uselist=False)
     empresa = db.relationship("Empresa", uselist=False)
+    activo=db.Column(db.String(10), nullable=False)
 
     def set_password(self, password):
         self.password = generate_password_hash(password, method='sha256')

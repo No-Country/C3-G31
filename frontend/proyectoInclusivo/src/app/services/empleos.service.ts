@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { UsuariosService } from './usuarios.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +12,24 @@ export class EmpleosService {
   private empleo: string;
   private empleos: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private servicioUsuario: UsuariosService
+  ) { }
 
 
   public getAllEmpleos(): Observable<any>{
-    return this.http.get(this.api_empleos);
+
+    return this.http.get(this.api_empleos, {
+      headers: new HttpHeaders({
+        'Content-Type': "application/json",
+        'Authorization': "Bearer " + this.servicioUsuario.getToken() //TODO: Hacer que funque
+      })
+    });
   }
   
-
-
+  public postEmpleo(data: object) {
+    return this.http.post(this.api_empleos, data);
+  }
 
 }

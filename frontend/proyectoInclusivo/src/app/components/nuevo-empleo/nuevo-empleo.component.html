@@ -1,0 +1,100 @@
+<app-navbar></app-navbar>
+
+<div class="container mt-4">
+    <form #f="ngForm" (ngSubmit)="f.form.valid">
+        <h1>Registra tu empleo aqui</h1>
+        <div class="row border border-4 rounded p-3">
+
+            <div class="col  p-3 m-2">
+
+                <h2>Empleo nuevo:</h2>
+
+                <!-- TÍTULO -->
+                <div class="form-floating mb-3 ">
+                    <input type="text" class="form-control" id="titulo" placeholder=" " [(ngModel)]="titulo"
+                        name="titulo" required>
+                    <label for="titulo"> Título * </label>
+                </div>
+                <!-- CARGO -->
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="cargo" placeholder=" " [(ngModel)]='cargo' name="cargo"
+                        required>
+                    <label for="cargo">Cargo *</label>
+                </div>
+                <!-- DESCRIPCION -->
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" id="descripcion" placeholder=" " [(ngModel)]="descripcion" rows="5"
+                        name="descripcion" required></textarea>
+                    <label for="descirpcion">Descripcion *</label>
+                </div>
+                <!-- RANGO SALARIAL -->
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="rango_salarial" placeholder=" "
+                        [(ngModel)]='rango_salarial' name="rango_salarial" required>
+                    <label for="rango_salarial">Rango salarial *</label>
+                </div>
+                <!-- UBICACIÓN -->
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="ubicacion" placeholder=" " [(ngModel)]='ubicacion' name="ubicacion"
+                        required>
+                    <label for="ubicacion">Ubicación *</label>
+                </div>
+                <!-- EXPERIENCIA -->
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="experiencia" placeholder=" " [(ngModel)]="experiencia"
+                        name="experiencia" required>
+                    <label for="experiencia">Experiencia *</label>
+                </div>
+
+                <!-- FECHA DE VENCIMIENTO -->
+                <div class="form-floating mb-3">
+                    <input type="date" class="form-control" id="fecha_vencimiento" placeholder=" "
+                        [(ngModel)]="fecha_vencimiento" name="fecha_vencimiento">
+                    <label for="fecha_vencimiento">Fecha de vencimiento</label>
+                </div>
+
+            </div>
+
+            <div class="col  p-3 m-2">
+                <br>
+                <br>
+                <!-- MODALIDAD -->
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="modalidad" placeholder=" " [(ngModel)]="modalidad"
+                        name="modalidad" required>
+                    <label for="modalidad">Modalidad *</label>
+                </div>
+
+                <!-- NUMERO -->
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="tipo_contrato" placeholder=" "
+                        [(ngModel)]="tipo_contrato" name="tipo_contrato" required>
+                    <label for="tipo_contrato">Tipo contrato *</label>
+                </div>
+                <!-- PISO -->
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="tipo_jornada" placeholder=" " [(ngModel)]="tipo_jornada"
+                        name="tipo_jornada" required>
+                    <label for="tipo_jornada">Tipo jornada *</label>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- BOTONES -->
+        <div class="row rounded p-4 ">
+            <small>(*)obligatorio</small>
+            <div class="col  text-center">
+                <button class=" container-fluid btn btn-lg btn-primary" (click)="registrar()"
+                    [disabled]="!f.form.valid">Aceptar</button>
+            </div>
+            <div class="col text-center">
+                <div class=" container-fluid btn btn-lg btn-secondary" [routerLink]="['']">Volver</div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+
+<app-footer></app-footer>

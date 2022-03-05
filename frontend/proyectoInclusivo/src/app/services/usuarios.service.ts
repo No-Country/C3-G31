@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class UsuariosService {
 
   private api_usuarios="http://127.0.0.1:5000/api/users";
-  private usuario: string;
+  private token: string;
 
   constructor(private http: HttpClient) { }
 
@@ -16,12 +16,12 @@ export class UsuariosService {
     return sessionStorage.getItem('nombreUsuario') != null;
   }
 
-  public getUsuarioActual(): string {
-    return this.usuario;
+  public getToken(): string {
+    return this.token;
   }
 
-  public setUsuarioActual(usuario: string) {
-    this.usuario = usuario;
+  public setToken(token: string) {
+    this.token = token;
   }
 
   public getAllUsuarios(): Observable<any>{

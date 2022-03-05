@@ -28,7 +28,7 @@ class Empleo(db.Model, BaseModelMixin):
         db.Enum(enums.EstadoEmpleoEnum),
         default=enums.EstadoEmpleoEnum.activo,
     )
-    descripcion = db.Column(db.String(100), nullable=False)
+    descripcion = db.Column(db.String(500), nullable=False)
     tipo_contrato = db.Column(
         db.Enum(enums.TipoContratoEnum),
         default=enums.TipoContratoEnum.otro,

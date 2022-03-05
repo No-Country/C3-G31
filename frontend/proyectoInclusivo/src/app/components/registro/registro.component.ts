@@ -161,11 +161,12 @@ export class RegistroComponent implements OnInit {
         sessionStorage.setItem('idUsuario', idUsuario);
         this.router.navigate(['']);
         },
-        error => Swal.fire({
+        error => {console.log(error),
+          Swal.fire({
           title: 'Error', 
           text: 'Ha ocurrido un error al registrarse',
           icon: 'error'
-        })
+        })}
       );
       }
       else{

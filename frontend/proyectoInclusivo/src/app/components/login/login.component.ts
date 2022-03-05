@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import Swal from 'sweetalert2';
 
@@ -12,10 +12,17 @@ export class LoginComponent implements OnInit {
   mail: string
   password: string
 
+  returnUrl: string;
+
   constructor(
     private servicioUsuario: UsuariosService,
-    private router: Router
-  ) { }
+    private router: Router,
+    route: ActivatedRoute
+  ) {
+    route.queryParams.subscribe(params => {
+      this.returnUrl = params.r || '';
+    });
+  }
 
   ngOnInit(): void {
   }
@@ -31,16 +38,21 @@ export class LoginComponent implements OnInit {
         (response: any) => {
           let nombreUsuario = response.user.profile.nombre;
           let idUsuario = response.user.id;
+          let empresa = response.user.empresa?.id;
+          sessionStorage.setItem('empresa', empresa);
           sessionStorage.setItem('nombreUsuario', nombreUsuario);
           sessionStorage.setItem('idUsuario', idUsuario);
-          this.router.navigate(['']);
+          
+
+          this.router.navigate([this.returnUrl]);
         },
-        error => Swal.fire({
+        (error) => {console.log(error)
+          Swal.fire({
           title: 'Error', 
           text: 'Usuario o contraseña incorrecta', 
-          icon: 'error'
-        })
-      );
+          icon: 'error',
+        })}
+      ); 
     }
     catch (error) {
     }

@@ -17,3 +17,4 @@ migrations/
 *.sqlite
 upload/curriculums/
 upload/imagenes/
+config/default.py

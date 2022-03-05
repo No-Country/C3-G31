@@ -24,12 +24,7 @@ class Direccion(db.Model, BaseModelMixin):
     depto = db.Column(db.String(10))
     observaciones= db.Column(db.String(100))
     localidad = db.relationship(Localidad, back_populates="direccion", uselist=False)
-    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), unique=True, nullable=False)
-    
-    user = db.relationship("User", back_populates="direccion")
 
-    # def __repr__(self) -> str:
-    #     return f'<Profile {self.nombre} {self.apellido}>'
-
-
+    def __repr__(self) -> str:
+        return f'<Direccion {self.calle} {self.numero}>'
     

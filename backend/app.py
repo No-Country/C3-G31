@@ -4,6 +4,7 @@ from flask_migrate import Migrate
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
 from werkzeug.exceptions import HTTPException
+from resources.postulacion_resource import PostulacionListResource, PostulacionResource
 
 from config.db import db
 from config.marsh import ma
@@ -62,6 +63,9 @@ api.add_resource(EmpresaResource, '/api/empresas/<int:empresa_id>')
 
 api.add_resource(EmpleoListResource, '/api/empleos')
 api.add_resource(EmpleoResource, '/api/empleos/<int:empleo_id>')
+
+api.add_resource(PostulacionListResource, '/api/postulaciones')
+api.add_resource(PostulacionResource, '/api/postulaciones/<int:postulacion_id>')
 
 if __name__ == '__main__':
      app.run(debug=False)

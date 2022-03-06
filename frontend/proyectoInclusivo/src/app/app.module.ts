@@ -14,6 +14,7 @@ import { HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { EmpresaComponent } from './components/empresa/empresa.component';
 import { NuevoEmpleoComponent } from './components/nuevo-empleo/nuevo-empleo.component';
+import { DetalleEmpleoComponent } from './components/detalle-empleo/detalle-empleo.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { NuevoEmpleoComponent } from './components/nuevo-empleo/nuevo-empleo.com
     EmpleosComponent,
     HomeComponent,
     EmpresaComponent,
-    NuevoEmpleoComponent
+    NuevoEmpleoComponent,
+    DetalleEmpleoComponent
   ],
   imports: [
     BrowserModule,

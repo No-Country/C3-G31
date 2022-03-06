@@ -1,0 +1,62 @@
+<app-navbar></app-navbar>
+
+
+<div class="container px-5">
+
+    <div class="card border-2 rounded-3 shadow">
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <h3 class="card-title"> {{datosEmpleo.titulo}}</h3>
+                    <h6> {{datosEmpleo.empresa.razon_social}} </h6>
+                </div>
+                <div class="col">
+                    <h6 class="card-title">Vencimiento de la oferta {{datosEmpleo.fecha_vencimiento}}</h6>
+                    <label><b>Cargo solicitado:</b> {{datosEmpleo.cargo}}</label>
+
+                </div>
+
+            </div>
+            <hr>
+            <label><b>Descripcion de la oferta: </b><br> {{datosEmpleo.descripcion}}</label> <br><br>
+
+            <div class="row mb-3">
+                <div class="col"> <label><b>Ubicacion: </b><br> {{datosEmpleo.ubicacion}} </label></div>
+                <div class="col"> <label><b>Experiencia deseada: </b><br> {{datosEmpleo.experiencia}}</label></div>
+
+            </div>
+
+            <div class="row mb-3">
+                <div class="col"> <label><b>Salario: </b><br> {{datosEmpleo.rango_salarial}}</label></div>
+                <div class="col"><label><b>Jornada: </b><br> {{datosEmpleo.tipo_jornada}}</label></div>
+            </div>
+
+            <div class="row mb-5">
+                <div class="col"> <label><b>Tipo de contrato: </b><br> {{datosEmpleo.tipo_contrato}}</label></div>
+                <div class="col"> <label><b>Modalidad de trabajo: </b><br> {{datosEmpleo.modalidad}}</label></div>
+            </div>
+            <hr>
+
+            <div class="row text-center">
+                <div class="col-6">
+                    <div class="btn btn-lg btn-primary" (click)="postular()">Postularse</div>
+                </div>
+                <div class="col-6">
+                    <div class="btn btn-lg btn-secondary">Regresar</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</div>
+
+
+
+
+<div class="container-fluid fixed-bottom mx-0 px-0">
+    <app-footer></app-footer>
+</div>

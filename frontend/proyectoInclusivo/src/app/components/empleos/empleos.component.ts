@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { EmpleosService } from 'src/app/services/empleos.service';
 import { EmpresaService } from 'src/app/services/empresa.service';
+
 
 @Component({
   selector: 'app-empleos',
@@ -9,7 +10,9 @@ import { EmpresaService } from 'src/app/services/empresa.service';
   styleUrls: ['./empleos.component.css']
 })
 export class EmpleosComponent implements OnInit {
+  
   empleos: Array<any> = [];
+  datoAenviar: any;
 
   constructor(
     private servicioEmpleos: EmpleosService,
@@ -23,12 +26,18 @@ export class EmpleosComponent implements OnInit {
       (response: any) => {
         let datos = response.results;
         this.empleos = datos;
+        
     })
         
   }
 
   tieneEmpresa() {
     return this.servicioEmpresa.tieneEmpresa();
+  }
+
+  postular(data:any){
+    this.datoAenviar=data;
+    this.router.navigate(['detalleEmpleo/'+data]);
   }
 
 }

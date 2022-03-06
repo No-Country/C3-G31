@@ -55,7 +55,7 @@ class EmpleoResource(Resource):
 
     # @jwt_required()
     def get(self, empleo_id):
-        empleo = get_or_404(self.empleo, empleo_id)
+        empleo = get_or_404(self.model, empleo_id)
         return empleo_schema.dump(empleo)
 
     # @jwt_required()
@@ -73,3 +73,4 @@ class EmpleoResource(Resource):
         abort_is_not_owner(empleo.empresa.user.id)
         empleo.delete()
         return "", 204
+

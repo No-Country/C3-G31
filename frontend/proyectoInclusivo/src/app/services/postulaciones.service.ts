@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UsuariosService } from './usuarios.service';
 
+
 @Injectable({
   providedIn: 'root'
 })
-export class EmpleosService {
+export class PostulacionesService {
 
-  private api_empleos="http://127.0.0.1:5000/api/empleos";
+  private api_postulaciones="http://127.0.0.1:5000/api/postulaciones";
   
   private empleo: string;
   private empleos: string;
@@ -16,12 +17,12 @@ export class EmpleosService {
   constructor(
     private http: HttpClient,
     private servicioUsuario: UsuariosService
+    
   ) { }
+  
+  public getAllPostulaciones(): Observable<any>{
 
-
-  public getAllEmpleos(): Observable<any>{
-
-    return this.http.get(this.api_empleos, {
+    return this.http.get(this.api_postulaciones, {
       headers: new HttpHeaders({
         'Content-Type': "application/json",
         'Authorization': "Bearer " + this.servicioUsuario.getToken() //TODO: Hacer que funque
@@ -29,14 +30,20 @@ export class EmpleosService {
     });
   }
 
-  public getEmpleoId(id:any): Observable<any>{
-    return this.http.get(this.api_empleos+"/"+id);
+  public getPostulacionId(id:any): Observable<any>{
+    return this.http.get(this.api_postulaciones+"/"+id); 
   }
 
 
   
-  public postEmpleo(data: object) {
-    return this.http.post(this.api_empleos, data);
+  public postPostulacion(data: object) {
+    return this.http.post(this.api_postulaciones, data);
   }
+
+
+
+
+
+
 
 }

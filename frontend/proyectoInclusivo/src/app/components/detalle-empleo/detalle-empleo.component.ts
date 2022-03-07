@@ -1,6 +1,7 @@
 import { Component,  OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmpleosService } from 'src/app/services/empleos.service';
+import { EmpresaService } from 'src/app/services/empresa.service';
 import { PostulacionesService } from 'src/app/services/postulaciones.service';
 import Swal from 'sweetalert2';
 
@@ -14,7 +15,11 @@ export class DetalleEmpleoComponent implements OnInit {
   datosEmpleo:any
   id:any
   datoPostulacion:any
-  constructor(private servicioEmpleos: EmpleosService, private servicioPostulacion: PostulacionesService, private router: Router, private route:ActivatedRoute) { 
+  constructor(private servicioEmpleos: EmpleosService, 
+              private servicioPostulacion: PostulacionesService, 
+              private router: Router, 
+              private route:ActivatedRoute,
+              private servicioEmpresa: EmpresaService ) { 
    
   }
 
@@ -50,6 +55,8 @@ export class DetalleEmpleoComponent implements OnInit {
     )
 
   }
+
+
   
 
 }

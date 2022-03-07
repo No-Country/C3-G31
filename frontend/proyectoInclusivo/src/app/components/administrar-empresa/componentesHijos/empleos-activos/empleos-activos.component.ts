@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { EmpleosService } from 'src/app/services/empleos.service';
 
 @Component({
   selector: 'app-empleos-activos',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmpleosActivosComponent implements OnInit {
 
-  constructor() { }
+  datos:any
+
+  constructor(private empleosService: EmpleosService, private router:Router) { }
 
   ngOnInit(): void {
+    this.datos=this.empleosService.getAllEmpleos().subscribe(
+      (response:any) => {
+      this.datos=response.results
+    })
+  }
+
+  verDetalle(data:any){
+    this.router.navigate(['detalleEmpleo/'+data]);
   }
 
 }
+

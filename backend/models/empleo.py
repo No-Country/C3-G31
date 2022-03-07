@@ -18,6 +18,7 @@ class Empleo(db.Model, BaseModelMixin):
     cargo = db.Column(db.String(100), nullable=False)
     rango_salarial = db.Column(db.String(100), nullable=False)
     ubicacion = db.Column(db.String(100))
+    postulaciones=db.relationship('Postulacion', lazy='select', back_populates='empleo')
     
 
     modalidad = db.Column(

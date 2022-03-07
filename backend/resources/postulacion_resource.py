@@ -8,7 +8,6 @@ from schemas.postulacion_schemas import postulacion_schema, postulaciones_schema
 class PostulacionListResource(Resource):
     def get(self):
         postulaciones = Postulacion.get_all()
-        dato=postulaciones_schema.dump(postulaciones)
         return postulaciones_schema.dump(postulaciones)
 
     def post(self):

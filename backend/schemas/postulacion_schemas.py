@@ -7,11 +7,11 @@ from schemas.user_schemas import UserSchema
 class PostulacionSchema(ma.SQLAlchemySchema):
     class Meta:
         model = Postulacion
-        id=ma.auto_field()
-        idUsuario = ma.auto_field()
-        idEmpleo = ma.auto_field()
-        empleo = ma.Nested(EmpleoSchema)
-        usuario = ma.Nested(UserSchema)
+    id=ma.auto_field()
+    idUsuario = ma.auto_field()
+    idEmpleo = ma.auto_field()
+    empleo = ma.Nested(EmpleoSchema)
+    usuario = ma.Nested(UserSchema)
         
 
 postulacion_schema = PostulacionSchema()

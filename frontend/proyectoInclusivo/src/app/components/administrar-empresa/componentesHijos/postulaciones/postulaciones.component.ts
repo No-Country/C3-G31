@@ -16,6 +16,7 @@ export class PostulacionesComponent implements OnInit {
       (response:any) => {
       this.datos=response
       console.log(response)
+
     })
   }
 

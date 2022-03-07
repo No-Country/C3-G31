@@ -15,6 +15,9 @@ import { FormsModule } from '@angular/forms';
 import { EmpresaComponent } from './components/empresa/empresa.component';
 import { NuevoEmpleoComponent } from './components/nuevo-empleo/nuevo-empleo.component';
 import { DetalleEmpleoComponent } from './components/detalle-empleo/detalle-empleo.component';
+import { AdministrarEmpresaComponent } from './components/administrar-empresa/administrar-empresa.component';
+import { PostulacionesComponent } from './components/administrar-empresa/componentesHijos/postulaciones/postulaciones.component';
+import { EmpleosActivosComponent } from './components/administrar-empresa/componentesHijos/empleos-activos/empleos-activos.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { DetalleEmpleoComponent } from './components/detalle-empleo/detalle-empl
     HomeComponent,
     EmpresaComponent,
     NuevoEmpleoComponent,
-    DetalleEmpleoComponent
+    DetalleEmpleoComponent,
+    AdministrarEmpresaComponent,
+    PostulacionesComponent,
+    EmpleosActivosComponent
   ],
   imports: [
     BrowserModule,

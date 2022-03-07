@@ -49,6 +49,7 @@
                 <li><a class="dropdown-item" [routerLink]="['/login']" >LogIn</a></li>
                 <li><a class="dropdown-item" href="" onclick="event.preventDefault()" (click)="logOut()">LogOut</a></li>
                 <li><a class="dropdown-item"  [routerLink]="['/registro']">Mi perfil</a></li>
+                <li><a class="dropdown-item"  [hidden]="!tieneEmpresa()"  [routerLink]="['/adminEmpresa']">Administracion Empresa</a></li>
               </ul>
             </div>
             <!-- FIN BOTON LOGIN -->

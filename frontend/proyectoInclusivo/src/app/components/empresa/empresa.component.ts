@@ -43,13 +43,13 @@ export class EmpresaComponent implements OnInit {
       this.servicioEmpresa.getEmpresaId(idEmpresa).subscribe(
         (response:any) => {
           datos=response
-          console.log(datos)
-          //Región empresa
+          //#region empresa
           this.razonSocial = response.razon_social
           this.email = response.email;
           this.telefono = response.telefono
+          //#endregion
 
-          //Región dirección
+          //#region Direccion
           this.provincia = response.direccion.localidad.provincia.nombre;
           this.localidad = response.direccion.localidad.nombre
           this.codigoPostal = response.direccion.localidad.codigoPostal
@@ -58,6 +58,7 @@ export class EmpresaComponent implements OnInit {
           this.piso = response.direccion.piso
           this.depto = response.direccion.depto
           this.observaciones = response.direccion.observaciones
+          //#endregion
         }
       )
     }

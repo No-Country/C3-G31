@@ -21,13 +21,7 @@ export class PostulacionesService {
   ) { }
   
   public getAllPostulaciones(): Observable<any>{
-
-    return this.http.get(this.api_postulaciones, {
-      headers: new HttpHeaders({
-        'Content-Type': "application/json",
-        'Authorization': "Bearer " + this.servicioUsuario.getToken() //TODO: Hacer que funque
-      })
-    });
+    return this.http.get(this.api_postulaciones); 
   }
 
   public getPostulacionId(id:any): Observable<any>{

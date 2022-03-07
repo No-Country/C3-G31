@@ -1,6 +1,4 @@
-<app-navbar></app-navbar>
-
-<div class="row mx-5 px-5" [hidden]="tieneEmpresa()">
+<div class="row mx-5 px-5" [hidden]="!tieneEmpresa()">
     <div class="col">
         <button type="button" class="btn btn-danger" [routerLink]="['/cargarEmpleo']">Cargar empleo</button>
     </div>
@@ -51,5 +49,4 @@
       </nav>
     
 
-    <app-footer></app-footer>
 </div>

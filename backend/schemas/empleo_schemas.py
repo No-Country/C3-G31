@@ -38,6 +38,7 @@ class EmpleoSchema(ma.SQLAlchemyAutoSchema):
 
     class Meta:
         model = Empleo
+        
         fields = (
             'id',
             'empresa',

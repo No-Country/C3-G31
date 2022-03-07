@@ -3,6 +3,7 @@ from config.db import db, BaseModelMixin
 from .profile import Profile
 from .curriculum import Curriculum
 
+
 class User(db.Model, BaseModelMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(100), unique=True, nullable=False)

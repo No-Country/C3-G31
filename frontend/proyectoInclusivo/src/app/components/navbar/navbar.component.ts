@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { EmpresaService } from 'src/app/services/empresa.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import Swal from 'sweetalert2';
 
@@ -14,6 +15,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private servicioUsuario: UsuariosService,
+    private servicioEmpresa: EmpresaService,
     private router: Router
   ) {
   }
@@ -22,6 +24,7 @@ export class NavbarComponent implements OnInit {
     let nombre = sessionStorage.getItem('nombreUsuario');
     if (nombre != null)
       this.usuario = nombre;
+    this.tieneEmpresa();
   }
 
   estaAutenticado() {
@@ -70,6 +73,11 @@ export class NavbarComponent implements OnInit {
       }
     })
 
+  }
+
+  
+  tieneEmpresa() {
+    return this.servicioEmpresa.tieneEmpresa();
   }
 
 }

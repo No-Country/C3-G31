@@ -34,7 +34,7 @@ import { EmpleosActivosComponent } from './components/administrar-empresa/compon
     DetalleEmpleoComponent,
     AdministrarEmpresaComponent,
     PostulacionesComponent,
-    EmpleosActivosComponent
+    EmpleosActivosComponent,
   ],
   imports: [
     BrowserModule,

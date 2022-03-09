@@ -26,16 +26,19 @@ class Empleo(db.Model, BaseModelMixin):
         default=enums.ModalidadesEnum.otro,
     )
     experiencia = db.Column(db.String(100), nullable=False)
+  
     estado = db.Column(
         db.Enum(enums.EstadoEmpleoEnum),
         default=enums.EstadoEmpleoEnum.activo,
     )
     descripcion = db.Column(db.String(1500), nullable=False)
+ 
     tipo_contrato = db.Column(
         db.Enum(enums.TipoContratoEnum),
         default=enums.TipoContratoEnum.otro,
         nullable=False
     )
+  
     tipo_jornada = db.Column(
         db.Enum(enums.TipoJornadaEnum),
         default=enums.TipoJornadaEnum.otro,

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { EmpleosService } from 'src/app/services/empleos.service';
+import { PostulacionesService } from 'src/app/services/postulaciones.service';
 
 @Component({
   selector: 'app-empleos-activos',
@@ -10,10 +11,15 @@ import { EmpleosService } from 'src/app/services/empleos.service';
 export class EmpleosActivosComponent implements OnInit {
 
   datos:any
+  postulaciones:any
+  
 
-  constructor(private empleosService: EmpleosService, private router:Router) { }
+  constructor(private empleosService: EmpleosService,
+              private router:Router,
+              private postulacionService: PostulacionesService) { }
 
   ngOnInit(): void {
+
     this.datos=this.empleosService.getAllEmpleos().subscribe(
       (response:any) => {
       this.datos=response.results

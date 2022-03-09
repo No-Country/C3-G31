@@ -16,8 +16,9 @@ export class NuevoEmpleoComponent implements OnInit {
   ubicacion: string;
   experiencia: string;
   descripcion: string;
+  
 
-  fecha_vencimiento: string;
+  fecha_vencimiento:any
 
   modalidad: string;
   tipo_contrato: string;
@@ -28,6 +29,7 @@ export class NuevoEmpleoComponent implements OnInit {
     private router: Router) {}
 
   ngOnInit(): void {
+
   }
 
   registrar() {
@@ -38,13 +40,11 @@ export class NuevoEmpleoComponent implements OnInit {
       ubicacion: this.ubicacion,
       experiencia: this.experiencia,
       descripcion: this.descripcion,
-
       fecha_vencimiento: this.fecha_vencimiento,
-
       modalidad: this.modalidad,
       tipo_contrato: this.tipo_contrato,
       tipo_jornada: this.tipo_jornada,
-
+      empresa_id: sessionStorage.getItem("empresa"),
       estado: 'Activo'
     }
 

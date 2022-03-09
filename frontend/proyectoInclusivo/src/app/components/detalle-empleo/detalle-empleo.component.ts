@@ -56,6 +56,7 @@ export class DetalleEmpleoComponent implements OnInit {
 
   }
 
+  mostrarPerfil(){}
 
   
 

@@ -33,7 +33,7 @@ class EmpleoSchema(ma.SQLAlchemyAutoSchema):
         by_value=True
     )
     
-    empresa_id = ma.auto_field(dump_only=True)
+    empresa_id = ma.auto_field(dump_only=False)
 
     # slug = fields.Str(dump_only=True)
 
@@ -55,6 +55,7 @@ class EmpleoSchema(ma.SQLAlchemyAutoSchema):
             'descripcion',
             'tipo_contrato',
             'tipo_jornada',
+            'empresa_id'
             # 'slug'
         )
 

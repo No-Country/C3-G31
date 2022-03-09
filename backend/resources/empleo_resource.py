@@ -35,16 +35,13 @@ class EmpleoListResource(Resource):
     # @jwt_required()
     # @validate_schema(empleo_schema)
     def post(self):
-        user_id = 1
-        # current_user_id = get_jwt_identity()
-        empresa = Empresa.get_by_user(user_id)
-        if empresa is None:
-            abort(403, message="You do not have a registered company")
 
         form_data: dict = request.get_json()
-        form_data['fecha_vencimiento'] = "2000-01-01T18:30:00"
+        fecha=form_data['fecha_vencimiento']
+        form_data['fecha_vencimiento'] =  datetime.strptime(fecha,  '%Y-%m-%d')
+        #error aca
         valid_data = empleo_schema.load(form_data)
-        empleo = self.model(empresa_id=empresa.id, **valid_data)
+        empleo = self.model(**valid_data)
         empleo.save(is_new=True)
         return empleo_schema.dump(empleo), 201
 

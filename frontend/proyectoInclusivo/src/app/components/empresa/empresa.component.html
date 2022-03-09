@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 
 <div class="container mt-4">
-    <h1>Regístrate aquí</h1>
+    <h1 *ngIf="!tieneEmpresa()">Regístrate aquí</h1>
     <form class="row border border-4 rounded p-3" #f="ngForm" (ngSubmit)="f.form.valid && registrar()">
 
         <div class="col  p-3 m-2">
@@ -28,8 +28,8 @@
             </div>
 
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" placeholder=" " [(ngModel)]="telefono" name="telefono">
-                <label>Teléfono</label>
+                <input type="text" class="form-control" placeholder=" " [(ngModel)]="telefono" name="telefono" required>
+                <label>Teléfono *</label>
             </div>
             
         </div>
@@ -42,36 +42,36 @@
 
                     <div class="col">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" placeholder=" " [(ngModel)]="provincia" name="provincia">
-                            <label>Provincia</label>
+                            <input type="text" class="form-control" placeholder=" " [(ngModel)]="provincia" name="provincia" required>
+                            <label>Provincia *</label>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" placeholder=" " [(ngModel)]="localidad" name="localidad">
-                                <label>Localidad</label>
+                                <input type="text" class="form-control" placeholder=" " [(ngModel)]="localidad" name="localidad" required>
+                                <label>Localidad *</label>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" placeholder=" " [(ngModel)]="codigoPostal" name="codigoPostal"> 
-                                <label>Código postal</label>
+                                <input type="text" class="form-control" placeholder=" " [(ngModel)]="codigoPostal" name="codigoPostal" required> 
+                                <label>Código postal *</label>
                             </div>
                         </div>
                     </div>
 
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" placeholder=" " [(ngModel)]="calle" name="calle">
-                        <label>Calle </label>
+                        <input type="text" class="form-control" placeholder=" " [(ngModel)]="calle" name="calle" required>
+                        <label>Calle *</label>
                     </div>
 
                     <div class="row">
                         <div class="col">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" placeholder=" " [(ngModel)]="altura" name="altura">
-                                <label>Altura </label>
+                                <input type="text" class="form-control" placeholder=" " [(ngModel)]="altura" name="altura" required>
+                                <label>Altura *</label>
                             </div>
                         </div>
                         <div class="col">
@@ -101,7 +101,7 @@
             <div class="row rounded p-4 ">
                 <small>(*)obligatorio</small>
                 <div class="col  text-center">
-                    <button type="submit" class="container-fluid btn btn-lg btn-primary" [disabled]="!f.form.valid">Registrar</button>
+                    <button type="submit" class="container-fluid btn btn-lg btn-primary" [disabled]="!f.form.valid">{{!tieneEmpresa() ? 'Registrar' : 'Actualizar'}}</button>
                 </div>
                 <div class="col text-center">
                     <a class="container-fluid btn btn-lg btn-secondary" [routerLink]="['']">Volver</a>

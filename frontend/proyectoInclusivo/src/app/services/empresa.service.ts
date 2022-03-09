@@ -36,5 +36,5 @@ export class EmpresaService {
 
     public patchEmpresaId(id:number, data:any): Observable<any>{
         return this.http.patch(this.api_empresas+"/"+id, data);
-      }
+    }
 }

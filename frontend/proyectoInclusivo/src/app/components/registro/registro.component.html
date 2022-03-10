@@ -34,13 +34,13 @@
                 </div>
                 <!-- APELLIDO -->
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="apellido" placeholder=" " [(ngModel)]='apellido'
+                    <input type="text" class="form-control" id="apellido" placeholder="" [(ngModel)]='apellido'
                         name="apellido" required>
                     <label for="apellido">Apellido *</label>
                 </div>
                 <!-- PRESENTACION -->
                 <div class="form-floating mb-3">
-                    <textarea class="form-control" id="presentacion" placeholder=" " [(ngModel)]='presentacion'
+                    <textarea class="form-control" id="presentacion" placeholder="" [(ngModel)]='presentacion'
                         name="presentacion"></textarea>
                     <label for="presentacion">Haz una breve presentación de ti</label>
                 </div>
@@ -95,19 +95,16 @@
                     <label for="fechaNacimiento">Fecha de nacimiento</label>
                 </div>
                     <!-- CURRICULUM VITAE -->
-                    <div class="row border border-2 rounded p-4 mb-3 text-center">
-                        <div>
-    
-                            <div class="mb-3">
-                                <label for="">{{labelCv}}</label>
-                            </div>
+                    <div class="form-floating mb-2 pt-5 pb-3 border-2 border text-center">
+                        <div class="col-12">
                             <input type="file" class="mb-3 d-none" id="inputCv" name="curriculum"
                                 (change)="cargarCv($event)">
     
                             <input type="button" value="Carga tu Curriculum Vitae"
                                 onclick="document.getElementById('inputCv').click()" class="btn btn-primary mb-3">
+                        
+                         <label for="">{{labelCv}}</label>
                         </div>
-    
                     </div>
 
             </div>
@@ -217,6 +214,11 @@
                     <div class="col text-center">
                         <div class=" container-fluid btn btn-lg btn-secondary" [routerLink]="['']">Volver</div>
                     </div>
+                    <p class="small fw-bold mt-4 pt-1 mb-0 centrar">¿Ya tiene cuenta? <a href="" [routerLink]="['/login']"
+                        class="link-primary mx-1"> Inicia sesión</a></p>
+                </div>
+                <div class="row">
+                    
                 </div>
 
             </div>

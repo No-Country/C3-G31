@@ -28,8 +28,6 @@ export class NavbarComponent implements OnInit {
 
       this.opcion1 = 'Mi perfil'
       let option1 = document.getElementById('opcion1')
-      option1?.setAttribute('[routerLink]','["/login"]')
-
 
       this.opcion2 = 'Crear empresa'
 

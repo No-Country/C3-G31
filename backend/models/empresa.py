@@ -12,6 +12,8 @@ class Empresa(db.Model, BaseModelMixin):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), unique=True, nullable=False)
 
     direccion_id = db.Column(db.Integer, db.ForeignKey("direccion.id"), unique=True, nullable=False)
+   
+   
     direccion = db.relationship("Direccion", uselist=False)
     
     empleos = db.relationship('Empleo', lazy='select', backref=db.backref('empresa', lazy='joined'))

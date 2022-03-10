@@ -1,0 +1,92 @@
+<div class="container px-5">
+
+    <div class="card border-2 rounded-3 shadow">
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <h3 class="card-title"> {{datosEmpleo.titulo}}</h3>
+                    <h6> {{datosEmpleo.empresa.razon_social}} 
+                    
+                        <a href="" onclick="event.preventDefault()"> </a> 
+
+
+                        <a href="" onclick="event.preventDefault()" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="mostrarPerfil()"><i class="fa-solid fa-eye"></i></a> 
+                    </h6>
+                </div>
+                <div class="col">
+                    <h6 class="card-title">Vencimiento de la oferta {{datosEmpleo.fecha_vencimiento}}</h6>
+                    <label><b>Cargo solicitado:</b> {{datosEmpleo.cargo}}</label>
+
+                </div>
+
+            </div>
+            <hr>
+            <label><b>Descripcion de la oferta: </b><br> {{datosEmpleo.descripcion}}</label> <br><br>
+
+            <div class="row mb-3">
+                <div class="col"> <label><b>Ubicacion: </b><br> {{datosEmpleo.ubicacion}} </label></div>
+                <div class="col"> <label><b>Experiencia deseada: </b><br> {{datosEmpleo.experiencia}}</label></div>
+
+            </div>
+
+            <div class="row mb-3">
+                <div class="col"> <label><b>Salario: </b><br> {{datosEmpleo.rango_salarial}}</label></div>
+                <div class="col"><label><b>Jornada: </b><br> {{datosEmpleo.tipo_jornada}}</label></div>
+            </div>
+
+            <div class="row mb-5">
+                <div class="col"> <label><b>Tipo de contrato: </b><br> {{datosEmpleo.tipo_contrato}}</label></div>
+                <div class="col"> <label><b>Modalidad de trabajo: </b><br> {{datosEmpleo.modalidad}}</label></div>
+            </div>
+            <hr>
+
+            <div class="row text-center">
+                <div class="col-6">
+                    <div class="btn btn-lg btn-primary" (click)="postular()" >Postularse</div>
+                </div>
+                <div class="col-6">
+                    <div class="btn btn-lg btn-secondary"[routerLink]="['/empleos']" >Regresar</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</div>
+
+    <!-- Modal -->
+    <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Perfil de: <br> <u>{{datosEmpleo.empresa.razon_social}} </u></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-start">
+  
+              <div class="row">
+                <div class="col">
+                  <label for=""><b>E-mail: </b> {{datosEmpleo.empresa.email}}  </label> <br>
+                  <label for=""><b>Telefono: </b>{{datosEmpleo.empresa.telefono}}   </label> <br>
+                  <label for=""><b>Calle: </b> {{datosEmpleo.empresa.direccion.calle}} </label> <br>
+                  <label for=""><b>Numero: </b>{{datosEmpleo.empresa.direccion.numero}} </label> <br>
+                  <label for=""><b>Piso: </b> {{datosEmpleo.empresa.direccion.piso}} </label> <br>
+                  <label for=""><b>Departamento:  </b>{{datosEmpleo.empresa.direccion.depto}} </label> <br>
+                  <label for=""><b>Localidad: </b></label> {{datosEmpleo.empresa.direccion.localidad.nombre}}<br>
+                  <label for=""><b>Provincia: </b></label> {{datosEmpleo.empresa.direccion.localidad.provincia.nombre}}<br>
+                </div>
+                <div class="col">
+                    <img src="../../../assets/img/apple.png" width="200px" alt="">
+                </div>
+              </div>
+  
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+            </div>
+          </div>
+        </div>
+      </div>

@@ -1,11 +1,9 @@
-<app-navbar></app-navbar>
-
-<div class="container mt-4">
+<div class="container ">
     <form #f="ngForm" (ngSubmit)="f.form.valid">
-        <h1>Registrate aqui</h1>
+        <h1>Registrate aquí</h1>
         <div class="row border border-4 rounded p-3">
 
-            <div class="col  p-3 m-2">
+            <div class="col">
 
                 <h2>Tus datos:</h2>
                 <!-- Oculto el input file asi utilizo un boton personalizado para subir la foto(tambien lo voy a usar para el cv) -->
@@ -24,7 +22,7 @@
                 <div class="form-floating mb-3 ">
                     <input type="email" class="form-control" id="email" placeholder=" " [(ngModel)]="email" name="email"
                         required>
-                    <label for="email"> E-mail <small>(sera tu usuario) *</small> </label>
+                    <label for="email"> Correo electrónico <small>(será tu usuario) *</small> </label>
                 </div>
                 <!-- NOMBRE -->
                 <div class="form-floating mb-3">
@@ -34,21 +32,21 @@
                 </div>
                 <!-- APELLIDO -->
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="apellido" placeholder=" " [(ngModel)]='apellido'
+                    <input type="text" class="form-control" id="apellido" placeholder="" [(ngModel)]='apellido'
                         name="apellido" required>
                     <label for="apellido">Apellido *</label>
                 </div>
                 <!-- PRESENTACION -->
                 <div class="form-floating mb-3">
-                    <textarea class="form-control" id="presentacion" placeholder=" " [(ngModel)]='presentacion'
+                    <textarea class="form-control" id="presentacion" placeholder="" [(ngModel)]='presentacion'
                         name="presentacion"></textarea>
-                    <label for="presentacion">Haz una breve presentacion de ti</label>
+                    <label for="presentacion">Haz una breve presentación de ti</label>
                 </div>
                 <!-- TELEFONO -->
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="telefono" placeholder=" " [(ngModel)]="telefono"
                         name="telefono">
-                    <label for="telefono">Telefono</label>
+                    <label for="telefono">Teléfono</label>
                 </div>
                 <!-- SWITCHES -->
                 <div class="form-check form-switch">
@@ -57,7 +55,7 @@
                         <div class="col ">
                             <input class="form-check-input" type="checkbox" role="switch" id="switchMovilidad"
                                 [(ngModel)]="movilidad" name="movilidad">
-                            <label class="form-check-label" for="switchMovilidad">Movilidad Propia</label>
+                            <label class="form-check-label" for="switchMovilidad">Movilidad propia</label>
                         </div>
                         <!-- DISPONIBILIDAD PARA VIAJAR -->
                         <div class="col">
@@ -83,7 +81,7 @@
                 <div class="row">
                     <div class="col mb-3">
                         <!-- Aqui si se activa el switch se abriria el text area -->
-                        <textarea *ngIf="mostrar" class="form-control" placeholder="Cuéntanos mas sobre ti"
+                        <textarea *ngIf="mostrar" class="form-control" placeholder="Cuéntanos más sobre ti"
                             id="floatingTextarea" [(ngModel)]="sobreTi" name="sobreTi"></textarea>
                     </div>
                 </div>
@@ -95,19 +93,16 @@
                     <label for="fechaNacimiento">Fecha de nacimiento</label>
                 </div>
                     <!-- CURRICULUM VITAE -->
-                    <div class="row border border-2 rounded p-4 mb-3 text-center">
-                        <div>
-    
-                            <div class="mb-3">
-                                <label for="">{{labelCv}}</label>
-                            </div>
+                    <div class="form-floating mb-2 pt-5 pb-3 border-2 border text-center">
+                        <div class="col-12">
                             <input type="file" class="mb-3 d-none" id="inputCv" name="curriculum"
                                 (change)="cargarCv($event)">
     
                             <input type="button" value="Carga tu Curriculum Vitae"
                                 onclick="document.getElementById('inputCv').click()" class="btn btn-primary mb-3">
+                        
+                         <label for="">{{labelCv}}</label>
                         </div>
-    
                     </div>
 
             </div>
@@ -115,7 +110,7 @@
             <div class="col  p-4 m-2">
                 <div class="row mb-3 ">
                     <div class="col">
-                        <h2>Direccion:</h2>
+                        <h2>Dirección:</h2>
                         <!-- CALLE -->
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="calle" placeholder=" " [(ngModel)]="calle"
@@ -129,7 +124,7 @@
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="numero" placeholder=" "
                                         [(ngModel)]="numero" name="numero">
-                                    <label for="numero">Nro </label>
+                                    <label for="numero">Número </label>
                                 </div>
                             </div>
                             <div class="col">
@@ -146,7 +141,7 @@
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="depto" placeholder=" "
                                         [(ngModel)]="depto" name="depto">
-                                    <label for="depto">Depto </label>
+                                    <label for="depto">Departamento </label>
                                 </div>
                             </div>
 
@@ -158,7 +153,7 @@
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="cp" placeholder=" " [(ngModel)]="cp"
                                         name="cp">
-                                    <label for="cp">Codigo postal</label>
+                                    <label for="cp">Código postal</label>
                                 </div>
                             </div>
                             <div class="col">
@@ -210,14 +205,25 @@
                 <!-- BOTONES -->
                 <div class="row rounded p-4 ">
                     <small>(*)obligatorio</small>
+                    <!-- BOTON ACEPTAR -->
                     <div class="col  text-center">
                         <button class=" container-fluid btn btn-lg btn-primary" (click)="registrar()"
                             [disabled]="!f.form.valid" [disabled]="banderaPass==false">Aceptar</button>
                     </div>
+
+                    <!-- BOTON VOLVER -->
                     <div class="col text-center">
                         <div class=" container-fluid btn btn-lg btn-secondary" [routerLink]="['']">Volver</div>
+                    <!--DAR DE BAJA AL USUARIO -->
+                    <div>
+                        <a class="text-danger" href="" onclick="event.preventDefault()" (click)="eliminarUsuario()">Eliminar cuenta</a>
                     </div>
+                    <p class="small fw-bold mt-4 pt-1 mb-0 centrar">¿Ya tiene cuenta? <a href="" [routerLink]="['/login']"
+                        class="link-primary mx-1"> Inicia sesión</a></p>
                 </div>
+                <div class="row">
+                </div>
+
 
             </div>
         </div>
@@ -225,4 +231,3 @@
 </div>
 
 
-<app-footer></app-footer>

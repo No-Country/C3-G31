@@ -26,27 +26,28 @@ class EmpresaListResource(Resource):
         direccion.save(is_new=True)
         
         localidad = Localidad(
-            nombre = form_data['localidad'],
-            codigoPostal = form_data['cp'],
-            direccion_id = direccion.id
+            nombre=form_data.get('localidad'),
+            codigoPostal=form_data.get('cp'),
         )
+        localidad.direccion_id=direccion.id
         localidad.save(is_new=True)
         
-        provincia = Provincia(
-            nombre = form_data['provincia'],
-            localidad_id = localidad.id
+        provincia=Provincia(
+            nombre=form_data.get('provincia')
         )
+        provincia.localidad_id = localidad.id
         provincia.save(is_new=True)
         
-        empresa = Empresa(
-            razon_social = form_data['razonSocial'],
-            telefono = form_data['telefono'],
-            email = form_data['email'],
-            logo = form_data.get('logo'),
-            user_id = form_data['idUsuario'],
-            direccion_id = direccion.id
+        empresa=Empresa(
+            razon_social= form_data.get('razonSocial'),
+            telefono= form_data.get('telefono'),
+            email= form_data.get('email'),
+            logo= form_data.get('logo'),
+            user_id= form_data.get('idUsuario')
         )
+        empresa.direccion_id=direccion.id
         empresa.save(is_new=True)
+
         return empresa_schema.dump(empresa), 201
 
 class EmpresaResource(Resource):

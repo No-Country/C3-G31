@@ -1,11 +1,9 @@
-<app-navbar></app-navbar>
-
-<div class="container mt-4">
+<div class="container ">
     <form #f="ngForm" (ngSubmit)="f.form.valid">
         <h1>Registrate aqui</h1>
         <div class="row border border-4 rounded p-3">
 
-            <div class="col  p-3 m-2">
+            <div class="col">
 
                 <h2>Tus datos:</h2>
                 <!-- Oculto el input file asi utilizo un boton personalizado para subir la foto(tambien lo voy a usar para el cv) -->
@@ -210,14 +208,28 @@
                 <!-- BOTONES -->
                 <div class="row rounded p-4 ">
                     <small>(*)obligatorio</small>
+                    <!-- BOTON ACEPTAR -->
                     <div class="col  text-center">
                         <button class=" container-fluid btn btn-lg btn-primary" (click)="registrar()"
                             [disabled]="!f.form.valid" [disabled]="banderaPass==false">Aceptar</button>
                     </div>
+
+                    <!-- BOTON VOLVER -->
                     <div class="col text-center">
                         <div class=" container-fluid btn btn-lg btn-secondary" [routerLink]="['']">Volver</div>
+                    <!--DAR DE BAJA AL USUARIO -->
+                    <div>
+                        <a class="text-danger" href="" onclick="event.preventDefault()" (click)="eliminarUsuario()">Eliminar cuenta</a>
                     </div>
+
+
+
+                    </div>
+
+
+
                 </div>
+
 
             </div>
         </div>
@@ -225,4 +237,3 @@
 </div>
 
 
-<app-footer></app-footer>

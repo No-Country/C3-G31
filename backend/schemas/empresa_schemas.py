@@ -4,6 +4,7 @@ from schemas.direccion_schemas import DireccionSchema
 
 class EmpresaSchema(ma.SQLAlchemySchema):
     class Meta:
+        
         model = Empresa
 
     id = ma.auto_field()

@@ -1,0 +1,65 @@
+<table class="table table-hover border border-1 border-dark rounded text-center">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Cargo al que se postulo</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Apellido</th>
+      <th scope="col">Perfil</th>
+      <th scope="col">Curriculum</th>
+    </tr>
+  </thead>
+
+  <tbody *ngFor="let dato of datos">
+    <tr>
+      <th scope="row">1</th>
+      <td>{{dato.empleo.cargo}}</td>
+      <td>{{dato.usuario.profile.nombre}}</td>
+      <td>{{dato.usuario.profile.apellido}}</td>
+      <td> <a href="" onclick="event.preventDefault()" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="mostrarPerfil(this.dato)"> <i
+            class="fa-solid fa-address-card"></i></a> </td>
+      <td> <a href="" onclick="event.preventDefault()"> <i class="fa-solid fa-file-arrow-down"></i></a> </td>
+    </tr>
+
+
+    <!-- Modal -->
+    <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Perfil de: {{dato.usuario.profile.nombre}}
+              {{dato.usuario.profile.apellido}} </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-start">
+
+            <div class="row">
+              <div class="col">
+                <label for=""><b>Nombre: </b> {{nombre}}</label> <br>
+                <label for=""><b>Apellido: </b> {{apellido}}</label> <br>
+                <label for=""><b>Presentacion: </b> {{presentacion}}</label> <br>
+                <label for=""><b>Telefono: </b>{{telefono}}</label> <br>
+                <label for=""><b>E-mail: </b>{{email}}</label> <br>
+              </div>
+
+              <div class="col">
+                <label for=""><b>Datos del domicilio</b></label> <br>
+                <label for=""><b>Calle: </b> {{calle}}</label> <br>
+                <label for=""><b>Numero: </b> {{numero}}</label> <br>
+                <label for=""><b>Piso: </b> {{piso}}</label> <br>
+                <label for=""><b>Departamento: </b>{{departamento}}</label> <br>
+                <label for=""><b>Localidad: </b>{{localidad}}</label> <br>
+                <label for=""><b>Provincia: </b>{{provincia}}</label> <br>
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </tbody>
+</table>

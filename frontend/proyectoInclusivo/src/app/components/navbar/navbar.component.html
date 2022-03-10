@@ -16,6 +16,10 @@
           </li>
 
           <li class="nav-item">
+            <a class="nav-link active" aria-current="page"href="#empresa">Empresas</a>
+          </li>
+
+          <li class="nav-item">
             <a class="nav-link active" aria-current="page" 
               [routerLink]="!estaAutenticado() ? ['/login'] : ['/empresa']" 
               [queryParams]="!estaAutenticado() ? {r: '/empresa'} : null" >Soy empresa</a>
@@ -47,8 +51,9 @@
               </button>
               <ul class="dropdown-menu text-center" aria-labelledby="botonLogin">
                 <li><a class="dropdown-item" [routerLink]="['/login']" >LogIn</a></li>
-                <li><a class="dropdown-item" href="/deslogueo">LogOut</a></li>
+                <li><a class="dropdown-item" href="" onclick="event.preventDefault()" (click)="logOut()">LogOut</a></li>
                 <li><a class="dropdown-item"  [routerLink]="['/registro']">Mi perfil</a></li>
+                <li><a class="dropdown-item"  [hidden]="!tieneEmpresa()"  [routerLink]="['/adminEmpresa']">Administracion Empresa</a></li>
               </ul>
             </div>
             <!-- FIN BOTON LOGIN -->

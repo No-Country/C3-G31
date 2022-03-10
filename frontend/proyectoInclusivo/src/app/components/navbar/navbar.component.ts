@@ -12,6 +12,11 @@ import Swal from 'sweetalert2';
 export class NavbarComponent implements OnInit {
 
   usuario: string
+  saludo: string
+
+  opcion1: string
+  opcion2: string
+  opcion3: string
 
   constructor(
     private servicioUsuario: UsuariosService,
@@ -22,9 +27,27 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     let nombre = sessionStorage.getItem('nombreUsuario');
-    if (nombre != null)
-      this.usuario = nombre;
-    this.tieneEmpresa();
+    if (nombre != null){
+      this.usuario =  nombre;
+      this.saludo = ", " + nombre
+
+      this.opcion1 = 'Mi perfil'
+      let option1 = document.getElementById('opcion1')
+
+      this.opcion2 = 'Crear empresa'
+
+
+      this.opcion3 = 'Cerrar sesión'
+
+    }else{
+      this.opcion1 = 'Iniciar Sesión'
+
+
+      this.opcion2 = 'Crear cuenta'
+
+
+      this.opcion3 = ''
+    }
   }
 
   estaAutenticado() {

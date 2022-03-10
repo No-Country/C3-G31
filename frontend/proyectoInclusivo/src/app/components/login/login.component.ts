@@ -69,4 +69,16 @@ export class LoginComponent implements OnInit {
     catch (error) {
     }
   } 
+
+  mostrar(){ //Función para mostrar/ocultar password
+    let input = document.getElementById('form3Example4')
+
+    if (input?.getAttribute('type') == 'password'){
+      input?.setAttribute("type",'text')
+    }
+    else{
+      input?.setAttribute("type",'password')
+    }
+  }
+
 }

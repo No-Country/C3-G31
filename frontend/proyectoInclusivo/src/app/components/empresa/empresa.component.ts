@@ -32,9 +32,12 @@ export class EmpresaComponent implements OnInit {
   constructor(
     private router: Router,
     private servicioEmpresa: EmpresaService
-  ) { }
+  ) { 
+    console.log('Constructor')
+  }
 
   ngOnInit(): void {
+    console.log('ngOnInit')
     if (this.servicioEmpresa.tieneEmpresa())
     {
       let datos;

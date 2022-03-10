@@ -15,13 +15,13 @@ class EmpresaListResource(Resource):
         # errors = empresa_schema.validate(form_data)
         # if errors:
         #     abort(400, errors)
-        
-        direccion=Direccion(
-            calle=form_data.get('calle'),
-            numero= form_data.get('numero'),
-            piso= form_data.get('piso'),
-            depto= form_data.get('depto'),
-            observaciones=form_data.get('observaciones')
+
+        direccion = Direccion(
+            calle = form_data['calle'],
+            numero = form_data['numero'],
+            piso = form_data.get('piso'),
+            depto = form_data.get('depto'),
+            observaciones = form_data.get('observacionesDomicilio'),
         )
         direccion.save(is_new=True)
         
@@ -55,5 +55,34 @@ class EmpresaResource(Resource):
         empresa = Empresa.get_by_id(empresa_id)
         if empresa is None:
             abort(404, 'The requested resource was not found')
+
+        return empresa_schema.dump(empresa)
+
+    def patch(self, empresa_id):
+        empresa = Empresa.get_by_id(empresa_id)
+        if empresa is None:
+            abort(404, 'The requested resource was not found')
+
+        form_data: dict = request.get_json()
+
+        empresa.direccion.calle = form_data.get('calle', empresa.direccion.calle)
+        empresa.direccion.numero = form_data.get('numero', empresa.direccion.numero)
+        empresa.direccion.piso = form_data.get('piso', empresa.direccion.piso)
+        empresa.direccion.depto = form_data.get('depto', empresa.direccion.depto)
+        empresa.direccion.observaciones = form_data.get('observacionesDomicilio', empresa.direccion.observaciones)
+        empresa.direccion.save(is_new=False)
+                 
+        empresa.direccion.localidad.nombre = form_data.get('localidad', empresa.direccion.localidad.nombre)
+        empresa.direccion.localidad.codigoPostal = form_data.get('cp', empresa.direccion.localidad.codigoPostal)
+        empresa.direccion.localidad.save(is_new=False)
+        
+        empresa.direccion.localidad.provincia.nombre = form_data.get('provincia', empresa.direccion.localidad.provincia.nombre)
+        empresa.direccion.localidad.provincia.save(is_new=False)
+
+        empresa.razon_social = form_data.get('razonSocial', empresa.razon_social)
+        empresa.email = form_data.get('email', empresa.email)
+        empresa.telefono = form_data.get('telefono', empresa.telefono)
+        empresa.logo = form_data.get('logo', empresa.logo)
+        empresa.save(is_new=False)
 
         return empresa_schema.dump(empresa)

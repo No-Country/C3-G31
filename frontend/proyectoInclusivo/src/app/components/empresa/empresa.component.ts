@@ -99,19 +99,50 @@ export class EmpresaComponent implements OnInit {
       observacionesDomicilio: this.observaciones
     }
 
-    this.servicioEmpresa.postEmpresa(dataEmpresa).subscribe(
-      response => Swal.fire({
-        icon: 'success',
-        title: 'Éxito',
-        text: 'Su empresa ha sido registrada con éxito'
-      }).then(() => this.router.navigate([''])),
-      error => {console.log(error)
-        Swal.fire({
-        title: 'Error', 
-        text: 'Ha ocurrido un error al registrar su empresa',
-        icon: 'error'
-      })}
-    )
+    if (!this.servicioEmpresa.tieneEmpresa()) {
+
+      this.servicioEmpresa.postEmpresa(dataEmpresa).subscribe(
+        (response: any) => Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Su empresa ha sido registrada con éxito'
+        }).then(() => {
+          sessionStorage.setItem('empresa', response.id);
+          this.router.navigate(['']);
+        }),
+        error => {
+          console.log(error);
+          Swal.fire({
+            title: 'Error', 
+            text: 'Ha ocurrido un error al registrar su empresa',
+            icon: 'error'
+          });
+        }
+      );
+      
+    } else {
+      let idEmpresa = Number.parseInt(sessionStorage.getItem('empresa') || '0');
+
+      this.servicioEmpresa.patchEmpresaId(idEmpresa, dataEmpresa).subscribe(
+        response => Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Los datos de su empresa han sido actualizados con éxito'
+        }),
+        error => {
+          console.log(error);
+          Swal.fire({
+            title: 'Error', 
+            text: 'Ha ocurrido un error al actualizar los datos de su empresa',
+            icon: 'error'
+          });
+        }
+      );
+
+    }
   }
 
+  tieneEmpresa() {
+    return this.servicioEmpresa.tieneEmpresa();
+  }
 }

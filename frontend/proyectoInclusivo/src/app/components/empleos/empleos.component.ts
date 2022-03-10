@@ -24,9 +24,10 @@ export class EmpleosComponent implements OnInit {
 
     this.servicioEmpleos.getAllEmpleos().subscribe(
       (response: any) => {
-        let datos = response.results;
+        console.log(response)
+        let datos = response;
         this.empleos = datos;
-        
+        console.log(this.empleos)
     })
         
   }

@@ -5,9 +5,10 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from models.empleo import Empleo
 from models.empresa import Empresa
-from schemas.empleo_schemas import empleos_schema, empleo_schema
+from schemas.empleo_schemas import empleo_schema, empleos_schema
 from utils.decorators import validate_schema
 from utils.helpers import get_or_404, abort_is_not_owner, get_paginated_dict
+
 
 
 class EmpleoListResource(Resource):
@@ -28,22 +29,53 @@ class EmpleoListResource(Resource):
 
     # @jwt_required()
     def get(self):
-        queryset = self.get_queryset()
-        data = empleos_schema.dump(queryset.items)
-        return get_paginated_dict(data, queryset), 201
+        empleos = Empleo.get_all()
+        return empleos_schema.dump(empleos)
+     
 
     # @jwt_required()
     # @validate_schema(empleo_schema)
     def post(self):
 
-        form_data: dict = request.get_json()
-        fecha=form_data['fecha_vencimiento']
-        form_data['fecha_vencimiento'] =  datetime.strptime(fecha,  '%Y-%m-%d')
-        #error aca
-        valid_data = empleo_schema.load(form_data)
-        empleo = self.model(**valid_data)
+        form_data=request.form
+        empleo = Empleo()
+
+        if 'empresa_id' in form_data:
+            empleo.empresa_id = form_data['empresa_id']
+
+        if 'titulo' in form_data:
+            empleo.titulo = form_data['titulo']
+
+        if 'fecha_creacion' in form_data:
+            empleo.fecha_creacion = form_data['fecha_creacion']
+
+        if 'fecha_vencimiento' in form_data:
+            empleo.fecha_vencimiento = form_data['fecha_vencimiento']
+
+        if 'cargo' in form_data:
+            empleo.cargo = form_data['cargo']
+
+        if 'rango_salarial' in form_data:
+            empleo.rango_salarial = form_data['rango_salarial']
+
+        if 'experiencia' in form_data:
+            empleo.experiencia = form_data['experiencia']
+
+        if 'estado' in form_data:
+            empleo.estado = form_data['estado']
+
+        if 'tipo_contrato' in form_data:
+            empleo.tipo_contrato = form_data['tipo_contrato']
+
+        if 'tipo_jornada' in form_data:
+            empleo.tipo_jornada = form_data['tipo_jornada']
+        
+        if 'descripcion' in form_data:
+            empleo.descripcion = form_data['descripcion']
+        
         empleo.save(is_new=True)
-        return empleo_schema.dump(empleo), 201
+        return empleo_schema.dump(empleo)
+
 
 
 class EmpleoResource(Resource):

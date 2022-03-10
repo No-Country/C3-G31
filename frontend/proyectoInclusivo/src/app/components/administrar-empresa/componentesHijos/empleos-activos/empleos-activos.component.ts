@@ -22,7 +22,7 @@ export class EmpleosActivosComponent implements OnInit {
 
     this.datos=this.empleosService.getAllEmpleos().subscribe(
       (response:any) => {
-      this.datos=response.results
+      this.datos=response
     })
   }
 

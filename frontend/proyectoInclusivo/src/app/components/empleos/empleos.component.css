@@ -1,0 +1,9 @@
+#tarjetaEmpleo{
+    cursor: pointer;
+    border-radius: 30px;
+    border:1px solid;
+}
+#tarjetaEmpleo:active{
+   background-color:ghostwhite;
+   opacity: 0.5;
+}

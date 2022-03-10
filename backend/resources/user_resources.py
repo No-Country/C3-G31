@@ -1,4 +1,5 @@
 import email
+from urllib import response
 from flask import request
 from flask_restful import Resource
 from flask_jwt_extended import create_access_token
@@ -54,24 +55,22 @@ class UserListResource(Resource):
             observaciones= form_data['observacionesDomicilio']
         )
         direccion.save(is_new=True)
-        
         localidad=Localidad(
             nombre= form_data['localidad'],
             codigoPostal= form_data['cp'],
             direccion_id=direccion.id
         )
         localidad.save(is_new=True)
-        
         provincia=Provincia(
             nombre=form_data['provincia'],
             localidad_id=localidad.id
         )
         provincia.save(is_new=True)
-        
 
         user = User(
             email = email,
-            direccion_id = direccion.id
+            direccion_id = direccion.id,
+            activo="activo"
         )
         user.set_password(password)
         user.save(is_new=True)
@@ -117,13 +116,19 @@ class TokenResource(Resource):
         password = form_data['password']
 
         user = User.query.filter_by(email=email).first()
-        bad_response = {"msg": "Bad username or password"}, 401
+
+        bad_responseEmail = {"msg": "El usuario no existe"}, 401
+        bad_responsePassword = {"msg": "La contraseña es incorrecta"}, 401
+        
 
         if user is None:
-            return bad_response
+            return bad_responseEmail
 
         if not user.check_password(password):
-            return bad_response
+            return bad_responsePassword
+
+        if user.activo=="inactivo":
+            return bad_responseEmail
 
         access_token = create_access_token(identity=user.id)
 
@@ -198,5 +203,7 @@ class UserResource(Resource):
 
     def delete(self, user_id):
         user = User.get_by_id(user_id)
-        user.delete()
-        return '', 204
+        user.activo="inactivo"
+        user.save(is_new=False)
+        #user.delete()
+        return 'inactivo', 204

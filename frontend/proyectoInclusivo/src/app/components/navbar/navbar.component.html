@@ -5,21 +5,37 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Inicio</a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" [routerLink]="['/empleos']">Empleos</a>
-        </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" [routerLink]="['/empleos']">Empleos</a>
+          </li>
 
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" 
-            [routerLink]="!estaAutenticado() ? ['/login'] : ['/empresa']" 
-            [queryParams]="!estaAutenticado() ? {r: '/empresa'} : null" >Soy empresa</a>
-        </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page"href="#empresa">Empresas</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" 
+              [routerLink]="!estaAutenticado() ? ['/login'] : ['/empresa']" 
+              [queryParams]="!estaAutenticado() ? {r: '/empresa'} : null" >Soy empresa</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Sobre nosotros
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#p1">¿Quiénes Somos?</a></li>
+              <li><a class="dropdown-item" href="#p2">Nuestro objetivo</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#p3">FAQs</a></li>
+            </ul>
+          </li>
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -41,17 +57,6 @@
             <label class="text-primary me-2">
               {{usuario}}
             </label>
-            <!--
-              <button class="btn btn-primary  dropdown-toggle" type="button" id="botonLogin" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              <i class="fa-solid fa-circle-user fa-xl"></i>
-            </button>
-            <ul class="dropdown-menu text-center" aria-labelledby="botonLogin">
-              <li><a class="dropdown-item" [routerLink]="['/login']" >LogIn</a></li>
-              <li><a class="dropdown-item" href="/deslogueo">LogOut</a></li>
-              <li><a class="dropdown-item"  [routerLink]="['/registro']">Mi perfil</a></li>
-            </ul>
-            -->
             <button class="btn btn-primary" type="button" id="botonLogin" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" aria-expanded="false">
               <i class="fa-solid fa-circle-user fa-xl"></i>
             </button>
@@ -59,7 +64,6 @@
           </div>
           <!-- FIN BOTON LOGIN -->
         </form>
-  
     </div>
   </div>
 
@@ -77,7 +81,9 @@
     <ul class="container-fluid list-group" aria-labelledby="botonLogin">
       <li class="container-fluid list-group-item centrar"><a [routerLink]="['/login']" class="link" id="opcion1"><b>{{opcion1}}</b></a></li>
       <li class="container-fluid list-group-item centrar"><a href="/registro" class="link" id="opcion2"><b>{{opcion2}}</b></a></li>
-      <li class="container-fluid list-group-item centrar"><a  [routerLink]="['/deslogueo']" class="link" id="opcion3"><b>{{opcion3}}</b></a></li>
+      <!--<li class="container-fluid list-group-item centrar"><a  [routerLink]="['/deslogueo']" class="link" id="opcion3"><b>{{opcion3}}</b></a></li>-->
+      <li><a class="dropdown-item" href="" onclick="event.preventDefault()" (click)="logOut()">LogOut</a></li>
+      <li><a class="dropdown-item"  [hidden]="!tieneEmpresa()"  [routerLink]="['/adminEmpresa']">Administracion Empresa</a></li>
     </ul>
   
   </div>

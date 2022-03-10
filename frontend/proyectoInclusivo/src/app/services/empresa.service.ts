@@ -34,6 +34,10 @@ export class EmpresaService {
         return this.http.get(this.api_empresas+"/"+id)
     }
 
+    public getEmpresaAll(){
+        return this.http.get(this.api_empresas)
+    }
+
     public patchEmpresaId(id:number, data:any): Observable<any>{
         return this.http.patch(this.api_empresas+"/"+id, data);
       }

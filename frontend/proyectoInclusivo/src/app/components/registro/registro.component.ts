@@ -59,6 +59,7 @@ export class RegistroComponent implements OnInit {
 
   //bandera para mostrar el textArea de discapacidad o no, dependiendo del switch "discapacidad"
   mostrar = false;
+  checkTerminos:boolean = false;
 
 
   constructor(
@@ -295,12 +296,9 @@ export class RegistroComponent implements OnInit {
     })
 }
 
-rechazar(){
-
-}
-
-aceptar(){
-  
+check(){
+  console.log(this.checkTerminos)
+  this.checkTerminos=!this.checkTerminos;
 }
 
 

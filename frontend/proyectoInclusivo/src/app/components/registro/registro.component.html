@@ -206,10 +206,10 @@
 
                 <!--TÉRMINOS Y CONDICIONES-->
                 <div class="form-check mb-0 me-2">
-                    <input class="form-check-input me-2" type="checkbox" value=""  data-bs-toggle="modal" data-bs-target="#exampleModal" required>
-                    <label class="form-check-label me-4" for="form2Example3" id="opacidad">
-                      Términos y condiciones *
-                    </label>
+                    <input class="form-check-input me-2" type="checkbox" required  [checked]="checkTerminos" (change)="check()">
+                    Acepto los <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Términos y condiciones *
+                    </a>
                   </div>
 
                 <!-- BOTONES -->
@@ -217,7 +217,9 @@
                     <!-- BOTON ACEPTAR -->
                     <div class="col  text-center">
                         <button class=" container-fluid btn btn-lg btn-primary" (click)="registrar()"
-                            [disabled]="!f.form.valid" [disabled]="banderaPass==false">Aceptar</button>
+
+                            [disabled]="!f.form.valid || checkTerminos==false || banderaPass==false" 
+                            >Aceptar</button>
                     </div>
 
                     <!-- BOTON VOLVER -->
@@ -561,8 +563,7 @@
             Esta Política de Privacidad fue actualizada por última vez el 02 de marzo de 2022.            
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="rechazar()">Rechazar</button>
-          <button type="button" class="btn btn-primary" (click)="aceptar()">Aceptar</button>
+          <button type="button" class="btn btn-primary"data-bs-dismiss="modal" >Aceptar</button>
         </div>
       </div>
     </div>

@@ -1,13 +1,13 @@
-<div class="container ">
-    <form #f="ngForm" (ngSubmit)="f.form.valid">
-        <h1>Registrate aquí</h1>
+<div class="container">
+    <form #f="ngForm" (ngSubmit)="f.form.valid" class="mb-5">
+        <h1 class="pb-5">Registrate aquí</h1>
         <div class="row border border-4 rounded p-3">
 
             <div class="col">
 
-                <h2>Tus datos:</h2>
+                <h2 class="pt-4 mb-1">Tus datos:</h2>
                 <!-- Oculto el input file asi utilizo un boton personalizado para subir la foto(tambien lo voy a usar para el cv) -->
-                <div>
+                <div class="centrar pt-3">
                     <div>
                         <img [src]="imageURL[0]" width="100px" class="mb-3" >
                     </div>
@@ -37,10 +37,11 @@
                     <label for="apellido">Apellido *</label>
                 </div>
                 <!-- PRESENTACION -->
-                <div class="form-floating mb-3">
-                    <textarea class="form-control" id="presentacion" placeholder="" [(ngModel)]='presentacion'
-                        name="presentacion"></textarea>
-                    <label for="presentacion">Haz una breve presentación de ti</label>
+                <div class="row">
+                    <div class="col mb-3">
+                        <textarea class="form-control" placeholder="Haz una breve presentación de ti"
+                            id="presentacion" [(ngModel)]="presentacion" name="presentacion"></textarea>
+                    </div>
                 </div>
                 <!-- TELEFONO -->
                 <div class="form-floating mb-3">
@@ -55,13 +56,13 @@
                         <div class="col ">
                             <input class="form-check-input" type="checkbox" role="switch" id="switchMovilidad"
                                 [(ngModel)]="movilidad" name="movilidad">
-                            <label class="form-check-label" for="switchMovilidad">Movilidad propia</label>
+                            <label class="form-check-label" for="switchMovilidad" id="opacidad">Movilidad propia</label>
                         </div>
                         <!-- DISPONIBILIDAD PARA VIAJAR -->
                         <div class="col">
                             <input class="form-check-input" type="checkbox" role="switch" id="switchDisponibilidad"
                                 [(ngModel)]="disponibilidadViajar" name="disponibilidadViajar">
-                            <label class="form-check-label" for="switchDisponibilidad">Disponibilidad para
+                            <label class="form-check-label" for="switchDisponibilidad" id="opacidad">Disponibilidad para
                                 viajar</label>
                         </div>
                     </div>
@@ -73,7 +74,7 @@
                         <div class="form-check form-switch mb-3">
                             <input class="form-check-input" type="checkbox" role="switch" id="switchDiscapacidad"
                                 (click)="mostrarTextArea()"  [(ngModel)]="switchDiscapacidad" name="switchDiscapacidad">
-                            <label class="form-check-label" for="switchDiscapacidad">Discapacidad</label>
+                            <label class="form-check-label" for="switchDiscapacidad" id="opacidad">Discapacidad</label>
                         </div>
                     </div>
                 </div>
@@ -110,7 +111,7 @@
             <div class="col  p-4 m-2">
                 <div class="row mb-3 ">
                     <div class="col">
-                        <h2>Dirección:</h2>
+                        <h2 class="pb-3">Dirección:</h2>
                         <!-- CALLE -->
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="calle" placeholder=" " [(ngModel)]="calle"
@@ -124,7 +125,7 @@
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="numero" placeholder=" "
                                         [(ngModel)]="numero" name="numero">
-                                    <label for="numero">Número </label>
+                                    <label for="numero">Nro </label>
                                 </div>
                             </div>
                             <div class="col">
@@ -141,7 +142,7 @@
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="depto" placeholder=" "
                                         [(ngModel)]="depto" name="depto">
-                                    <label for="depto">Departamento </label>
+                                    <label class="col" for="depto">Depto</label>
                                 </div>
                             </div>
 
@@ -202,9 +203,17 @@
                     <span for="" class="text-danger" *ngIf="banderaPass==false">Las contraseñas deben coincidir</span>
 
                 </div>
+
+                <!--TÉRMINOS Y CONDICIONES-->
+                <div class="form-check mb-0 me-2">
+                    <input class="form-check-input me-2" type="checkbox" value=""  data-bs-toggle="modal" data-bs-target="#exampleModal" required>
+                    <label class="form-check-label me-4" for="form2Example3" id="opacidad">
+                      Términos y condiciones *
+                    </label>
+                  </div>
+
                 <!-- BOTONES -->
                 <div class="row rounded p-4 ">
-                    <small>(*)obligatorio</small>
                     <!-- BOTON ACEPTAR -->
                     <div class="col  text-center">
                         <button class=" container-fluid btn btn-lg btn-primary" (click)="registrar()"
@@ -214,14 +223,16 @@
                     <!-- BOTON VOLVER -->
                     <div class="col text-center">
                         <div class=" container-fluid btn btn-lg btn-secondary" onclick="window.history.go(-1);">Volver</div>
-                        <!--DAR DE BAJA AL USUARIO -->
-                        <div *ngIf="estaAutenticado()">
-                            <a class="text-danger" href="" onclick="event.preventDefault()" (click)="eliminarUsuario()">Eliminar cuenta</a>
-                        </div>
-                        <p *ngIf="!estaAutenticado()" class="small fw-bold mt-4 pt-1 mb-0 centrar">¿Ya tiene cuenta? <a href="" [routerLink]="['/login']"
-                            class="link-primary mx-1"> Inicia sesión</a></p>
+                        
                     </div>
+
                 <div class="row">
+                    <!--DAR DE BAJA AL USUARIO -->
+                    <div *ngIf="estaAutenticado()">
+                        <a class="text-danger centrar mt-4" href="" onclick="event.preventDefault()" (click)="eliminarUsuario()"><b>Eliminar cuenta</b></a>
+                    </div>
+                    <p *ngIf="!estaAutenticado()" class="small fw-bold mt-4 pt-1 mb-0 centrar">¿Ya tiene cuenta? <a href="" [routerLink]="['/login']"
+                        class="link-primary mx-1"> Inicia sesión</a></p>
                 </div>
 
 
@@ -229,4 +240,334 @@
         </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+            <div class="modal-header">
+                <div class="container centrar">
+                <h5 class="modal-title" id="exampleModalLabel">TÉRMINOS Y CONDICIONES</h5>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+        <div class="modal-body">
+            Esta sección establece los Términos y Condiciones (en adelante, las "Condiciones Generales") para el uso de los contenidos y servicios (en adelante, los "Servicios"), del sitio web especificado en la cláusula 12 (en adelante, el "Sitio Web"). El Sitio Web y los Servicios son prestados por la empresa detallada en la cláusula 12 (en adelante, "B-INCLUSIVE").
+            En caso de no estar de acuerdo con las Condiciones Generales, por favor, abandone el Sitio Web y absténgase de utilizar los Servicios que se ofrecen. La utilización por el usuario del Sitio Web se entenderá como aceptación plena y sin reservas de las Condiciones Generales aquí establecidas.
+            En adelante, los términos “Usted” y “Usuario” serán utilizados para hacer referencia a todas las personas físicas y/o jurídicas que por cualquier razón accedan al Sitio Web.
+            <br>
+            <br>
+            <strong class="centrar">1. ACCESO AL SITIO WEB</strong>
+            <br>
+            1.1. Acceso al Sitio Web:
+            El acceso y utilización del Sitio Web no exige la previa suscripción o registro del Usuario. Sin embargo, es posible que la utilización de algunos de los Servicios ofrecidos a través del Sitio Web requiera la suscripción o registro del Usuario y/o el pago de un precio.
+            <br>
+            <br>
+            1.2. Utilización del Sitio Web
+            <br>
+            1.2.1. El Usuario se compromete a utilizar el Sitio Web de conformidad con estas Condiciones Generales, las leyes aplicables conforme la cláusula 12 y con la moral y buenas costumbres.
+            <br>
+            1.2.2. El Usuario se obliga a abstenerse de utilizar el Sitio Web con fines o efectos ilícitos, contrarios a lo establecido en las Condiciones Generales, lesivos de los derechos e intereses de terceros, o que de cualquier forma puedan dañar, inutilizar, sobrecargar o deteriorar el Sitio Web o impedir la normal utilización del Sitio Web por parte de los Usuarios.
+            <br>
+            <br>
+            1.3. Contenido del Sitio Web
+            <br>
+            1.3.1 Los contenidos de este Sitio Web, tales como texto, información, gráficos, imágenes, logos, marcas, programas de computación, bases de datos, diseños, arquitectura funcional y cualquier otro material (en adelante, el “Contenido”) están protegidos por las leyes aplicables en cada jurisdicción conforme la cláusula 12 incluyendo, pero sin limitación, las leyes sobre derechos de autor, patentes, marcas, modelos de utilidad, diseños industriales y nombres de dominio.
+            <br>
+            1.3.2. Todo el Contenido es propiedad de B-INCLUSIVE y/o de cualquier otra sociedad vinculada y/o de sus proveedores de contenido. La compilación, interconexión, operatividad y disposición de los contenidos del Sitio Web es de propiedad exclusiva de B-INCLUSIVE y/o de sus empresas vinculadas. El uso, adaptación, reproducción y/o comercialización no autorizada del Contenido puede encontrarse penado por la legislación vigente en cada jurisdicción.
+            <br>
+            1.3.3. Usted no copiará ni adaptará el código de programación desarrollado por, o por cuenta de, B-INCLUSIVE para generar y operar sus páginas, el cual se encuentra protegido por la legislación aplicable y vigente en cada jurisdicción.
+            <br>
+            <br>
+            1.4. Uso permitido del Sitio
+            <br>
+            1.4.1. Reglas generales: Los Usuarios tienen prohibido utilizar el Sitio Web para transmitir, distribuir, almacenar o destruir material (i) violando la normativa vigente, (ii) de forma que se infrinjan derechos de terceros o se viole la confidencialidad, honor, privacidad, imagen u otros derechos personales de otras personas.
+            <br>
+            1.4.2. Reglas de Seguridad del Sitio Web: Los Usuarios tienen prohibido violar o intentar violar la seguridad del Sitio Web, incluyendo pero no limitándose a: (i) el acceso a datos que no estén destinados a tal usuario o entrar en un servidor o cuenta cuyo acceso no está autorizado al Usuario, (ii) evaluar o probar la vulnerabilidad de un sistema o red, o violar las medidas de seguridad o identificación sin la adecuada autorización, (iii) intentar impedir el Servicio a cualquier Usuario, anfitrión o red, incluyendo, pero sin limitación, mediante el envío de virus al Sitio Web, o mediante saturación o ataques de denegación de Servicio, (iv) enviar correos no pedidos, incluyendo promociones y/o publicidad de productos o servicios, o (v) falsificar cualquier cabecera de paquete TCP/IP o cualquier parte de la información de la cabecera de cualquier correo electrónico o en mensajes de foros de debate.
+            <br>
+            1.4.3. Las violaciones de la seguridad del sistema o de la red constituyen delitos penales y pueden derivar en responsabilidades civiles. B-INCLUSIVE investigará los casos de violaciones a la seguridad del sistema, pudiendo dirigirse a la autoridad judicial o administrativa competente a los efectos de perseguir a los Usuarios involucrados en tales violaciones.
+            <br>
+            <br>
+            1.5. Usos prohibidos
+            <br>
+            1.5.1. El Sitio Web sólo podrá ser utilizado con fines lícitos, para acceder a información referida a los Servicios disponibles a través del mismo. B-INCLUSIVE prohíbe específicamente cualquier utilización del Sitio Web para:
+            - Anunciar datos biográficos incompletos, falsos o inexactos.
+            - Registrar más de una cuenta correspondiente a un mismo usuario.
+            - Usar cualquier mecanismo para impedir o intentar impedir el adecuado funcionamiento de este Sitio Web o cualquier actividad que se esté realizando en este Sitio Web.
+            - Revelar o compartir su contraseña con terceras personas, o usar su contraseña para propósitos no autorizados.
+            - El uso o intento de uso de cualquier máquina, software, herramienta, agente u otro mecanismo para navegar o buscar en este Sitio Web que sean distintos a las herramientas de búsqueda provistos por B-INCLUSIVE en este Sitio Web.
+            - Intentar descifrar, descompilar u obtener el código fuente de cualquier programa de software de este Sitio Web.
+            <br>
+            1.5.2. B-INCLUSIVE se reserva el derecho de suspender o dar de baja a cualquier Usuario que, a exclusivo criterio de B-INCLUSIVE, no cumpla con los estándares definidos en estas Condiciones Generales o con las políticas vigentes de B-INCLUSIVE, sin que ello genere derecho a resarcimiento alguno.
+            <br>
+            <br>
+            1.6. Canales de comunicación disponibles para los Usuarios
+            <br>
+            1.6.1 El Usuario deberá utilizar el canal de comunicación disponible de forma responsable, correcta y dando fiel cumplimiento a la normativa vigente.
+            <br>
+            1.6.2. El contenido de cada mensaje enviado por el Usuario a través de los Canales es de única y exclusiva responsabilidad del Usuario. B-INCLUSIVE no garantiza la veracidad de los datos personales y/o contenidos de cada mensaje efectuados y/o publicados en los Canales por el Usuario. El Usuario acepta voluntariamente que el acceso a y/o el uso de los Canales tiene lugar, en todo caso, bajo su exclusiva y única responsabilidad.
+            <br>
+            1.6.3. B-INCLUSIVE se reserva el derecho a suspender temporal o definitivamente de los Canales y/o de los Servicios sin previo aviso, a quien no respete las presentes Condiciones Generales o realice actos que atenten contra el normal funcionamiento de los Servicios y/o de los Canales y/o del Sitio Web.
+            <br>
+            1.6.4. El Usuario reconoce y acepta que las siguientes conductas se encuentran terminantemente prohibidas:
+            a) utilizar lenguaje vulgar /obsceno, discriminatorio y/u ofensivo;
+            b) todo tipo de ataque personal contra Usuarios y/o terceros, mediante acoso, amenazas, insultos;
+            c) todo acto contrario a las leyes, la moral y las buenas costumbres;
+            d) publicar mensajes, imágenes e hipervínculos agraviantes, difamatorios, calumniosos, injuriosos, falsos, discriminatorios, pornográficos, de contenido violento, insultantes, amenazantes, incitantes a conductas ilícitas o peligrosas para la salud, y/o que vulneren de cualquier forma la privacidad de cualquier tercero como así también la violación directa o indirecta de los derechos de propiedad intelectual de B-INCLUSIVE y/o de cualquier tercero, incluyendo clientes de B-INCLUSIVE;
+            e) publicar mensajes que puedan herir y/o afectar la sensibilidad del resto de los Usuarios y/o de cualquier tercero, incluyendo clientes de B-INCLUSIVE;
+            f) promocionar, comercializar, vender, publicar y/u ofrecer cualquier clase de productos, servicios y/o actividades por intermedio de o a través de la utilización de los Canales, excepto aquellas expresamente permitidas por B-INCLUSIVE;
+            g) la venta, locación o cesión, ya sea a título oneroso o gratuito, del espacio de comunicación de los Canales;
+            h) publicar mensajes que de cualquier forma contengan publicidad;
+            i) el uso o envío de virus informáticos, malware, spyware y/o la realización de todo acto que cause o pudiera causar daños o perjuicios al normal funcionamiento de los Servicios y/o los Canales, o de los equipos informáticos o software de B-INCLUSIVE y/o de cualquier tercero, incluyendo clientes de B-INCLUSIVE;
+            j) todo acto dirigido a enmascarar y/o falsificar o disimular direcciones IP, correos electrónicos y/o cualquier otro medio técnico de identificación de los Usuarios o sus equipos informáticos;
+            k) todo acto que viole la privacidad de otros Usuarios, o que viole cualquiera de sus derechos bajo la Ley N° 25.326;
+            l) la publicación de datos personales sin el consentimiento expreso del titular de los mismos;
+            m) la transmisión o divulgación de material que viole la legislación en vigor en el país y/o que pudiera herir la sensibilidad del resto de los Usuarios y/o de cualquier tercero, incluyendo clientes de B-INCLUSIVE;
+            n) la publicación de cualquier tipo de contenido en violación de derechos de terceros, incluyendo sin limitación los derechos de propiedad intelectual y/o industrial.
+            <br>
+            1.6.5. B-INCLUSIVE no tiene obligación de controlar ni controla la utilización que el Usuario haga de los Canales. No obstante ello, B-INCLUSIVE se reserva el derecho de no publicar o remover luego de ser publicados todos aquellos contenidos y/o mensajes propuestos y/o publicados por el Usuario que, a exclusivo criterio de B-INCLUSIVE, no respondan estrictamente a las disposiciones contenidas en estas Condiciones Generales y/o resulten impropios y/o inadecuados a las características, finalidad y/o calidad de los Servicios.
+            <br>
+            1.6.6. B-INCLUSIVE no garantiza la disponibilidad y continuidad del funcionamiento de los Canales.
+            <br>
+            1.6.7. B-INCLUSIVE no es en ningún caso responsable de la destrucción, alteración o eliminación del contenido o información que cada Usuario incluya en sus mensajes.
+            <br>
+            1.6.8. Cada Usuario es único y exclusivo responsable de sus manifestaciones, dichos, opiniones y todo acto que realice a través de los Canales.
+            <br>
+            <br>
+            <strong class="centrar">2. DATOS PERSONALES DEL USUARIO. REGISTRO EN EL SITIO WEB.</strong>
+            <br>
+            2.1. Cuando se registre en el Sitio Web, se le pedirá que aporte a B-INCLUSIVE cierta información que incluirá, entre otras, nombre y apellido, dirección y una dirección válida de correo electrónico, antecedentes académicos y laborales (de corresponder), entre otros.
+            <br>
+            <br>
+            2.2. B-INCLUSIVE se reserva el derecho de ofrecerle servicios y productos de terceros basados en las preferencias que Usted indicó al momento de registrarse o en cualquier momento posterior; tales ofertas pueden ser efectuadas por B-INCLUSIVE o por terceros.
+            <br>
+            <br>
+            2.3. Por favor consulte la Política de Privacidad del Sitio Web para conocer los detalles respecto del tratamiento de sus Datos Personales.
+            <br>
+            <br>
+            2.4. El Usuario será responsable de todos los usos de su cuenta, tanto si están autorizados o no por Usted. Usted deberá notificar inmediatamente a B-INCLUSIVE sobre cualquier uso sin autorización de su cuenta o contraseña.
+            <br>
+            <br>
+            2.5. Los Usuarios registrados y/o que utilicen los Servicios de B-INCLUSIVE garantizan la veracidad, exactitud, vigencia y autenticidad de la información facilitada, y se comprometen a mantenerlos debidamente actualizados, informando a B-INCLUSIVE sobre cualquier modificación a través de la sección “Contacto” disponible en la página principal del Sitio Web.
+            <br>
+            <br>
+            2.6. El Usuario autoriza a que la información personal suministrada sea compartida con los clientes de B-INCLUSIVE.
+            <br>
+            <br>
+            <strong class="centrar">3. RESPONSABILIDAD DEL USUARIO</strong>
+            <br>
+            El Usuario declara y acepta que el uso del Sitio Web sus Servicios y los contenidos se efectúan bajo su única y exclusiva responsabilidad.
+            <br>
+            <br>
+            <strong class="centrar"> 4. EXCLUSIÓN DE GARANTÍAS Y DE RESPONSABILIDAD</strong>
+            <br>
+            <br>
+            4.1. Atento al estado de la técnica y a la estructura y funcionamiento de las redes, el Sitio Web no puede confirmar que cada Usuario es quien dice ser.
+            <br>
+            <br>
+            4.2. B-INCLUSIVE no garantiza la disponibilidad y continuidad del funcionamiento del Sitio Web y de los Servicios ofrecidos. No todos los Servicios y contenidos en general se encuentran disponibles para todas las áreas geográficas. Asimismo, B-INCLUSIVE no garantiza la utilidad del Sitio Web y de los Servicios para la realización de ninguna actividad en particular, ni su infalibilidad y, en particular, aunque no de modo exclusivo, que los Usuarios puedan efectivamente utilizar el Sitio Web, acceder a las distintas páginas web que forman el Sitio Web o a aquéllas desde las que se prestan los Servicios.
+            <br>
+            <br>
+            4.3. B-INCLUSIVE no garantiza que el Sitio Web funcione libre de errores o que el Sitio Web y su servidor estén libres de virus informáticos u otros mecanismos lesivos.
+            <br>
+            <br>
+            4.4. El Sitio Web y los Servicios se suministran tal como están, sin garantías de ninguna clase.
+            <br>
+            <br>
+            4.5. B-INCLUSIVE no garantiza la exactitud, la veracidad, la exhaustividad o la actualización de los contenidos, los Servicios, el software, los textos, los gráficos y los vínculos.
+            <br>
+            <br>
+            4.6. En ningún caso B-INCLUSIVE será responsable de cualquier daño incluyendo, pero sin limitación, daños directos y/o indirectos, lucro cesante o pérdida de chance que resulten del uso o de la imposibilidad de uso del Sitio Web, sin perjuicio de que B-INCLUSIVE haya sido advertido sobre la posibilidad de tales daños.
+            <br>
+            <br>
+            4.7. B-INCLUSIVE excluye toda responsabilidad por los daños y perjuicios de toda naturaleza que pudieran deberse al accionar de terceros no autorizados respecto de los Datos Personales de los Usuarios, así como de los Servicios ofrecidos en el Sitio Web.
+            <br>
+            <br>
+            <strong class='centrar'>5. VÍNCULOS A OTROS SITIOS</strong>
+            <br>
+            El Sitio Web contiene vínculos a otros sitios de Internet. B-INCLUSIVE no respalda los contenidos de estos sitios web. B-INCLUSIVE no es responsable del contenido de los sitios web de terceros y no hace ninguna afirmación relativa al contenido o su exactitud en estos sitios web de terceros. Si Usted decide acceder a sitios web de terceras partes vinculados, lo hace a su propio riesgo.
+            <br>
+            <br>
+            <strong class='centrar'>6. CESIÓN O USO COMERCIAL NO AUTORIZADO</strong>
+            <br>
+            6.1. Usted acepta no ceder, bajo ningún título, sus derechos u obligaciones bajo estas Condiciones Generales. Usted también acepta no realizar ningún uso comercial no autorizado del Sitio Web.
+            <br>
+            <br>
+            6.2. Asimismo, el Usuario se compromete a utilizar el Sitio Web y los Servicios diligentemente y de conformidad con la ley aplicable y vigente y con estas Condiciones Generales.
+            <br>
+            <br>
+            <strong class='centrar'>7. CANCELACIÓN</strong>
+            <br>
+            7.1. B-INCLUSIVE tiene la facultad, y no la obligación, de emitir advertencias, suspensiones temporales y cancelaciones permanentes (baja) de los Usuarios registrados por infracciones a las presentes Condiciones Generales, y/o cualquier aviso, reglamento de uso e instrucción puestos en conocimiento del Usuario por B-INCLUSIVE.
+            <br>
+            <br>
+            7.2. Sin perjuicio de lo indicado en el punto anterior, B-INCLUSIVE se reserva el derecho, a su exclusivo criterio, de emplear todos los medios legales a su alcance en caso que Usted infrinja cualquiera de estas Condiciones Generales.
+            <br>
+            <br>
+            <strong class="centrar">8. INDEMNIZACIÓN</strong>
+            <br>
+            Usted acepta mantener indemne a B-INCLUSIVE de y contra cualquier cargo, acción o demanda, incluyendo, pero no limitándose a, los gastos legales razonables, que resulten del uso que Usted haga del Sitio Web, de los Contenidos y de los Servicios. Usted acepta y reconoce que B-INCLUSIVE es un mero intermediario, ajeno a cualquier relación que pudiera entablarse entre Usted y quienes publiquen avisos, anuncios y/o propuestas a través del Sitio Web. En tal sentido, Usted acepta no reclamar a B-INCLUSIVE por ningún tipo de consecuencia derivada de tales relaciones.
+            <br>
+            <br>
+            <strong class="centrar">9. GENERAL</strong>
+            <br>
+            9.1 B-INCLUSIVE se reserva el derecho a modificar total o parcialmente estas Condiciones Generales en cualquier momento. En caso de llevar a cabo alguna modificación, B-INCLUSIVE notificará al Usuario a la dirección de correo electrónico registrada para utilizar el Sitio Web y los Servicios. El Usuario acepta que la notificación por parte de B-INCLUSIVE a dicha dirección de correo electrónico tendrá plena validez como notificación suficiente, y renuncia a cualquier tipo de impugnación respecto de las notificaciones cursadas por B-INCLUSIVE a tal dirección de correo electrónico. Asimismo, si el Usuario persiste en la utilización de los Servicios y/o el Sitio Web, se considerará que ha aceptado implícitamente las nuevas Condiciones Generales.
+            <br>
+            <br>
+            9.2 En caso de declararse la nulidad de alguna de las cláusulas de estas Condiciones Generales, tal nulidad no afectará a la validez de las restantes, las cuales mantendrán su plena vigencia y efecto.
+            <br>
+            <br>
+            9.3 Estas Condiciones Generales, junto con la Política de Privacidad constituyen la totalidad del acuerdo entre Usted y B-INCLUSIVE respecto del uso del Sitio Web.
+            <br>
+            <br>
+            <strong class="centrar">10. DURACIÓN Y TERMINACIÓN</strong>
+            <br>
+            La prestación del Servicio del Sitio Web tiene una duración indeterminada. Sin perjuicio de lo anterior, B-INCLUSIVE está autorizada para dar por terminada o suspender la prestación del Servicio del Sitio Web y/o de cualquiera de los Contenidos en cualquier momento.
+            <br>
+            <br>
+            <strong class="centrar">11. LOCALIZACIÓN</strong>
+            <br>
+            11.1. ARGENTINA
+            <br>
+            11.1.1. B-INCLUSIVE, CUIT 12-34567890-1, tiene domicilio en Santa Fe 1234 piso 5.
+            <br>
+            <br>
+            <strong class="centrar">12.1.2. El Sitio Web es www.b-inclusive.com.ar.</strong>
+            <br>
+            12.1.3. Estas Condiciones Generales se rigen por la las leyes de la República Argentina. El Usuario se somete a la jurisdicción de los Tribunales Ordinarios de la Ciudad de Buenos Aires, con renuncia expresa a cualquier otro fuero y/o jurisdicción.
+            Estos Términos y Condiciones fueron actualizados por última vez el 03 de marzo de 2022.
+            <br>
+            <br>
+            <strong class="centrar">POLÍTICA DE PRIVACIDAD</strong>
+            <br>
+            1. NUESTRO COMROMISO CON LA PRIVACIDAD
+            Las empresas indicadas en la cláusula 12, sus empresas afiliadas, subsidiarias o controladoras (en adelante “B-INCLUSIVE”), respetan la privacidad de toda persona que visite el sitio web enunciado en la cláusula 12 (en adelante, el "Sitio Web").
+            Esta Política de Privacidad indica la información que B-INCLUSIVE puede recopilar y el uso que puede dar a esa información. También explica las medidas de seguridad tomadas para proteger su información, su posibilidad de acceder a su información, y a quién podrá contactar en B-INCLUSIVE para que sus preguntas en relación con esta Política de Privacidad sean contestadas.
+            <br>
+            <br>
+            2. RECOPILACIÓN Y UTILIZACIÓN DE SU INFORMACIÓN
+            <br>
+            2.1. Esta Política de Privacidad contempla la recopilación y uso de información personal en el Sitio Web.
+            <br>
+            2.2. B-INCLUSIVE no recopilará a través del Sitio Web ninguna información sobre usted que pueda identificarlo personalmente, como, por ejemplo, su nombre, dirección, número de teléfono o dirección de correo electrónico (en adelante, la " Información Personal "), a menos que usted nos la brinde en forma voluntaria. Si usted no desea que recopilemos su Información Personal, por favor absténgase de proporcionarla. Sin embargo, deberá tener en cuenta que en caso de no proporcionarnos su Información Personal, no podrá acceder a los servicios e información disponibles a través del Sitio Web.
+            <br>
+            2.3. En caso de que usted nos brinde Información Personal, le comunicamos que esa Información Personal será objeto de tratamiento automatizado e incorporada a la base de datos de B-INCLUSIVE.
+            <br>
+            2.4. B-INCLUSIVE en ningún momento recopilará información sensible sobre usted.
+            <br>
+            <br>
+            3. INFORMACIÓN PERSONAL
+            <br>
+            3.1. B-INCLUSIVE recopila Información Personal en línea cuando, entre otros casos:
+            <br>
+            - Usted se registra para hacer uso de alguno de los servicios disponibles del Sitio Web.
+            <br>
+            - Usted utiliza el Sitio Web.
+            <br>
+            - Usted nos envía preguntas, consultas o comentarios o se contacta con el Sitio Web.
+            <br>
+            - Usted solicita información o materiales.
+            <br>
+            - Usted provee de cualquier forma información al Sitio Web (chats, foros, uploads, etc.).
+            <br>
+            3.2. El tipo de información recopilada puede incluir nombre, tipo y número de documento, teléfono, dirección de correo electrónico y/o cualquier otra información que permita individualizarlo. En todos los casos que usted brinde Información Personal, y de acuerdo a la legislación vigente, usted declara que la Información Personal brindada es correcta, cierta y actual.
+            <br>
+            3.3. En los casos que nos brinde su Información Personal, usted acepta y presta su consentimiento libre, expreso e informado para que dicha Información Personal sea utilizada con las finalidades arriba mencionadas y autoriza a que la misma sea tratada, almacenada, recopilada en las bases de datos de propiedad de B-INCLUSIVE. En tal sentido, usted autoriza a que su Información Personal sea compartida con los clientes de B-INCLUSIVE. Asimismo, usted acepta y presta su consentimiento libre, expreso e informado con los términos de la presente Política de Privacidad.
+            <br>
+            <br>
+            4. CORREO ELECTRÓNICO
+            <br>
+            4.1. B-INCLUSIVE podrá enviarle correos electrónicos en relación con el contenido del Sitio Web, los servicios prestados por B-INCLUSIVE o sobre su cuenta y en respuesta a sus preguntas, pedidos, consultas o comentarios. B-INCLUSIVE también le podrá enviar correos electrónicos con información sobre productos y servicios ofrecidos por B-INCLUSIVE y/o terceros asociados comercialmente que le puedan resultar de interés, a menos que usted indique expresamente que no desea recibir dichos correos electrónicos a través de los procesos implementados por B-INCLUSIVE a tal efecto.
+            <br>
+            4.2. Usted podrá solicitar en cualquier momento el retiro o bloqueo de su nombre de la base de datos a la que se refiere la presente Política de Privacidad siguiendo el procedimiento señalado en esta misma política.
+            <br>
+            4.3. Todo correo electrónico que reciba de B-INCLUSIVE le informará cómo rechazar el envío de futuros correos electrónicos promocionales. Asimismo, usted podrá cambiar sus preferencias de recepción de correos electrónicos publicitarios a través de la configuración de su cuenta en el propio Sitio Web en cualquier momento.
+            <br>
+            <br>
+            5. OTRA INFORMACIÓN - COOKIES
+            Cuando usted ingresa en el Sitio Web podemos almacenar alguna información en su computadora bajo la forma de “Cookie” o archivo similar que puede sernos útil de varias formas. Con la mayoría de los exploradores para Internet, usted puede borrar las Cookies del disco rígido de su computadora, bloquear todas las Cookies o recibir un mensaje de alerta antes de que se almacene una Cookie. Por favor, consulta las instrucciones de su explorador para conocer más sobre estas funciones.
+            <br>
+            <br>
+            6. COMPARTIENDO SU INFORMACIÓN
+            La Información Personal que usted suministre será reputada y tratada como confidencial. Sin perjuicio de lo expuesto, B-INCLUSIVE podrá compartir total o parcialmente la Información Personal suministrada por usted, incluyendo registros de comportamiento y actividad en el Sitio, contactos a terceros que anuncien u ofrezcan productos o servicios en el Sitio, parámetros de interés de búsquedas así como su historial de búsqueda y preferencias a empresas del grupo B-INCLUSIVE y a los anunciantes del Sitio Web, entidades financieras y compañías de seguro de primera línea y reconocida trayectoria con la finalidad de proveerle ofertas, anuncios e información que se ajusten en la mayor medida posible a sus expectativas y preferencias.
+            <br>
+            <br>
+            7. PROTEGIENDO SU INFORMACIÓN PERSONAL
+            <br>
+            7.1. Para prevenir acceso no autorizado, mantener la precisión de los datos y asegurar el uso correcto de su Información Personal, B-INCLUSIVE ha puesto en uso ciertos medios físicos, electrónicos, administrativos y procedimientos de seguridad para resguardar y asegurar la Información Personal que recopilamos en línea. Nosotros resguardamos la Información Personal de acuerdo a estándares y procedimientos de seguridad establecidos y continuamente evaluamos nueva tecnología para proteger esa información. B-INCLUSIVE garantiza que los procesos internos propios de las bases de datos cumplen con las obligaciones legales de seguridad y confidencialidad impuestas por las leyes de cada país en materia de privacidad y protección de datos personales.
+            <br>
+            7.2. A pesar de lo anterior, usted reconoce que los medios técnicos existentes que brindan seguridad no son inexpugnables y que aun cuando se adopten todos los recaudos razonables de seguridad es posible sufrir manipulaciones, destrucción y/o pérdida de información. De presentarse estos casos, B-INCLUSIVE procederá conforme las leyes de cada país en materia de privacidad y protección de datos lo requieran.
+            <br>
+            7.3. Los empleados de B-INCLUSIVE son entrenados para comprender y cumplir con estos principios en materia de protección de datos personales y seguridad de la información. Asimismo, los empleados de B-INCLUSIVE asumen estrictos compromisos de confidencialidad en cuanto a la Información Personal que procesan en el ejercicio de sus funciones.
+            <br>
+            7.4. Usted consiente, reconoce y acepta que su información personal sea almacenada en la jurisdicción de B-INCLUSIVE o que la misma pueda ser transferida, almacenada y tratada fuera de su país de residencia.
+            <br>
+            <br>
+            8. MENORES DE EDAD
+            <br>
+            8.1. B-INCLUSIVE no tiene intenciones de recopilar Información Personal de menores de edad. Cuando corresponda, B-INCLUSIVE le indicará específicamente a los menores que no brinden esa información Personal en nuestro Sitio Web y/o tomará medidas razonables para obtener el consentimiento de los padres, tutor o representante legal para la entrega de esa Información Personal.
+            <br>
+            8.2. Le informamos que en su condición de padre, tutor legal o representante será el responsable de que sus hijos menores o bajo su tutela accedan al Sitio Web, por lo que recomendamos enfáticamente tomar las precauciones oportunas durante la navegación en el Sitio Web. A este fin, le informamos que algunos navegadores permiten configurarse para que los niños no puedan acceder a páginas determinadas.
+            <br>
+            <br>
+            9. LINKS EXTERNOS
+            El Sitio Web puede contener links hacia y provenientes de otros sitios de Internet. B-INCLUSIVE no es responsable por las prácticas de privacidad ni el tratamiento de los datos personales de esos sitios.
+            <br>
+            <br>
+            10. DERECHOS DEL USUARIO
+            <br>
+            10.1. Si usted ha proporcionado Información Personal a través de los servicios disponibles en el Sitio Web, usted podrá acceder a la misma, revisar, modificar, eliminar y actualizar su Información Personal en el momento que lo desee.
+            <br>
+            10.2. Si usted desea acceder a su Información Personal o si tal Información Personales es incorrecta, desactualizada y/o suprimida, por favor tenga a bien enviar su solicitud por correo electrónico de acuerdo con las normas implementadas en su país tal como se detalla en la cláusula 12 con el asunto “Informar”, “Rectificar”, “Suprimir” y/o “Actualizar” y/o cualquier otro según corresponda, conjuntamente con el objeto de su requerimiento. Dicha solicitud deberá contener como mínimo la siguiente información:
+            <br>
+            - nombre y domicilio, a efecto de dar respuesta a su solicitud en los plazos establecidos en la ley aplicable;
+            <br>
+            - copia de su documento de identidad, pasaporte o cualquier otro documento que acredite su identidad o acredite la personalidad de su representante legal, y en caso que la solicitud se realice a través del representante legal, acompañar el documento que acredita sus facultades como representante;
+            <br>
+            - descripción clara y precisa de los datos personales sobre los que se busca ejercer alguno de los derechos antes mencionados de acceso, rectificación, oposición, cancelación o revocación, así como la descripción clara y precisa de su solicitud;
+            <br>
+            - fecha y firma del solicitante; y
+            <br>
+            - cualquier otro elemento o documento que facilite la localización de dichos datos personales.
+            <br>
+            10.3. Asimismo, si usted se suscribe a alguno de los servicios o comunicaciones que ofrece B-INCLUSIVE podrá dar de baja su suscripción en cualquier momento siguiendo las instrucciones incluidas en cada comunicación.
+            <br>
+            10.4. B-INCLUSIVE cooperará con las autoridades de cada país cuando éstas requieran formalmente cualquier información relacionada con nuestras bases de datos.
+            <br>
+            <br>
+            11. CAMBIOS A ESTE AVISO DE PRIVACIDAD
+            B-INCLUSIVE se reserva el derecho a modificar esta Política de Privacidad periódicamente, en cuyo caso la política actualizada se publicará en este mismo sitio, siendo obligación de los usuarios revisar regularmente esta sección a fin de informarse de cualquier cambio que se pueda haber producido. De todos modos, B-INCLUSIVE cursará una comunicación a su cuenta de correo electrónico registrada a efectos de informarle sobre el cambio en la Política de Privacidad.
+            <br>
+            <br>
+            12. LOCALIZACIÓN
+            <br>
+            12.1. PARA USUARIOS EN ARGENTINA
+            <br>
+            12.1.1. B-INCLUSIVE, CUIT 12-34567890-1, tiene domicilio en Santa Fe 1234 piso 5, Ciudad Autónoma de Buenos Aires. El Sitio Web es www.b-inclusive.com.ar. La presente Política de Privacidad se rige por la las leyes de la República Argentina.
+            <br>
+            12.1.2. El derecho de acceso a los datos podrá ser ejercido en forma gratuita por el interesado en la medida que la correspondiente información sea solicitada en intervalos no inferiores a seis meses, salvo que se acredite un interés legítimo al efecto.
+            <br>
+            12.1.3. El contacto para ejercer los derechos de acceso, rectificación, actualización y supresión de la Información Personal es: informacion@binclusive.com
+            <br>
+            12.1.4. La Información Personal recabada a través del Sitio Web puede ser transferida para los fines anteriormente descritos a nuestras filiales, entidades asociadas y proveedores de servicios, en otros países. Dichos países pueden no tener la misma normativa de protección de datos que la que existe en Argentina. Cuando transfiramos su Información Personal a otros países, la protegeremos en la forma descrita en este documento.
+            <br>
+            12.1.5. De conformidad con la Ley 25.326 y la Disposición 11/06 de la Agencia de Acceso a la Información Pública (ex Dirección Nacional de Protección de Datos Personales) hemos implementado salvaguardas que garantizan un nivel adecuado de protección de la Información Personal que se transfiere fuera de sus fronteras.
+            <br>
+            12.1.6. Se hace saber que la Agencia de Acceso a la Información Pública, Órgano de Control de la Ley Nº 25.326, tiene la atribución de atender las denuncias y reclamos que se interpongan con relación al incumplimiento de las normas sobre protección de datos personales.
+            <br>
+            <br>
+            13. CONTACTO
+            Si tiene preguntas sobre su privacidad cuando utilice el Sitio Web, por favor contáctenos a informacion@binclusive.com
+            Esta Política de Privacidad fue actualizada por última vez el 02 de marzo de 2022.            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="rechazar()">Rechazar</button>
+          <button type="button" class="btn btn-primary" (click)="aceptar()">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <div class="fixed-bottom">
+    <app-footer></app-footer>
+    </div>

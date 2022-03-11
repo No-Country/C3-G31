@@ -295,7 +295,13 @@ export class RegistroComponent implements OnInit {
     })
 }
 
+rechazar(){
 
+}
+
+aceptar(){
+  
+}
 
 
 

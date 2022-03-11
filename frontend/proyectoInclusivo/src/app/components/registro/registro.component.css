@@ -4,6 +4,10 @@
     justify-content: center
 }
 
-input::placeholder {
-    color: red;
-  }
+label{
+    opacity: 50%;
+}
+
+#opacidad{
+    opacity: 100%;
+}

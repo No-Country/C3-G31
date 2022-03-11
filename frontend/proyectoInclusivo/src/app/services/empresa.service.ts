@@ -15,7 +15,7 @@ export class EmpresaService {
     ) {}
 
     public tieneEmpresa() {
-        return sessionStorage.getItem('empresa') != null;
+        return sessionStorage.getItem('empresa') != null && sessionStorage.getItem('empresa') != 'undefined';
     }
     
     public getEmpresaActual():string{

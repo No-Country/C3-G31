@@ -11,7 +11,7 @@
                     <div>
                         <img [src]="imageURL[0]" width="100px" class="mb-3" >
                     </div>
-                    <input type="file" accept="image/*" class="mb-3 d-none" id="inputFoto" name="fotoPerfil"
+                    <input type="file" accept="image/*" class="mb-3 d-none me-4" id="inputFoto" name="fotoPerfil"
                         (change)="cargarImagen($event)">
 
                     <input type="button" value="Selecciona una foto"
@@ -21,19 +21,19 @@
                 <!-- E-MAIL -->
                 <div class="form-floating mb-3 ">
                     <input type="email" class="form-control" id="email" placeholder=" " [(ngModel)]="email" name="email"
-                        required>
+                        required autocomplete="off">
                     <label for="email"> Correo electrónico <small>(será tu usuario) *</small> </label>
                 </div>
                 <!-- NOMBRE -->
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="nombre" placeholder=" " [(ngModel)]='nombre'
-                        name="nombre" required>
-                    <label for="nombre">Nombre *</label>
+                        name="nombre" required autocomplete="off">
+                    <label for="nombre" >Nombre *</label>
                 </div>
                 <!-- APELLIDO -->
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="apellido" placeholder="" [(ngModel)]='apellido'
-                        name="apellido" required>
+                        name="apellido" required autocomplete="off">
                     <label for="apellido">Apellido *</label>
                 </div>
                 <!-- PRESENTACION -->
@@ -46,7 +46,7 @@
                 <!-- TELEFONO -->
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="telefono" placeholder=" " [(ngModel)]="telefono"
-                        name="telefono">
+                        name="telefono" autocomplete="off">
                     <label for="telefono">Teléfono</label>
                 </div>
                 <!-- SWITCHES -->
@@ -90,8 +90,8 @@
                 <!-- FECHA DE NACIMIENTO -->
                 <div class="form-floating mb-3">
                     <input type="date" class="form-control" id="fechaNacimiento" placeholder=" "
-                        [(ngModel)]="fechaNacimiento" name="fechaNacimiento">
-                    <label for="fechaNacimiento">Fecha de nacimiento</label>
+                        [(ngModel)]="fechaNacimiento" name="fechaNacimiento" required>
+                    <label for="fechaNacimiento">Fecha de nacimiento *</label>
                 </div>
                     <!-- CURRICULUM VITAE -->
                     <div class="form-floating mb-2 pt-5 pb-3 border-2 border text-center">
@@ -115,7 +115,7 @@
                         <!-- CALLE -->
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="calle" placeholder=" " [(ngModel)]="calle"
-                                name="calle">
+                                name="calle" autocomplete="off">
                             <label for="calle">Calle </label>
                         </div>
 
@@ -124,7 +124,7 @@
                                 <!-- NUMERO -->
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="numero" placeholder=" "
-                                        [(ngModel)]="numero" name="numero">
+                                        [(ngModel)]="numero" name="numero" autocomplete="off">
                                     <label for="numero">Nro </label>
                                 </div>
                             </div>
@@ -132,7 +132,7 @@
                                 <!-- PISO -->
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="piso" placeholder=" " [(ngModel)]="piso"
-                                        name="piso">
+                                        name="piso" autocomplete="off">
                                     <label for="piso">Piso </label>
                                 </div>
                             </div>
@@ -141,7 +141,7 @@
                                 <!-- DEPTO -->
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="depto" placeholder=" "
-                                        [(ngModel)]="depto" name="depto">
+                                        [(ngModel)]="depto" name="depto" autocomplete="off">
                                     <label class="col" for="depto">Depto</label>
                                 </div>
                             </div>
@@ -153,7 +153,7 @@
                                 <!-- CODIGO POSTAL -->
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="cp" placeholder=" " [(ngModel)]="cp"
-                                        name="cp">
+                                        name="cp" autocomplete="off">
                                     <label for="cp">Código postal</label>
                                 </div>
                             </div>
@@ -161,7 +161,7 @@
                                 <!-- LOCALIDAD -->
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="localidad" placeholder=" "
-                                        [(ngModel)]="localidad" name="localidad">
+                                        [(ngModel)]="localidad" name="localidad" autocomplete="off">
                                     <label for="localidad">Localidad</label>
                                 </div>
                             </div>
@@ -172,14 +172,14 @@
                             <!-- PROVINCIA -->
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control" id="provincia" placeholder=" "
-                                    [(ngModel)]="provincia" name="provincia">
+                                    [(ngModel)]="provincia" name="provincia" autocomplete="off">
                                 <label for="provincia">Provincia</label>
                             </div>
                         </div>
                         <!-- OBSERVACIONES EXTRAS -->
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="observacionesDomicilio" placeholder=" "
-                                [(ngModel)]="observacionesDomicilio" name="observacionesDomicilio">
+                                [(ngModel)]="observacionesDomicilio" name="observacionesDomicilio" autocomplete="off">
                             <label for="observacionesDomicilio">Observaciones del domicilio</label>
                         </div>
 
@@ -205,7 +205,7 @@
                 </div>
 
                 <!--TÉRMINOS Y CONDICIONES-->
-                <div class="form-check mb-0 me-2">
+                <div class="form-check mb-0 me-2" [hidden]="estaAutenticado()">
                     <input class="form-check-input me-2" type="checkbox" required  [checked]="checkTerminos" (change)="check()">
                     Acepto los <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Términos y condiciones *

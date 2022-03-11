@@ -88,7 +88,7 @@ class UserListResource(Resource):
             user_id = user.id,
             nombre = form_data['nombre'],
             apellido = form_data['apellido'],
-            fecha_nacimiento = datetime.datetime.now(),
+            fecha_nacimiento = form_data['fechaNacimiento'],
             presentacion = form_data['presentacion'],
             telefono = form_data['telefono'],
             disponibilidad_viajar =disponibilidad,
@@ -170,7 +170,7 @@ class UserResource(Resource):
         if 'telefono' in form_data:
             user.profile.telefono = form_data['telefono']
         if 'fechaNacimiento' in form_data:
-            user.profile.fecha_nacimiento = datetime.datetime.now() #form_data['fechaNacimiento']
+            user.profile.fecha_nacimiento = form_data['fechaNacimiento']
         if 'disponibilidadViajar' in form_data:
             user.profile.disponibilidad_viajar = disponibilidad
         if 'movilidad' in form_data:

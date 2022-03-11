@@ -18,6 +18,7 @@ import { DetalleEmpleoComponent } from './components/detalle-empleo/detalle-empl
 import { AdministrarEmpresaComponent } from './components/administrar-empresa/administrar-empresa.component';
 import { PostulacionesComponent } from './components/administrar-empresa/componentesHijos/postulaciones/postulaciones.component';
 import { EmpleosActivosComponent } from './components/administrar-empresa/componentesHijos/empleos-activos/empleos-activos.component';
+import { CommonModule, DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -40,9 +41,10 @@ import { EmpleosActivosComponent } from './components/administrar-empresa/compon
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

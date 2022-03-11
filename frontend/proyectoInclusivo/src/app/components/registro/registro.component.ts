@@ -1,4 +1,5 @@
 
+import { DatePipe } from '@angular/common';
 import { dashCaseToCamelCase } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -32,7 +33,7 @@ export class RegistroComponent implements OnInit {
   apellido: string;
   telefono: string = "";
   disponibilidadViajar: boolean;
-  fechaNacimiento: Date = new Date()
+  fechaNacimiento: any
   discapacidad: string = "";
   movilidad: boolean;
   sobreTi: string = "";
@@ -64,7 +65,8 @@ export class RegistroComponent implements OnInit {
 
   constructor(
     private servicio: UsuariosService,
-    private router: Router
+    private router: Router,
+    private datepipe : DatePipe
   ) {
 
   }
@@ -214,9 +216,10 @@ export class RegistroComponent implements OnInit {
       var idUsuario: any = sessionStorage.getItem('idUsuario');
       this.servicio.getUsuariosId(idUsuario).subscribe(
         (response: any) => {
+          console.log(response)
           datos = response
           let fechaEntrante = new Date(response.profile.fecha_nacimiento)
-
+          
           //#region Datos Usuario
           this.email = response.email
 
@@ -228,7 +231,7 @@ export class RegistroComponent implements OnInit {
           this.apellido = response.profile.apellido;
           this.presentacion = response.profile.presentacion;
           this.telefono = response.profile.telefono;
-          this.fechaNacimiento = fechaEntrante;
+          this.fechaNacimiento = this.datepipe.transform(fechaEntrante, 'yyyy-MM-dd')
           this.disponibilidadViajar = response.profile.disponibilidad_viajar;
           this.movilidad = response.profile.movilidad_propia;
           this.sobreTi = response.profile.discapacidad;

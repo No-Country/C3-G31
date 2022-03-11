@@ -29,7 +29,13 @@ class EmpleoListResource(Resource):
 
     # @jwt_required()
     def get(self):
-        empleos = Empleo.get_all()
+        empresa_id = request.args.get('empresaId')
+
+        if empresa_id is None:
+            empleos = Empleo.get_all()
+        else:
+            empleos = Empleo.get_by_empresa_id(empresa_id)
+
         return empleos_schema.dump(empleos)
      
 

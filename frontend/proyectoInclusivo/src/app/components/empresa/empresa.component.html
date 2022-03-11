@@ -103,7 +103,7 @@
                     <button type="submit" class="container-fluid btn btn-lg btn-primary" [disabled]="!f.form.valid">{{!tieneEmpresa() ? 'Registrar' : 'Actualizar'}}</button>
                 </div>
                 <div class="col text-center">
-                    <a class="container-fluid btn btn-lg btn-secondary" [routerLink]="['']">Volver</a>
+                    <a class="container-fluid btn btn-lg btn-secondary" onclick="window.history.go(-1);">Volver</a>
                 </div>
             </div>
 

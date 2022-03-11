@@ -26,32 +26,14 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let nombre = sessionStorage.getItem('nombreUsuario');
-    if (nombre != null){
-      this.usuario =  nombre;
-      this.saludo = ", " + nombre
-
-      this.opcion1 = 'Mi perfil'
-      let option1 = document.getElementById('opcion1')
-
-      this.opcion2 = 'Crear empresa'
-
-
-      this.opcion3 = 'Cerrar sesión'
-
-    }else{
-      this.opcion1 = 'Iniciar Sesión'
-
-
-      this.opcion2 = 'Crear cuenta'
-
-
-      this.opcion3 = ''
-    }
   }
 
   estaAutenticado() {
     return this.servicioUsuario.estaAutenticado();
+  }
+
+  nombreUsuario() {
+    return sessionStorage.getItem('nombreUsuario');
   }
 
   logOut() {
@@ -62,7 +44,7 @@ export class NavbarComponent implements OnInit {
       html: `
         <div class="form-check mx-5 ">
             <input class="form-check-input mx-0 px-0" type="checkbox" id="checkbox1">
-            <label class="form-check-label text-danger" for="checkbox1">Olvidar mis datos en este navegador</label>
+            <label class="form-check-label text-info" for="checkbox1">Recordar mi usuario en este equipo</label>
         </div>`,
 
       focusConfirm: false,
@@ -77,22 +59,26 @@ export class NavbarComponent implements OnInit {
 
       if (result.isConfirmed) {
 
-        let checkDeOlvidar = document.getElementById('checkbox1') as HTMLInputElement
-        if (checkDeOlvidar.checked) {
-          localStorage.removeItem("nombreUsuario");
-          localStorage.removeItem("idUsuario");
-          localStorage.removeItem("empresa");
+        sessionStorage.removeItem("nombreUsuario");
+        sessionStorage.removeItem("idUsuario");
+        sessionStorage.removeItem("empresa");
+        localStorage.removeItem("nombreUsuario");
+        localStorage.removeItem("idUsuario");
+        localStorage.removeItem("empresa");
+        
+        let checkRecordar = document.getElementById('checkbox1') as HTMLInputElement
+        if (!checkRecordar.checked) {
+          localStorage.removeItem('emailUsuario');
         }
+
+        this.usuario = ''
 
         Swal.fire(
           'Saliste del sistema',
           '¡Te esperamos pronto!',
           'success'
         ),
-        sessionStorage.removeItem("nombreUsuario");
-        sessionStorage.removeItem("idUsuario");
-        sessionStorage.removeItem("empresa");
-        this.usuario = ''
+        this.router.navigate(['']);
       }
     })
 

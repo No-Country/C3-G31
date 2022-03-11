@@ -22,6 +22,10 @@ export class EmpleosService {
     return this.http.get(this.api_empleos);
   }
 
+  public getAllEmpleosEmpresaId(empresaId: number): Observable<any>{
+    return this.http.get(this.api_empleos + "?empresaId=" + empresaId);
+  }
+
   public getEmpleoId(id:any): Observable<any>{
     return this.http.get(this.api_empleos+"/"+id);
   }

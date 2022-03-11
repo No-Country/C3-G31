@@ -15,15 +15,13 @@ export class EmpleosActivosComponent implements OnInit {
   
 
   constructor(private empleosService: EmpleosService,
-              private router:Router,
-              private postulacionService: PostulacionesService) { }
+              private router:Router) { }
 
   ngOnInit(): void {
-
-    this.datos=this.empleosService.getAllEmpleos().subscribe(
-      (response:any) => {
-      this.datos=response
-    })
+    let empresaId = Number.parseInt(sessionStorage.getItem('empresa') || '0');
+    this.empleosService.getAllEmpleosEmpresaId(empresaId).subscribe(
+      (response:any) => this.datos=response  
+    )
   }
 
   verDetalle(data:any){

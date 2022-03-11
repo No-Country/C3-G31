@@ -260,6 +260,9 @@ export class RegistroComponent implements OnInit {
     }
   }
 
+  estaAutenticado() {
+    return this.servicio.estaAutenticado();
+  }
 
   eliminarUsuario() {
     Swal.fire({

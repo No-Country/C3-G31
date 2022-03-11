@@ -16,25 +16,9 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page"href="#empresa">Empresas</a>
-          </li>
-
-          <li class="nav-item">
             <a class="nav-link active" aria-current="page" 
-              [routerLink]="!estaAutenticado() ? ['/login'] : ['/empresa']" 
+              [routerLink]="!estaAutenticado() ? ['/login'] : (!tieneEmpresa() ? ['/empresa'] : ['/adminEmpresa'])" 
               [queryParams]="!estaAutenticado() ? {r: '/empresa'} : null" >Soy empresa</a>
-          </li>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Sobre nosotros
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#p1">¿Quiénes Somos?</a></li>
-              <li><a class="dropdown-item" href="#p2">Nuestro objetivo</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#p3">FAQs</a></li>
-            </ul>
           </li>
 
         <li class="nav-item dropdown">
@@ -55,7 +39,7 @@
           <!-- BOTON LOGIN -->
           <div class="dropdown me-5">
             <label class="text-primary me-2">
-              {{usuario}}
+              {{nombreUsuario()}}
             </label>
             <button class="btn btn-primary" type="button" id="botonLogin" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" aria-expanded="false">
               <i class="fa-solid fa-circle-user fa-xl"></i>
@@ -72,20 +56,24 @@
 <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
   <div class="offcanvas-header">
     <div class = "container-fluid centrar">
-      <h5 class="offcanvas-title " id="offcanvasWithBothOptionsLabel">¡Hola{{saludo}}!</h5>
+      <h5 class="offcanvas-title " id="offcanvasWithBothOptionsLabel">¡Hola{{estaAutenticado() ? ', ' + nombreUsuario() : ''}}!</h5>
     </div>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
 
-    <ul class="container-fluid list-group" aria-labelledby="botonLogin">
-      <li class="container-fluid list-group-item centrar"><a [routerLink]="['/login']" class="link" id="opcion1"><b>{{opcion1}}</b></a></li>
-      <li class="container-fluid list-group-item centrar"><a href="/registro" class="link" id="opcion2"><b>{{opcion2}}</b></a></li>
-      <!--<li class="container-fluid list-group-item centrar"><a  [routerLink]="['/deslogueo']" class="link" id="opcion3"><b>{{opcion3}}</b></a></li>-->
-      <li><a class="dropdown-item" href="" onclick="event.preventDefault()" (click)="logOut()">LogOut</a></li>
-      <li><a class="dropdown-item"  [hidden]="!tieneEmpresa()"  [routerLink]="['/adminEmpresa']">Administracion Empresa</a></li>
+    <ul class="container-fluid list-group" aria-labelledby="botonLogin" *ngIf="!estaAutenticado()">
+      <li class="container-fluid list-group-item centrar"><a [routerLink]="['/login']" class="link"><b>Iniciar Sesión</b></a></li>
+      <li class="container-fluid list-group-item centrar"><a href="/registro" class="link"><b>Crear cuenta</b></a></li>
     </ul>
   
+    <ul class="container-fluid list-group" aria-labelledby="botonLogin" *ngIf="estaAutenticado()">
+      <li class="container-fluid list-group-item centrar"><a [routerLink]="['/registro']" class="link"><b>Mi perfil</b></a></li>
+      <li class="container-fluid list-group-item centrar" [hidden]="tieneEmpresa()"><a [routerLink]="['/empresa']" class="link"><b>Crear empresa</b></a></li>
+      <li class="container-fluid list-group-item centrar" [hidden]="!tieneEmpresa()"><a [routerLink]="['/adminEmpresa']" class="link"><b>Administración Empresa</b></a></li>
+      <li class="container-fluid list-group-item centrar"><a (click)="logOut()" class="link"><b>Cerrar sesión</b></a></li>
+    </ul>
+
   </div>
 </div>
 

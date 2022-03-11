@@ -213,21 +213,20 @@
 
                     <!-- BOTON VOLVER -->
                     <div class="col text-center">
-                        <div class=" container-fluid btn btn-lg btn-secondary" [routerLink]="['']">Volver</div>
-                    <!--DAR DE BAJA AL USUARIO -->
-                    <div>
-                        <a class="text-danger" href="" onclick="event.preventDefault()" (click)="eliminarUsuario()">Eliminar cuenta</a>
+                        <div class=" container-fluid btn btn-lg btn-secondary" onclick="window.history.go(-1);">Volver</div>
+                        <!--DAR DE BAJA AL USUARIO -->
+                        <div *ngIf="estaAutenticado()">
+                            <a class="text-danger" href="" onclick="event.preventDefault()" (click)="eliminarUsuario()">Eliminar cuenta</a>
+                        </div>
+                        <p *ngIf="!estaAutenticado()" class="small fw-bold mt-4 pt-1 mb-0 centrar">¿Ya tiene cuenta? <a href="" [routerLink]="['/login']"
+                            class="link-primary mx-1"> Inicia sesión</a></p>
                     </div>
-                    <p class="small fw-bold mt-4 pt-1 mb-0 centrar">¿Ya tiene cuenta? <a href="" [routerLink]="['/login']"
-                        class="link-primary mx-1"> Inicia sesión</a></p>
-                </div>
                 <div class="row">
                 </div>
 
 
             </div>
         </div>
-    </form>
 </div>
 
 

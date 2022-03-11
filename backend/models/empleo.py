@@ -20,6 +20,9 @@ class Empleo(db.Model, BaseModelMixin):
     descripcion = db.Column(db.String(1500), nullable=False)
     postulaciones=db.relationship('Postulacion', lazy='select', back_populates='empleo')
     
+    @classmethod
+    def get_by_empresa_id(cls, empresa_id):
+        return cls.query.filter_by(empresa_id=empresa_id)
 
     # modalidad = db.Column(
     #     db.Enum(enums.ModalidadesEnum),

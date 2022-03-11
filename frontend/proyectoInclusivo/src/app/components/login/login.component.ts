@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   
+   this.mail = localStorage.getItem('emailUsuario') || '';
   }
   
   iniciar() {
@@ -52,6 +52,7 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('empresa', empresa);
             localStorage.setItem('nombreUsuario', nombreUsuario);
             localStorage.setItem('idUsuario', idUsuario);
+            localStorage.setItem('emailUsuario', response.user.email);
           }
           
           this.servicioUsuario.setToken(response.token);
